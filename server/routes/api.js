@@ -22,7 +22,7 @@ exports.appUsers = function (req, res) {
 exports.appUser = function (req, res) {
   console.log('*** appUser');
 
-  db.getAppUser(req.params.id, function(err, appUser) {
+  db.getAppUser(req.params.email, function(err, appUser) {
     if (err) {
       console.log('*** appUser err');
       res.json({
@@ -37,7 +37,7 @@ exports.appUser = function (req, res) {
 };
 
 exports.addAppUser = function (req, res) {
-  console.log('*** addAppUser' + req.body);
+  console.log('*** PostAppUser' + req.body);
   // db.getState(req.body.stateId, function(err, state) {
   //   if (err) {
   //     console.log('*** getState err');
@@ -57,7 +57,7 @@ exports.addAppUser = function (req, res) {
   // });
 };
 
- exports.editAppUser = function (req, res) {
+exports.editAppUser = function (req, res) {
   console.log('*** editAppUser');
 
   //db.getState(req.body.stateId, function(err, state) {
@@ -65,9 +65,10 @@ exports.addAppUser = function (req, res) {
     //   console.log('*** getState err');
     //   res.json({'status': false});
     // } else {
-      db.editAppUser(req.params.id, req.body, function(err) {
+      db.editAppUser(req.params.email, req.body, function(err) {
         if (err) {
-          console.log('*** editAppUser err' + util.inspect(err));
+          // console.log('*** editAppUser err' + util.inspect(err));
+          console.log('*** editAppUser bad');
           res.json({'status': false});
         } else {
           console.log('*** editAppUser ok');
@@ -82,7 +83,7 @@ exports.addAppUser = function (req, res) {
 exports.deleteAppUser = function (req, res) {
   console.log('*** deleteAppUser');
 
-  db.deleteAppUser(req.params.id, function(err) {
+  db.deleteAppUser(req.params.email, function(err) {
     if (err) {
       console.log('*** deleteAppUser err');
       res.json({'status': false});

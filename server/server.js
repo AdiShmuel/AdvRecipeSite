@@ -4,27 +4,39 @@
 var express = require('express')
    , routes = require('./routes/index')
    , api = require('./routes/api')
-   , DB = require('./accessDB');//.AccessDB;
+   , DB = require('./accessDB')//.AccessDB;
+   , bodyParser = require('body-parser');
+
  // , protectJSON = require('./lib/protectJSON');
 
 var app = module.exports = express();
 
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
 
+// parse application/json
+app.use(bodyParser.json())
+
+//let the server permission to use this files
 app.use(express.static(__dirname + '/../public'));
+
+
+//app.use(express.methodOverride());
+//app.use(app.router);
 // var DB = require('./accessDB');
 
 // Configuration
 
-// app.configure(function(){
-//   app.use(protectJSON);
-//   app.set('views', __dirname + '/views');
-//   app.set('view engine', 'jade');
-//   app.use(express.cookieParser()); //*
-//   app.use(express.session({ secret: 'gopalapuram' })); //*
+//app.configure(function(){
+  // app.use(protectJSON);
+  // app.set('views', __dirname + '/views');
+  // app.set('view engine', 'jade');
+  // app.use(express.cookieParser()); //*
+  // app.use(express.session({ secret: 'gopalapuram' })); //*
  // app.use(express.bodyParser());
-//   app.use(express.methodOverride());
-//   app.use(express.static(__dirname + '/../'));
-//   app.use(app.router);
+  // app.use(express.methodOverride());
+  // app.use(express.static(__dirname + '/../'));
+  // app.use(app.router);
 // });
 
 var conn = 'mongodb://localhost:27017/recipeSite';
@@ -52,7 +64,7 @@ db = new DB.startup(conn);
 
 app.get('/api/dataservice/AppUsers', api.appUsers);
 app.get('/api/dataservice/AppUser/:email', api.appUser);
-app.post('/api/dataservice/AddAppUser', api.addAppUser);
+app.post('/api/dataservice/PostAppUser', api.addAppUser);
 app.put('/api/dataservice/EditAppUser/:email', api.editAppUser);
 app.delete('/api/dataservice/DeleteAppUser/:email', api.deleteAppUser);
 //

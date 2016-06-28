@@ -72,26 +72,19 @@ module.exports = {
     });
   },
 
-  editCustomer: function(id, req_body, state, callback) {
+  editAppUser: function(email, req_body, callback) {
     console.log('*** accessDB.editCustomer');
 
-    var s = {'id': state[0].id, 'abbreviation': state[0].abbreviation, 'name': state[0].name}
-
-    Customer.findOne({'id': id}, {'_id': 1, 'firstName':1, 'lastName':1, 'city': 1, 'state': 1, 'stateId': 1, 'gender': 1, 'id': 1}, function(err, customer) {
+    AppUser.findOne({'email': email}, {}, function(err, appUser) {
       if (err) { return callback(err); }
 
-      customer.firstName = req_body.firstName || customer.firstName;
-      customer.lastName = req_body.lastName || customer.lastName;
-      customer.email = req_body.email || customer.email;
-      customer.address = req_body.address || customer.address;
-      customer.city = req_body.city || customer.city;
-      customer.state = s;
-      customer.stateId = s.id;
-      customer.zip = req_body.zip || customer.zip;
-      customer.gender = req_body.gender || customer.gender;
+      appUser.email = req_body.email || appUser.email;
+      appUser.userName = req_body.userName || appUser.userName;
+      appUser.password = req_body.password || appUser.password;
+      appUser.isAdmin = req_body.isAdmin || appUser.isAdmin;
+      appUser.gender = req_body.gender || appUser.gender;
 
-
-      customer.save(function(err) {
+      appUser.save(function(err) {
         if (err) { console.log('*** accessDB.editCustomer err: ' + err); return callback(err); }
 
         callback(null);
@@ -101,9 +94,9 @@ module.exports = {
   },
 
   // delete a customer
-  deleteAppUser: function(id, callback) {
+  deleteAppUser: function(email, callback) {
     console.log('*** accessDB.deleteAppUser');
-    AppUser.remove({'id': id}, function(err, user) {
+    AppUser.remove({'email': email}, function(err, user) {
       callback(null);
     });
   }
