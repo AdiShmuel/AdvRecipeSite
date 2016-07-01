@@ -90,8 +90,11 @@ app.listen(8080, function(){
 //   response.sendFile('../index.html');
 //
 // });
-app.get('/', function(request, response){
-  response.sendFile(__dirname + '/../public/index.html');
+app.all('/*', function(request, response){
+ console.log("serverrr    ");// + __dirname + '/../public/index.html');
+  var path = require('path');
+  response.sendFile(path.resolve('public/index.html'));
+  // response.sendFile('/../public/index.html');
 
 });
 
