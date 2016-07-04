@@ -1,5 +1,5 @@
 (function(){
-    var recipesApp = angular.module('recipesApp', ['ngRoute']);
+    var recipesApp = angular.module('recipesApp', ['ngRoute', 'ui.grid']);
     recipesApp.config(function($routeProvider,$locationProvider){
 
         $locationProvider.html5Mode({
@@ -12,6 +12,7 @@
                 templateUrl:'views/home.html'
             })
             .when('/usersManager',{
+                controller: 'usersManagerGridCtrl',
                 templateUrl:'views/usersManager.html'
             })
             // .when('/messagesForDisplays', {
