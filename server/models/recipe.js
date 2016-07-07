@@ -1,14 +1,7 @@
 var mongoose = require('mongoose')
-    , Schema = mongoose.Schema;
+    , Schema = mongoose.Schema
+    , ObjectCounter = require('./objectCounter');
 
-var SettingsSchema = new Schema({
-    collectionName : {
-        type : String, required: true, trim: true, default: 'recipes'
-    },
-    nextSeqNumber: {
-        type: Number, default: 1
-    }
-});
 
 var RecipeSchema = new Schema({
     title : {
@@ -18,36 +11,39 @@ var RecipeSchema = new Schema({
         type : String, required: true, trim: true
     },
     image : {
-        type : String, required: false, trim: true
+        //type : String, required: false, trim: true
+        data : Buffer, ContentType: String//, required: true
     },
     likeAmount : {
         type : Number, required: true
     },
     id : {
-        type : Number, required: true, unique: true
+        type : Number, index: { unique: true }, required: true
     },
-    categories: [String]//,
-   // author: Schema.appUser
+    categories: [
+        {type: Number , ref: 'Category'}
+    ],
+    user:{type: String , ref: 'AppUser'}
 });
 
-RecipeSchema.index({ id: 1, type: 1 }); // schema level
+var count;
 
-// I make sure this is the last pre-save middleware (just in case)
-var Settings = mongoose.model('settings', SettingsSchema);
+exports.updateCounter = function () {
+    ObjectCounter.findOneAndUpdate( {collectionName: "recipes"}, { $inc: { nextSeqNumber: 1 } }, function (err, retCount) {count = retCount})
+};
 
-RecipeSchema.pre('save', function(next) {
-    var doc = this;
-    // Calculate the next id on new Customers only.
-    if (this.isNew) {
-        Settings.findOneAndUpdate( {"collectionName": "recipes"}, { $inc: { nextSeqNumber: 1 } }, function (err, settings) {
-            if (err) next(err);
-            doc.id = settings.nextSeqNumber - 1; // substract 1 because I need the 'current' sequence number, not the next
-            next();
+exports.counter = function (callback) {
+    if(count == undefined) {
+        ObjectCounter.find({"collectionName": "recipes"}, {}, function (err, settings) {
+            count = settings[0].nextSeqNumber;
+            callback(err, count);
         });
-    } else {
-        next();
     }
-});
+    else {
+        callback(null, count);
+    }
+};
 
-exports.RecipeSchema = RecipeSchema;
-module.exports = mongoose.model('Recipe', RecipeSchema);
+
+//exports.RecipeSchema = RecipeSchema;
+exports.scehma = mongoose.model('Recipe', RecipeSchema);
