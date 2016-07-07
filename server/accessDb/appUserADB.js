@@ -1,57 +1,30 @@
 // Module dependencies
 var mongoose = require('mongoose')
   , Schema = mongoose.Schema
-  , AppUser = require('./models/appUser')
-//  , State = require('./models/state')
-  , util = require('util');
+  , AppUser = require('./../models/appUser')
+  , Recipe = require('./../models/recipe').schema
+  , Ingredient = require('./../models/ingredient').schema
 
 // connect to database
 module.exports = {
-  // Define class variable
-  myEventID: null,
-
-  // initialize DB
-  startup: function(dbToUse) {
-    mongoose.connect(dbToUse);
-    // Check connection to mongoDB
-    mongoose.connection.on('open', function() {
-      console.log('We have connected to mongodb');
-    });
-
-  },
-
-  // disconnect from database
-  closeDB: function() {
-    mongoose.disconnect();
-  },
-
   // get all the customers
   getAppUsers: function(callback) {
-    console.log('*** accessDB.getAppUsers');
+    console.log('*** GetAppUsers AccessDB');
     AppUser.find({}, function(err, customers) {//{'_id': 0, 'firstName':1, 'lastName':1, 'city': 1, 'state': 1, 'stateId': 1, 'orders': 1, 'orderCount': 1, 'gender': 1, 'id': 1}, function(err, customers) {
       callback(null, customers);
     });
   },
-
-  // get the customer summary
-  // getCustomersSummary: function(callback) {
-  //   console.log('*** accessDB.getCustomersSummary');
-  //   AppUser.find({}, {'_id': 0, 'firstName':1, 'lastName':1, 'city': 1, 'state': 1, 'stateId': 1, 'orders': 1, 'orderCount': 1, 'gender': 1, 'id': 1}, function(err, customersSummary) {
-  //     callback(null, customersSummary);
-  //   });
-  // },
-
   // get a  customer
   getAppUser: function(email, callback) {
-    console.log('*** accessDB.getAppUser');
+    console.log('*** GetAppUser AccessDB');
     AppUser.find({'email': email}, {}, function(err, user) {
       callback(null, user[0]);
     });
   },
 
   // insert a  appUser
-  insertAppUser: function(req_body, callback) {
-    console.log('*** accessDB.insertAppUser');
+  createAppUser: function(req_body, callback) {
+    console.log('*** CreateAppUser AccessDB');
 
     var appUser = new AppUser();
   //  var s = {'id': state[0].id, 'abbreviation': state[0].abbreviation, 'name': state[0].name}
@@ -62,27 +35,31 @@ module.exports = {
     appUser.email = req_body.email;
     appUser.isAdmin = req_body.isAdmin;
     appUser.gender = req_body.gender;
+    // appUser.recipes = [];
+    // appUser.ingredients = [];
 
   //  appUser.id = 1; // The id is calculated by the Mongoose pre 'save'.
 
-    appUser.save(function(err, user) {
+    //appUser.save(function(err, user) {
+    appUser.save(function(err) {
       if (err) {console.log('*** new appUser save err: ' + err); return callback(err); }
 
       callback(null, appUser.email);
     });
   },
 
-  editAppUser: function(email, req_body, callback) {
-    console.log('*** accessDB.editCustomer');
+  editAppUser: function(req_body, callback) {
+    console.log('*** EditAppUser AccessDB');
 
-    AppUser.findOne({'email': email}, {}, function(err, appUser) {
+    AppUser.findOne({'email': req_body.email}, {}, function(err, appUser) {
       if (err) { return callback(err); }
-
-      appUser.email = req_body.email || appUser.email;
+      
       appUser.userName = req_body.userName || appUser.userName;
-      appUser.password = req_body.password || appUser.password;
+      appUser.password = req_body.password;
       appUser.isAdmin = req_body.isAdmin || appUser.isAdmin;
       appUser.gender = req_body.gender || appUser.gender;
+      // appUser.recipes = req_body.recipes ;
+      // appUser.ingredients = req_body.ingredients || appUser.ingredients;
 
       appUser.save(function(err) {
         if (err) { console.log('*** accessDB.editCustomer err: ' + err); return callback(err); }
@@ -92,12 +69,12 @@ module.exports = {
 
     });
   },
-
-  // delete a customer
+  
   deleteAppUser: function(email, callback) {
-    console.log('*** accessDB.deleteAppUser');
-    AppUser.remove({'email': email}, function(err, user) {
-      callback(null);
+    console.log('*** DeleteAppUser AccessDB');
+    AppUser.remove({'email': email}, function(err) {
+      if (err) { callback(err); }
+      else{callback(null)}
     });
   }
 
