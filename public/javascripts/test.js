@@ -145,25 +145,25 @@
 
 ///////////////////////////////////////////////////Recipe/////////////////////////////////////////////////////////////
 // create new user - if try to change all columns excpet email it will throw an error
-var path = "/api/dataservice/createRecipe";
-var c = {'title': "special milk1123",
-    'content': "bla bla",'likeAmount': 2,'categories': [6],'user': "galcohen92@gmail.com"
-    //'content': "bla bla",'likeAmount': 2
-
-};
-
-$.ajax({
-    type: "POST",
-    url: path,
-    data: c,
-    success: function () {
-        alert("success");
-    },
-    fail: function () {
-        alert("fail");
-    },
-    dataType: "json"
-});
+// var path = "/api/dataservice/createRecipe";
+// var c = {'title': "special milk1123",
+//     'content': "bla bla",'likeAmount': 2,'categories': [6],'user': "galcohen92@gmail.com"
+//     //'content': "bla bla",'likeAmount': 2
+//
+// };
+//
+// $.ajax({
+//     type: "POST",
+//     url: path,
+//     data: c,
+//     success: function () {
+//         alert("success");
+//     },
+//     fail: function () {
+//         alert("fail");
+//     },
+//     dataType: "json"
+// });
 
 //edit recipe
 // var c = {'title': "very milk1","id":5,
