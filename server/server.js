@@ -8,8 +8,8 @@ var express = require('express')
    , categoryApi = require('./routes/categoryApi')
    , ingredientApi = require('./routes/ingredientApi')
    , DB = require('./accessDb/mainADB')
-   , bodyParser = require('body-parser');
-
+   , bodyParser = require('body-parser')
+   , path = require('path');
  // , protectJSON = require('./lib/protectJSON');
 
 var app = module.exports = express();
@@ -23,8 +23,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 //let the server permission to use this files
-app.use(express.static(__dirname + '/../public'));
-
+app.use(express.static(path.join(__dirname , '../public')));
 
 // app.use(express.methodOverride());
 //app.use(app.router);
@@ -79,13 +78,6 @@ app.post('/api/dataservice/CreateIngredient', ingredientApi.createIngredient);
 app.put('/api/dataservice/EditIngredient', ingredientApi.editIngredient);
 app.delete('/api/dataservice/DeleteIngredientsByAppUser/:email', ingredientApi.deleteIngredientsByAppUser); //? get all the recipes number or the user
 app.delete('/api/dataservice/DeleteIngredient/:id', ingredientApi.deleteIngredient);
-//
-// app.get('/api/dataservice/States', api.states);
-//
-// app.get('/api/dataservice/CustomersSummary', api.customersSummary);
-// app.get('/api/dataservice/CustomerById/:id', api.customer);
-// app.get('/api/dataservice/CheckUnique/:email', api.checkemail);
-
 
 // redirect all others to the index (HTML5 history)
 // app.get('*', routes.index);
@@ -104,22 +96,6 @@ app.listen(8080, function(){
 // });
 app.all('/*', function(request, response){
  console.log("serverrr    ");// + __dirname + '/../public/index.html');
-  var path = require('path');
-  response.sendFile(path.resolve('public/index.html'));
-  // response.sendFile('/../public/index.html');
-
+  //response.sendFile(path.resolve('../public/index.html'));
+    response.sendFile(path.join(__dirname , '../public/index.html'));
 });
-
-
-// appUserDB = appUserDB.getSiblingDB('recipeSite')
-
-// appUserDB.appUsers.remove({});
-// var c = {'userName': "Gal Cohen"// nameGenderHost[0]
-//   , 'password': "1234"// nameGenderHost[1]
-//   , 'email': "galcohen92@gmail.com"//nameGenderHost[0] + '.' + nameGenderHost[1] + '@' + nameGenderHost[3]
-//   , 'isAdmin': true// addresses[i]
-//   , 'gender': "M"//cityState[0]
-//
-// };
-//
-// appUserDB.appUsers.insert(c);

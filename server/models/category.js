@@ -34,7 +34,7 @@ var CategorySchema = new Schema({
 var count;
 
 exports.updateCounter = function () {
-    ObjectCounter.findOneAndUpdate( {collectionName: "categories"}, { $inc: { nextSeqNumber: 1 } }, function (err, retCount) {count = retCount})
+    ObjectCounter.findOneAndUpdate( {collectionName: "categories"}, { $inc: { nextSeqNumber: 1 } }, function (err, retCount) {count = retCount.nextSeqNumber})
 };
 
 exports.counter = function (callback) {

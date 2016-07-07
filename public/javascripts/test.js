@@ -7,7 +7,7 @@
 // var path = "/api/dataservice/PostAppUser";
 // var c = {'userName': "Gal Cohen"// nameGenderHost[0]
 //     , 'password': "1234"// nameGenderHost[1]
-//     , 'email': "galcohen92@gmail.com"//nameGenderHost[0] + '.' + nameGenderHost[1] + '@' + nameGenderHost[3]
+//     , 'email': "galcohen92@gmail.com2"//nameGenderHost[0] + '.' + nameGenderHost[1] + '@' + nameGenderHost[3]
 //     , 'isAdmin': true// addresses[i]
 //     , 'gender': "M"//cityState[0]
 //
@@ -78,23 +78,23 @@
 //     dataType: "json"
 // });
 
-var path = "/api/dataservice/DeleteAppUser/" + "galcohen92@gmail.com1";
-$.ajax({
-    type: "DELETE",
-    url: path,
-    success: function () {
-        alert("success");
-    },
-    fail: function () {
-        alert("fail");
-    },
-    dataType: "json"
-});
+// var path = "/api/dataservice/DeleteAppUser/" + "galcohen92@gmail.com1";
+// $.ajax({
+//     type: "DELETE",
+//     url: path,
+//     success: function () {
+//         alert("success");
+//     },
+//     fail: function () {
+//         alert("fail");
+//     },
+//     dataType: "json"
+// });
 
 ///////////////////////////////////////////////////Category/////////////////////////////////////////////////////////////
 // create new
 // var path = "/api/dataservice/createCategory";
-// var c = {'name': "CANDIES"
+// var c = {'name': "CANDIES123"
 // };
 //
 // $.ajax({
@@ -109,7 +109,7 @@ $.ajax({
 //     },
 //     dataType: "json"
 // });
-
+//
 
 //delete
 // var path = "/api/dataservice/DeleteCategory/" + "1";
@@ -145,25 +145,25 @@ $.ajax({
 
 ///////////////////////////////////////////////////Recipe/////////////////////////////////////////////////////////////
 // create new user - if try to change all columns excpet email it will throw an error
-// var path = "/api/dataservice/createRecipe";
-// var c = {'title': "special milk",
-//     'content': "bla bla",'likeAmount': 2,'categories': [6],'user': "galcohen92@gmail.com"
-//     //'content': "bla bla",'likeAmount': 2
-//
-// };
-//
-// $.ajax({
-//     type: "POST",
-//     url: path,
-//     data: c,
-//     success: function () {
-//         alert("success");
-//     },
-//     fail: function () {
-//         alert("fail");
-//     },
-//     dataType: "json"
-// });
+var path = "/api/dataservice/createRecipe";
+var c = {'title': "special milk1123",
+    'content': "bla bla",'likeAmount': 2,'categories': [6],'user': "galcohen92@gmail.com"
+    //'content': "bla bla",'likeAmount': 2
+
+};
+
+$.ajax({
+    type: "POST",
+    url: path,
+    data: c,
+    success: function () {
+        alert("success");
+    },
+    fail: function () {
+        alert("fail");
+    },
+    dataType: "json"
+});
 
 //edit recipe
 // var c = {'title': "very milk1","id":5,
@@ -203,7 +203,7 @@ $.ajax({
 
 ///////////////////////////////////////////////////Ingredient/////////////////////////////////////////////////////////////
 // var path = "/api/dataservice/createIngredient";
-// var c = {'name': "coc cola",
+// var c = {'name': "coc cola1",
 //     'calories': 120.5,'fat': 10.0,'user': "galcohen92@gmail.com1"
 //     //'content': "bla bla",'likeAmount': 2
 // };
