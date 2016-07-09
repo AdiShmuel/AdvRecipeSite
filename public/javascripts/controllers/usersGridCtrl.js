@@ -1,31 +1,27 @@
 (function(){
     "use strict";
-    function usersManagerGridCtrl($scope, userService){//}, uiGridConstants, $filter){
+    function usersGridCtrl($scope, userService){//}, uiGridConstants, $filter){
         var self = this;
-      $scope.popularUsers = [{'userName': "Yarden Davidof"
-          //  , 'password': "1234"// nameGenderHost[1]
-          , 'email': "yardo.david@gmail.com"//nameGenderHost[0] + '.' + nameGenderHost[1] + '@' + nameGenderHost[3]
-          , 'isAdmin': true// addresses[i]
-          , 'gender': "F"},
-          {'userName': "Gal Cohen"
-          //  , 'password': "1234"// nameGenderHost[1]
-          , 'email': "galcohen92@gmail.com"//nameGenderHost[0] + '.' + nameGenderHost[1] + '@' + nameGenderHost[3]
-          , 'isAdmin': true// addresses[i]
-          , 'gender': "M"}];
+        $scope.gridUsers = [{'userName': "Yarden Davidof"
+            //  , 'password': "1234"// nameGenderHost[1]
+            , 'email': "yardo.david@gmail.com"//nameGenderHost[0] + '.' + nameGenderHost[1] + '@' + nameGenderHost[3]
+            , 'isAdmin': true// addresses[i]
+            , 'gender': "F"},
+            {'userName': "Gal Cohen"
+                //  , 'password': "1234"// nameGenderHost[1]
+                , 'email': "galcohen92@gmail.com"//nameGenderHost[0] + '.' + nameGenderHost[1] + '@' + nameGenderHost[3]
+                , 'isAdmin': true// addresses[i]
+                , 'gender': "M"}];
 
         //  $scope.searchedDisplayStation = "";
-     //   $scope.searchedMessage = "";
-     //   $scope.gridUsers = [];
+        //   $scope.searchedMessage = "";
+        //   $scope.gridUsers = [];
         // userService.getAll().then(function (data) {
         //     $scope.gridUsers = data.data;
         // })
-  //       $scope.gridUsers = [{'userName': "Gal Cohen"
-  // //  , 'password': "1234"// nameGenderHost[1]
-  //   , 'email': "galcohen92@gmail.com"//nameGenderHost[0] + '.' + nameGenderHost[1] + '@' + nameGenderHost[3]
-  //   , 'isAdmin': true// addresses[i]
-  //   , 'gender': "M"}];
-  //    //   $scope.gridData = messageDisplayRelations.data;
-     //   $scope.gridScope = {
+
+        //   $scope.gridData = messageDisplayRelations.data;
+        //   $scope.gridScope = {
         //     deleteRelation: function(messageDisplayRelation){
         //         messageService.removeMessageDisplayRelation(messageDisplayRelation)
         //             .success(function(deletedRelation){
@@ -42,18 +38,18 @@
         //     }
         // };
 
-        // $scope.gridUsersOptions = {
-        //     data: "gridUsers"//,
-        //     // enableSorting: true,
-        //     // columnDefs: [
-        //     //     { name: 'userName', enableSorting: false },
-        //     //     { name: 'email' },
-        //     //     { name: 'isAdmin', visible: false },
-        //     //     { name: 'gender'}
-        //     // ]
-        // };
+        $scope.gridUsersOptions =  {
+           data: "gridUsers",
+            enableSorting: true//,
+            // columnDefs: [
+            //     { name: 'userName', enableSorting: false },
+            //     { name: 'email' },
+            //     { name: 'isAdmin', visible: false },
+            //     { name: 'gender'}
+            // ]
+       };
 
-       // $scope.gridUserdOptions = {
+        // $scope.gridUserdOptions = {
         //   //  enableFiltering: true,
         //    // enableScrollbars: false,
         //     data:'gridUsers',
@@ -81,5 +77,5 @@
         //     $scope.gridData = $filter('filter')($scope.gridData, {'messageId': $scope.searchedMessage}, undefined);
         // };
     }
-    angular.module('recipesApp').controller('usersManagerGridCtrl', ['$scope', 'userService',  usersManagerGridCtrl])
+    angular.module('recipesApp').controller('usersGridCtrl', ['$scope', 'userService',  usersGridCtrl])
 })();

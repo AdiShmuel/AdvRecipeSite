@@ -13,7 +13,7 @@
                 templateUrl:'views/home.html'
             })
             .when('/usersManager',{
-                controller: 'usersManagerGridCtrl',
+                controller: 'usersGridCtrl',
                 templateUrl:'views/usersManager.html'
             })
             .when('/about',{
