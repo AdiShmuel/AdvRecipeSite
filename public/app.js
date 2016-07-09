@@ -1,5 +1,5 @@
 (function(){
-    var recipesApp = angular.module('recipesApp', ['ngRoute', 'ui.grid']);
+    var recipesApp = angular.module('recipesApp',  ['ngRoute', 'ui.grid']);
     recipesApp.config(function($routeProvider,$locationProvider){
 
         $locationProvider.html5Mode({
@@ -14,7 +14,12 @@
             })
             .when('/usersManager',{
                 controller: 'usersGridCtrl',
-                templateUrl:'views/usersManager.html'
+                templateUrl:'views/usersManager.html',
+                resolve:{
+                    allUsers: function (userService) {
+                        return userService.getAll();
+                    }
+                }
             })
             .when('/about',{
                 // controller: 'usersManagerGridCtrl',
