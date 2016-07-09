@@ -9,12 +9,29 @@
       // $locationProvider.html5Mode(true).hashPrefix('!');
         $routeProvider
             .when('/',{
+                controller: 'usersManagerGridCtrl',
                 templateUrl:'views/home.html'
             })
             .when('/usersManager',{
                 controller: 'usersManagerGridCtrl',
                 templateUrl:'views/usersManager.html'
             })
+            .when('/about',{
+                // controller: 'usersManagerGridCtrl',
+                templateUrl:'views/about.html'
+            })
+            .when('/contact',{
+                // controller: 'usersManagerGridCtrl',
+                templateUrl:'views/contact.html'
+            })
+            .when('/Categories',{
+                // controller: 'usersManagerGridCtrl',
+                templateUrl:'views/cat1.html'
+            })
+
+
+
+
             // .when('/messagesForDisplays', {
             //     templateUrl: 'views/messagesForDisplaysGrid.html',
             //     controller: 'messagesForDisplaysGridCtrl',
