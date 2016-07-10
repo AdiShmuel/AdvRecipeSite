@@ -71,6 +71,8 @@ app.get('/api/dataservice/GetRecipesByCategory/:id', recipeApi.getRecipesByCateg
 app.delete('/api/dataservice/DeleteRecipesByAppUser/:email', recipeApi.deleteRecipesByAppUser); //? get all the recipes number or the user
 app.post('/api/dataservice/CreateRecipe', recipeApi.createRecipe);
 app.put('/api/dataservice/EditRecipe', recipeApi.editRecipe);
+// TODO - add 
+// app.put('/api/dataservice/GetRecipe/:id', recipeApi.getRecipe);
 
 //Ingredient
 app.get('/api/dataservice/GetIngredientsByAppUser/:email', ingredientApi.getIngredientsByAppUser);

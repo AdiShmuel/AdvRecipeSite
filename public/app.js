@@ -24,10 +24,19 @@
                 // controller: 'usersManagerGridCtrl',
                 templateUrl:'views/contact.html'
             })
-            .when('/Categories',{
+            // .when('/recipeDetails/:id',{
+            //     // controller: 'recipeDetailsCtrl',
+            //     templateUrl:'views/recipeDetails.html'
+            // })
+            .when('/recipeDetails',{
+                controller: 'recipeDetailsCtrl',
+                templateUrl:'views/recipeDetails.html'
+            })
+            .when('/categories',{
                 controller: 'categoriesCtrl',
                 templateUrl:'views/categories.html'
             })
+
 
 
 
