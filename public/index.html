@@ -53,8 +53,22 @@
     <script src="libs/ui-grid.js"></script>
 
 </head>
-<body ng-app="recipesApp" ng-controller="usersManagerGridCtrl" >
+<body ng-app="recipesApp" >
 <div id="fh5co-page">
+
+
+    <header>
+
+        <section class="login-section" id="fh5co-main-menu">
+            <ul>
+                <li><img height="30px" width="30px" src="../images/login.png"></li>
+                <li><a href="#">Login</a></li>
+                <li> | </li>
+                <li><a href="">Reister</a></li>
+            </ul>
+        </section>
+    </header>
+
     <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
     <aside id="fh5co-aside" role="complementary" class="border js-fullheight">
 
@@ -88,16 +102,10 @@
 
 
     </aside>
-    <section class="login-section" id="fh5co-main-menu">
-        <ul>
-            <li><img height="30px" width="30px" src="../images/login.png"></li>
-            <li><a href="#">Login</a></li>
-            <li> | </li>
-            <li><a href="">Reister</a></li>
-        </ul>
-    </section>
 
 
+
+    {{popularUsers}}
     <div id="fh5co-main" data-ng-view=""></div>
 
     <div id="fb-root"></div>
@@ -131,6 +139,10 @@
     <!--&lt;!&ndash;Services&ndash;&gt;-->
     <script src="javascripts/services/userService.js"></script>
 
+
+    <script src="/javascripts/controllers/categoriesCtrl.js"></script>
+
+    <script src="javascripts/services/categoriesService.js"></script>
 <!-- MAIN JS -->
 <script src="js/main.js"></script>
 

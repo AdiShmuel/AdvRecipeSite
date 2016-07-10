@@ -25,8 +25,8 @@
                 templateUrl:'views/contact.html'
             })
             .when('/Categories',{
-                // controller: 'usersManagerGridCtrl',
-                templateUrl:'views/cat1.html'
+                controller: 'categoriesCtrl',
+                templateUrl:'views/categories.html'
             })
 
 
