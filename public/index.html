@@ -8,9 +8,15 @@
 <body ng-app="recipesApp">
 dadadad
 <a href="/usersManager">home</a>
+|
+<a href="/userRecipes">user graph</a>
+|
+<a href="/categoryRecipes">category graph</a>
     <div data-ng-view=""></div>
 
     <!--Libs-->
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
     <script src="libs/jquery.js"></script>
     <script src="libs/angular.js"></script>
     <script src="libs/angular-route.js"></script>
@@ -21,6 +27,8 @@ dadadad
     <script src="app.js"></script>
     <!--Controllers-->
     <script src="javascripts/controllers/usersManagerGridCtrl.js"></script>
+    <script src="javascripts/controllers/userRecipesGraphCtrl.js"></script>
+    <script src="javascripts/controllers/categoryRecipesPieCtrl.js"></script>
     <!--Services-->
     <script src="javascripts/services/userService.js"></script>
 

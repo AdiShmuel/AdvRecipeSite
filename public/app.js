@@ -15,6 +15,14 @@
                 controller: 'usersManagerGridCtrl',
                 templateUrl:'views/usersManager.html'
             })
+            .when('/userRecipes',{
+                controller: 'userRecipesGraphCtrl',
+                templateUrl:'views/userRecipesGraph.html'
+            })
+            .when('/categoryRecipes',{
+                controller: 'categoryRecipesPieCtrl',
+                templateUrl:'views/categoryRecipesPie.html'
+            })
             // .when('/messagesForDisplays', {
             //     templateUrl: 'views/messagesForDisplaysGrid.html',
             //     controller: 'messagesForDisplaysGridCtrl',
