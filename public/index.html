@@ -44,7 +44,7 @@
     <header>
         <section class="login-section" id="fh5co-main-menu">
             <ul>
-                <li>
+                <li ng-if="connected&&currentUser.isAdmin">
                     <div class="dropdown">
                         <img class="private-zone-but" height="40px" width="40px" src="../images/settings_icon1.png"
                              alt="Admin Zone">
@@ -57,7 +57,7 @@
                     </div>
                 </li>
 
-                <li>
+                <li ng-if="connected">
                     <div class="dropdown">
                         <img class="private-zone-but" height="40px" width="40px" src="../images/person_icon.png"
                              alt="Private Zone">
@@ -70,9 +70,18 @@
                     </div>
                 </li>
 
-                <li><a href="#">Login</a></li>
+                <li>
+                    <a  ng-if="!connected" href="/login">Login</a>
+                    <label ng-if="connected">Hello {{currentUser.userName}}</label>
+
+                </li>
                 <li style="margin: 10px"> |</li>
-                <li><a href="">Register</a></li>
+                <li>
+                    <a ng-if="!connected" href="/register">Register</a>
+                    <a ng-if="connected" ng-click="logout()" href="/signOut">Logout</a>
+
+                </li>
+
             </ul>
         </section>
     </header>
@@ -111,15 +120,6 @@
 
 
     </aside>
-    <!--<section class="login-section" id="fh5co-main-menu">-->
-        <!--<ul>-->
-            <!--<li><img height="30px" width="30px" src="../images/login.png"></li>-->
-            <!--<li><a href="/login">Login</a></li>-->
-            <!--<li> | </li>-->
-            <!--<li><a href="/register">Reister</a></li>-->
-        <!--</ul>-->
-    <!--</section>-->
-
 
     <div id="fh5co-main" data-ng-view=""></div>
 

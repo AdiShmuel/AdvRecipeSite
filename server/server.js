@@ -53,7 +53,7 @@ db = new DB.startup(conn);
 
 //AppUserApi
 app.get('/api/dataservice/GetAppUsers', appUserApi.getAllAppUsers);
-app.get('/api/dataservice/GetAppUser/:email', appUserApi.getAppUser);
+app.get('/api/dataservice/GetAppUser/:email/:password', appUserApi.getAppUser);
 app.post('/api/dataservice/PostAppUser', appUserApi.createAppUser);
 app.put('/api/dataservice/EditAppUser', appUserApi.editAppUser);
 app.delete('/api/dataservice/DeleteAppUser/:email', appUserApi.deleteAppUser);

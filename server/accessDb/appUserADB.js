@@ -15,9 +15,10 @@ module.exports = {
     });
   },
   // get a  customer
-  getAppUser: function(email, callback) {
+  getAppUser: function(email, password, callback) {
     console.log('*** GetAppUser AccessDB');
-    AppUser.find({'email': email}, {}, function(err, user) {
+    console.log(email + password);
+    AppUser.find({'email': email, 'password': password}, {}, function(err, user) {
       callback(null, user[0]);
     });
   },

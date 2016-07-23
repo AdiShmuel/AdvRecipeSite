@@ -1,9 +1,9 @@
-<form>
+<form name="loginForm" id="loginForm" ng-submit="login()">
     user mail:
-    <input>
+    <input type="email" name="userMail" required>
     password:
-    <input>
+    <input type="password" name="userPassword" required>
 
-    <button>Login</button>
-
+    <button >Login</button>
+{{currentUser}}
 </form>
