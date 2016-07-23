@@ -1,12 +1,18 @@
-<section style="height:30%" id="canvasSection" onload="init();">
+<!--<img src="../images/hero.jpg" onload="init();">-->
+<section id="canvasSection" >
+
     <div>
         <label>What's new?</label>
     </div>
 
     <!--canva-->
-    <canvas id="MyCanvas1" onload="init();">
+    <canvas id="MyCanvas1" >
         This browser or document mode doesn't support canvas object
     </canvas>
+    <script type="text/javascript">
+        console.log("script")
+    init();
+    </script>
 </section>
 
 
@@ -25,16 +31,15 @@
 </section>
 <div ng-repeat="x in popuarUsers"></div>
 
-<!--canvas script-->
+<!--&lt;!&ndash;canvas script&ndash;&gt;-->
 <script type="text/javascript">
+
+    console.log("sss");
     var can, ctx, step, steps = 0,
             delay = 50;
-    //        var appElement = document.querySelector('body');
-    //        var appScope = angular.element(appElement).scope();
-    var users;
 
-    //        var u = angular.element(document.getElementById('body')).scope();
     function init() {
+        console.log("in inut");
         can = document.getElementById("MyCanvas1");
         ctx = can.getContext("2d")  ;
         ctx.fillStyle = "black";
