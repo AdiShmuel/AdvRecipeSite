@@ -12,6 +12,19 @@
                 controller: 'usersManagerGridCtrl',
                 templateUrl:'views/home.html'
             })
+            .when('/login',{
+             //   controller: 'usersManagerGridCtrl',
+                templateUrl:'views/login.html'
+            })
+            .when('/register',{
+                  controller: 'userManagerCtrl',
+                templateUrl:'views/userDetails.html',
+                resolve:{
+                    isNew: function () {
+                        return true;
+                    }
+                }
+            })
             .when('/usersManager',{
                 controller: 'usersGridCtrl',
                 templateUrl:'views/usersManager.html',
