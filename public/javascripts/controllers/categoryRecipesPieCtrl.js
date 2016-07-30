@@ -28,24 +28,27 @@
             .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
         d3.json("/api/dataservice/GetAllCategoriesRecipes", function(error, data) {
-            data = data.filter(function(i) { return i.recipes > 0; });
-            data.sort(function(a, b){ return b.recipes-a.recipes; });
+            if (!_.isEmpty(data)){
+                data = data.filter(function(i) { return i.recipes > 0; });
+                data.sort(function(a, b){ return b.recipes-a.recipes; });
 
-            if (error) throw error;
+                if (error) throw error;
 
-            var g = svg.selectAll(".arc")
-                .data(pie(data))
-                .enter().append("g")
-                .attr("class", "arc");
+                var g = svg.selectAll(".arc")
+                    .data(pie(data))
+                    .enter().append("g")
+                    .attr("class", "arc");
 
-            g.append("path")
-              .attr("d", arc)
-              .style("fill", function(d, i) { return colors[i % 5]; });
+                g.append("path")
+                    .attr("d", arc)
+                    .style("fill", function(d, i) { return colors[i % 5]; });
 
-            g.append("text")
-              .attr("transform", function(d) { return "translate(" + labelArc.centroid(d) + ")"; })
-              .attr("dy", ".35em")
-              .text(function(d) { return d.data.name + ' (' + d.data.recipes + ')'; });
+                g.append("text")
+                    .attr("transform", function(d) { return "translate(" + labelArc.centroid(d) + ")"; })
+                    .attr("dy", ".35em")
+                    .text(function(d) { return d.data.name + ' (' + d.data.recipes + ')'; });
+            }
+
 
         });
     }
