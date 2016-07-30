@@ -14,6 +14,16 @@ module.exports = {
       callback(null, customers);
     });
   },
+  getAllAppUsersRecipes: function(callback) {
+    console.log('*** GetAllAppUsersRecipes AccessDB');
+    AppUser.aggregate([
+            { $lookup: { from: "recipes", localField: "email", foreignField: "user", as: "recipes" } },
+            { $project: { email: 1, recipes: { $size: "$recipes" } } },
+            { $sort: { "recipes": -1 } }
+        ], function(err, customers) {
+      callback(null, customers);
+    });
+  },
   // get a  customer
   getAppUser: function(email, password, callback) {
     console.log('*** GetAppUser AccessDB');

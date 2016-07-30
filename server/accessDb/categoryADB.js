@@ -12,6 +12,16 @@ module.exports = {
             callback(null, categories);
         });
     },
+    getAllCategoriesRecipes: function(callback) {
+        console.log('*** GetAllCategoriesRecipes AccessDB');
+        Category.aggregate([
+            { $lookup: { from: "recipes", localField: "id", foreignField: "categories", as: "recipes" } },
+            { $project: { id: 1, name: 1, recipes: { $size: "$recipes" } } },
+            { $sort: { "recipes": -1 } }
+        ], function(err, categories) {
+            callback(null, categories);
+        });
+    },
     getCategory: function(name, callback) {
         console.log('*** GetCategory AccessDB');
         Category.find({'name': name}, function(err, category) {//{'_id': 0, 'firstName':1, 'lastName':1, 'city': 1, 'state': 1, 'stateId': 1, 'orders': 1, 'orderCount': 1, 'gender': 1, 'id': 1}, function(err, customers) {

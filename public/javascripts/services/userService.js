@@ -4,6 +4,9 @@
         this.getAll = function(){
             return $http.get('/api/dataservice/GetAppUsers');
         };
+        this.getAllRecipies = function () {
+          return $http.get('/api/dataservice/GetAppUsersRecipes');  
+        };
 
         this.removeUser = function (userMail) {
             alert(userMail);

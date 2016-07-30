@@ -34,6 +34,14 @@
                     }
                 }
             })
+            .when('/userRecipes',{
+                controller: 'userRecipesGraphCtrl',
+                templateUrl:'views/userRecipesGraph.html'
+            })
+            .when('/categoryRecipes',{
+                controller: 'categoryRecipesPieCtrl',
+                templateUrl:'views/categoryRecipesPie.html'
+            })
             .when('/about',{
                 // controller: 'usersManagerGridCtrl',
                 templateUrl:'views/about.html'

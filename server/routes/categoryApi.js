@@ -22,6 +22,22 @@ exports.getAllCategories = function (req, res) {
     });
 };
 
+exports.getAllCategoriesRecipes = function (req, res) {
+    console.log('*** GetAllCategoriesRecipes API');
+    categoryDb.getAllCategoriesRecipes(function(err, categories) {
+        if (err) {
+            console.log('*** GetAllCategoriesRecipes API Err');
+            res.json({
+                categories: categories
+            });
+        } else {
+            console.log('*** GetAllCategoriesRecipes API OK');
+
+            res.json(categories);
+        }
+    });
+};
+
 exports.createCategory = function (req, res) {
     console.log('*** CreateCategory API');
     categoryDb.createCategory(req.body, function(err){

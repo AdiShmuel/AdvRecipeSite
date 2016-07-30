@@ -41,6 +41,22 @@ exports.getAllAppUsers = function (req, res) {
   });
 };
 
+exports.getAllAppUsersRecipes = function (req, res) {
+  console.log('*** getAllAppUsersRecipes API');
+  appUserDB.getAllAppUsersRecipes(function(err, appUsersRecipes) {
+    if (err) {
+      console.log('*** getAllAppUsersRecipes API Err');
+      res.json({
+        appUsersRecipes: appUsersRecipes
+      });
+    } else {
+      console.log('*** getAllAppUsersRecipes API OK');
+
+      res.json(appUsersRecipes);
+    }
+  });
+};
+
 exports.createAppUser = function (req, res) {
   console.log('*** AddAppUser API');
       appUserDB.createAppUser(req.body, function(err){
