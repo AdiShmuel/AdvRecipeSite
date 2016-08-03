@@ -14,10 +14,21 @@ module.exports = {
       callback(null, customers);
     });
   },
+  getAllAppUsersRecipes: function(callback) {
+    console.log('*** GetAllAppUsersRecipes AccessDB');
+    AppUser.aggregate([
+            { $lookup: { from: "recipes", localField: "email", foreignField: "user", as: "recipes" } },
+            { $project: { email: 1, recipes: { $size: "$recipes" } } },
+            { $sort: { "recipes": -1 } }
+        ], function(err, customers) {
+      callback(null, customers);
+    });
+  },
   // get a  customer
-  getAppUser: function(email, callback) {
+  getAppUser: function(email, password, callback) {
     console.log('*** GetAppUser AccessDB');
-    AppUser.find({'email': email}, {}, function(err, user) {
+    console.log(email + password);
+    AppUser.find({'email': email, 'password': password}, {}, function(err, user) {
       callback(null, user[0]);
     });
   },

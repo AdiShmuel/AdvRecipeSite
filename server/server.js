@@ -49,12 +49,13 @@ db = new DB.startup(conn);
 
 // app.get('/', routes.index);
 
-
 // JSON API
 
 //AppUserApi
 app.get('/api/dataservice/GetAppUsers', appUserApi.getAllAppUsers);
-app.get('/api/dataservice/GetAppUser/:name', appUserApi.getAppUser);
+app.get('/api/dataservice/GetAppUser/:email/:password', appUserApi.getAppUser);
+app.get('/api/dataservice/GetAppUsersRecipes', appUserApi.getAllAppUsersRecipes);
+app.get('/api/dataservice/GetAppUser/:email', appUserApi.getAppUser);
 app.post('/api/dataservice/PostAppUser', appUserApi.createAppUser);
 app.put('/api/dataservice/EditAppUser', appUserApi.editAppUser);
 app.delete('/api/dataservice/DeleteAppUser/:email', appUserApi.deleteAppUser);
@@ -62,6 +63,7 @@ app.delete('/api/dataservice/DeleteAppUser/:email', appUserApi.deleteAppUser);
 //Category
 app.get('/api/dataservice/GetAllCategories', categoryApi.getAllCategories);
 app.get('/api/dataservice/GetCategory/:name', categoryApi.getCategory);
+app.get('/api/dataservice/GetAllCategoriesRecipes', categoryApi.getAllCategoriesRecipes);
 app.post('/api/dataservice/CreateCategory', categoryApi.createCategory);
 app.delete('/api/dataservice/DeleteCategory/:name', categoryApi.deleteCategory);
 app.put('/api/dataservice/EditCategory', categoryApi.editCategory);

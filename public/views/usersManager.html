@@ -1,9 +1,10 @@
-
-<!--<div ng-controller="usersManagerGridCtrl" >-->
 <div>
     {{ popularUsers}}
-    <h1 > hello</h1>
-<div  ui-grid="{data: gridUsers}" style="width: 500px; height: 250px;">
 
+<h1 > hello</h1>
+<div class="col-sm-10 col-lg-offset-1 ">
+    <div  ui-grid="gridUsersOptions" ui-grid-edit external-scopes="gridScope">
+
+    </div>
 </div>
-</div>
+    </div>

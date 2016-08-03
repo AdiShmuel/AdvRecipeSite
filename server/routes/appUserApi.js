@@ -4,9 +4,14 @@ var appUserDB = require('../accessDb/appUserADB')
 
 
 ///////////////// appUser
+/**
+ * Check if email exist with the getting password. If it does- get user, otherwise-null
+ * @param req
+ * @param res
+ */
 exports.getAppUser = function (req, res) {
   console.log('*** GetAppUser API');
-  appUserDB.getAppUser(req.params.email, function(err, appUser) {
+  appUserDB.getAppUser(req.params.email, req.params.password, function(err, appUser) {
     if (err) {
       console.log('*** GetAppUser API Err');
       res.json({
@@ -32,6 +37,22 @@ exports.getAllAppUsers = function (req, res) {
       console.log('*** GetAppUsers API OK');
 
       res.json(appUsers);
+    }
+  });
+};
+
+exports.getAllAppUsersRecipes = function (req, res) {
+  console.log('*** getAllAppUsersRecipes API');
+  appUserDB.getAllAppUsersRecipes(function(err, appUsersRecipes) {
+    if (err) {
+      console.log('*** getAllAppUsersRecipes API Err');
+      res.json({
+        appUsersRecipes: appUsersRecipes
+      });
+    } else {
+      console.log('*** getAllAppUsersRecipes API OK');
+
+      res.json(appUsersRecipes);
     }
   });
 };

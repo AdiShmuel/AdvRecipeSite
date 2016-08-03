@@ -8,17 +8,16 @@ var categoryDb = require('../accessDb/categoryADB')
 
 exports.getAllCategories = function (req, res) {
     console.log('*** GetAllCategories API');
-
     categoryDb.getAllCategories(function(err, categories) {
         if (err) {
             console.log('*** GetAllCategories API Err');
-            return res.json({
+            res.json({
                 categories: categories
             });
         } else {
             console.log('*** GetAllCategories API OK');
 
-            return res.json(categories);
+            res.json(categories);
         }
     });
 };
@@ -37,6 +36,22 @@ exports.getCategory = function (req,res) {
         }
     });
 }
+
+exports.getAllCategoriesRecipes = function (req, res) {
+    console.log('*** GetAllCategoriesRecipes API');
+    categoryDb.getAllCategoriesRecipes(function(err, categories) {
+        if (err) {
+            console.log('*** GetAllCategoriesRecipes API Err');
+            res.json({
+                categories: categories
+            });
+        } else {
+            console.log('*** GetAllCategoriesRecipes API OK');
+
+            res.json(categories);
+        }
+    });
+};
 
 exports.createCategory = function (req, res) {
     console.log('*** CreateCategory API');

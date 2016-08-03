@@ -1,5 +1,5 @@
 (function(){
-    var recipesApp = angular.module('recipesApp', ['ngRoute', 'ui.grid']);
+    var recipesApp = angular.module('recipesApp',  ['ngRoute', 'ui.grid']);
     recipesApp.config(function($routeProvider,$locationProvider){
 
         $locationProvider.html5Mode({
@@ -12,9 +12,35 @@
                 controller: 'usersManagerGridCtrl',
                 templateUrl:'/views/home.html'
             })
+            .when('/login',{
+             //   controller: 'usersManagerGridCtrl',
+                templateUrl:'views/login.html'
+            })
+            .when('/register',{
+                  controller: 'userManagerCtrl',
+                templateUrl:'views/userDetails.html',
+                resolve:{
+                    isNew: function () {
+                        return true;
+                    }
+                }
+            })
             .when('/usersManager',{
-                controller: 'usersManagerGridCtrl',
-                templateUrl:'/views/usersManager.html'
+                controller: 'usersGridCtrl',
+                templateUrl:'/views/usersManager.html',
+                resolve:{
+                    allUsers: function (userService) {
+                        return userService.getAll();
+                    }
+                }
+            })
+            .when('/userRecipes',{
+                controller: 'userRecipesGraphCtrl',
+                templateUrl:'/views/userRecipesGraph.html'
+            })
+            .when('/categoryRecipes',{
+                controller: 'categoryRecipesPieCtrl',
+                templateUrl:'/views/categoryRecipesPie.html'
             })
             .when('/about',{
                 // controller: 'usersManagerGridCtrl',
@@ -24,10 +50,6 @@
                 // controller: 'usersManagerGridCtrl',
                 templateUrl:'/views/contact.html'
             })
-            // .when('/recipeDetails/:id',{
-            //     // controller: 'recipeDetailsCtrl',
-            //     templateUrl:'views/recipeDetails.html'
-            // })f
             .when('/recipeDetails',{
                 controller: 'recipeDetailsCtrl',
                 templateUrl:'/views/recipeDetails.html'
@@ -59,7 +81,7 @@
 
 
 
-        
+
 
 
 
