@@ -12,6 +12,17 @@
 *
 * ======================================================= */
 
+.btn-glyphicon {
+  padding:8px;
+  background:#ffffff;
+  margin-right:4px;
+}
+
+.icon-btn {
+  padding: 1px 15px 3px 2px;
+  border-radius:50px;
+}
+
 .dropdown {
   position: relative;
   display: inline-block;
@@ -922,21 +933,21 @@ body.offcanvas #fh5co-main, body.offcanvas .fh5co-nav-toggle {
   outline: none !important;
 }
 
-.btn-primary {
+.btn-primary-custom {
   background: #da1212;
   color: #fff;
   border: 2px solid #da1212;
 }
-.btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+.btn-primary-custom:hover, .btn-primary-custom:focus, .btn-primary-custom:active {
   background: #ec1919 !important;
   border-color: #ec1919 !important;
 }
-.btn-primary.btn-outline {
+.btn-primary-custom.btn-outline {
   background: transparent;
   color: #da1212;
   border: 2px solid #da1212;
 }
-.btn-primary.btn-outline:hover, .btn-primary.btn-outline:focus, .btn-primary.btn-outline:active {
+.btn-primary-custom.btn-outline:hover, .btn-primary-custom.btn-outline:focus, .btn-primary-custom.btn-outline:active {
   background: #da1212;
   color: #fff;
 }

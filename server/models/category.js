@@ -11,7 +11,8 @@ var CategorySchema = new Schema({
         type : Number, index: { unique: true }
     },
     image : {
-        data : Buffer, ContentType: String
+        // data : Buffer, ContentType: String
+        type: String, required: true
     }//,
     // recipes: [
     //     {type: Schema.ObjectId , ref: 'Recipe'}
