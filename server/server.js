@@ -49,28 +49,31 @@ db = new DB.startup(conn);
 
 // app.get('/', routes.index);
 
+
 // JSON API
 
 //AppUserApi
 app.get('/api/dataservice/GetAppUsers', appUserApi.getAllAppUsers);
-app.get('/api/dataservice/GetAppUser/:email', appUserApi.getAppUser);
+app.get('/api/dataservice/GetAppUser/:name', appUserApi.getAppUser);
 app.post('/api/dataservice/PostAppUser', appUserApi.createAppUser);
 app.put('/api/dataservice/EditAppUser', appUserApi.editAppUser);
 app.delete('/api/dataservice/DeleteAppUser/:email', appUserApi.deleteAppUser);
 
 //Category
 app.get('/api/dataservice/GetAllCategories', categoryApi.getAllCategories);
+app.get('/api/dataservice/GetCategory/:name', categoryApi.getCategory);
 app.post('/api/dataservice/CreateCategory', categoryApi.createCategory);
-app.delete('/api/dataservice/DeleteCategory/:id', categoryApi.deleteCategory);
+app.delete('/api/dataservice/DeleteCategory/:name', categoryApi.deleteCategory);
 app.put('/api/dataservice/EditCategory', categoryApi.editCategory);
 
 //Recipe
 app.get('/api/dataservice/GetAllRecipes', recipeApi.getAllRecipes);
 app.get('/api/dataservice/GetRecipesByAppUser/:email', recipeApi.getRecipesByAppUser);
-app.get('/api/dataservice/GetRecipesByCategory/:id', recipeApi.getRecipesByCategory);
+app.get('/api/dataservice/GetRecipesByCategory/:name', recipeApi.getRecipesByCategory);
 app.delete('/api/dataservice/DeleteRecipesByAppUser/:email', recipeApi.deleteRecipesByAppUser); //? get all the recipes number or the user
 app.post('/api/dataservice/CreateRecipe', recipeApi.createRecipe);
 app.put('/api/dataservice/EditRecipe', recipeApi.editRecipe);
+app.put('/api/dataservice/LikeRecipe', recipeApi.likeRecipe)
 // TODO - add 
 // app.put('/api/dataservice/GetRecipe/:id', recipeApi.getRecipe);
 

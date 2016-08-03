@@ -8,19 +8,35 @@ var categoryDb = require('../accessDb/categoryADB')
 
 exports.getAllCategories = function (req, res) {
     console.log('*** GetAllCategories API');
+
     categoryDb.getAllCategories(function(err, categories) {
         if (err) {
             console.log('*** GetAllCategories API Err');
-            res.json({
+            return res.json({
                 categories: categories
             });
         } else {
             console.log('*** GetAllCategories API OK');
 
-            res.json(categories);
+            return res.json(categories);
         }
     });
 };
+
+exports.getCategory = function (req,res) {
+    console.log('*** GetCategory API');
+    categoryDb.getCategory(req.params.name, function(err, category) {
+        if (err) {
+            console.log('*** GetCategory API Err');
+            res.json({
+                category: category
+            });
+        } else {
+            console.log('*** GetCategory API Success');
+            res.json(category);
+        }
+    });
+}
 
 exports.createCategory = function (req, res) {
     console.log('*** CreateCategory API');
@@ -39,12 +55,12 @@ exports.createCategory = function (req, res) {
 
 exports.deleteCategory = function (req, res) {
     console.log('*** DeleteCategory API');
-    categoryDb.deleteCategory(req.params.id, function(err) {
+    categoryDb.deleteCategory(req.params.name, function(err) {
         if (err) {
             console.log('*** DeleteCategory API Err');
             res.json({'status': false});
         } else {
-            recipeDb.deleteRecipesCategory(req.params.id,function(){
+            recipeDb.deleteRecipesCategory(req.params.name,function(){
                 console.log('*** DeleteCategory API OK');
                 res.json({'status': true});
             })

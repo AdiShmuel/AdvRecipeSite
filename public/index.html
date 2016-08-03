@@ -15,11 +15,13 @@
     <link rel="stylesheet" href="css/icomoon.css">
     <!-- Bootstrap  -->
     <link rel="stylesheet" href="css/bootstrap.css">
+    <!--<link rel="stylesheet" href="css/bootstrap-theme.css">-->
     <!-- Owl Carousel -->
     <link rel="stylesheet" href="css/owl.carousel.min.css">
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
     <!-- Theme style  -->
     <link rel="stylesheet" href="css/style.css">
+
 
     <!-- Modernizr JS -->
     <script src="js/modernizr-2.6.2.min.js"></script>
@@ -32,7 +34,7 @@
 
 </head>
 
-<body ng-app="recipesApp" onload="init();">
+<body ng-app="recipesApp" >
 <div id="fh5co-page">
 
 
@@ -144,6 +146,12 @@
 
     <script src="/javascripts/services/categoriesService.js"></script>
 
+    <script src="javascripts/services/recipeService.js"></script>
+
+    <script src="javascripts/controllers/categoryRecipesCtrl.js"></script>
+
+    <script src="/javascripts/controllers/categoryFormCtrl.js"></script>
+
     <script src="/javascripts/controllers/recipeDetailsCtrl.js"></script>
 
     <script src="/javascripts/services/recipeDetailsService.js"></script>
@@ -159,7 +167,6 @@
                 delay = 50;
 
         function init() {
-            console.log("in inut");
             can = document.getElementById("MyCanvas1");
             ctx = can.getContext("2d")  ;
             ctx.fillStyle = "black";

@@ -80,6 +80,42 @@ var local = module.exports = {
             });
         })
     },
+    likeRecipe: function (req_body, callback) {
+        console.log('*** LikeRecipe AccessDB');
+
+        Recipe.findOne({'id': req_body.id}, {}, function (err, recipe) {
+            if (err) {
+                return callback(err);
+            }
+
+            recipe.likeAmount++;
+            recipe.save(function (err) {
+                if (err) {
+                    console.log('*** accessDB.likeRecipe err: ' + err);
+                    return callback(err);
+                }
+                callback(null);
+            });
+        })
+    },
+    unlikeRecipe: function (req_body, callback) {
+        console.log('*** UnlikeRecipe AccessDB');
+
+        Recipe.findOne({'id': req_body.id}, {}, function (err, recipe) {
+            if (err) {
+                return callback(err);
+            }
+
+            recipe.likeAmount--;
+            recipe.save(function (err) {
+                if (err) {
+                    console.log('*** accessDB.unlikeRecipe err: ' + err);
+                    return callback(err);
+                }
+                callback(null);
+            });
+        })
+    },
     deleteRecipesByAppUser: function (email, callback) {
         console.log('*** DeleteRecipesByAppUser AccessDB');
         Recipe.remove({'user': email}, function (err) {
