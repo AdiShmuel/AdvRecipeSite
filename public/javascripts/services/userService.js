@@ -13,6 +13,10 @@
             return $http.delete('/api/dataservice/DeleteAppUser/' + userMail);
         }
 
+        this.updateUser = function (user) {
+            return $http.put('/api/dataservice/EditAppUser', user);
+        }
+
         this.getUser = function (userMail, userPassword) {
             alert(userMail, userPassword);
             var user = {'email': userMail , 'password': userPassword};

@@ -25,6 +25,15 @@
                     }
                 }
             })
+            .when('/myProfile',{
+                controller: 'userManagerCtrl',
+                templateUrl:'views/userDetails.html',
+                resolve:{
+                    isNew: function () {
+                        return false;
+                    }
+                }
+            })
             .when('/usersManager',{
                 controller: 'usersGridCtrl',
                 templateUrl:'views/usersManager.html',

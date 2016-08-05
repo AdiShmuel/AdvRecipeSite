@@ -64,17 +64,23 @@
             }
         };
 
+        var columnDef = [
+            {name: 'userName', displayName: 'User Name', enableCellEdit: false},//, enableFiltering: true},
+            {field: 'email', displayName: 'Email', enableCellEdit: false},//, enableFiltering: true},
+            {field: 'isAdmin', displayName: 'Is Admin', type: 'boolean', enableCellEdit: true},//, enableFiltering: false},
+            {field: 'gender', displayName: 'Gender', enableCellEdit: false}];
+        // enableFiltering: false}//,
+        if (!_.isEmpty($scope.$parent.currentUser) && $scope.$parent.currentUser.isAdmin){
+            columnDef[columnDef.length] = {name: 'actions', displayName: 'Actions',
+                cellTemplate: '<button id="deleteBtn" type="button" class="btn-small btn-danger" ng-click="getExternalScopes().deleteRelation(row.entity)"><i class="fa fa-trash" aria-hidden="true"></i> </button>', enableFiltering: false};
+        }
+
+
+
         $scope.gridUsersOptions =  {
            data: "gridUsers",
             enableSorting: true,
-            columnDefs:[
-                    {name: 'userName', displayName: 'User Name', enableCellEdit: false},//, enableFiltering: true},
-                    {field: 'email', displayName: 'Email', enableCellEdit: false},//, enableFiltering: true},
-                    {field: 'isAdmin', displayName: 'Is Admin', type: 'boolean', enableCellEdit: true},//, enableFiltering: false},
-                    {field: 'gender', displayName: 'Gender', enableCellEdit: false},// enableFiltering: false}//,
-                    {name: 'actions', displayName: 'Actions',
-                        cellTemplate: '<button id="deleteBtn" type="button" class="btn-small btn-danger" ng-click="getExternalScopes().deleteRelation(row.entity)"><i class="fa fa-trash" aria-hidden="true"></i> </button>', enableFiltering: false}
-                ]
+            columnDefs: columnDef
        };
 
         // $scope.gridUserdOptions = {
