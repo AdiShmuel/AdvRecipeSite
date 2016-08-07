@@ -87,6 +87,13 @@ module.exports = {
       if (err) { callback(err); }
       else{callback(null)}
     });
+  },
+
+  isUserExist: function(email, callback) {
+    console.log('*** isUserExist AccessDB');
+    AppUser.find({'email': email}, {}, function(err, user) {
+      callback(null, user[0]);
+    });
   }
 
   // // get a  customer's email

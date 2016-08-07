@@ -55,10 +55,11 @@ db = new DB.startup(conn);
 app.get('/api/dataservice/GetAppUsers', appUserApi.getAllAppUsers);
 app.get('/api/dataservice/GetAppUser/:email/:password', appUserApi.getAppUser);
 app.get('/api/dataservice/GetAppUsersRecipes', appUserApi.getAllAppUsersRecipes);
-app.get('/api/dataservice/GetAppUser/:email', appUserApi.getAppUser);
+// app.get('/api/dataservice/GetAppUser/:email', appUserApi.getAppUser);
 app.post('/api/dataservice/PostAppUser', appUserApi.createAppUser);
 app.put('/api/dataservice/EditAppUser', appUserApi.editAppUser);
 app.delete('/api/dataservice/DeleteAppUser/:email', appUserApi.deleteAppUser);
+app.get('/api/dataservice/isUserExist/:email', appUserApi.isUserExist);
 
 //Category
 app.get('/api/dataservice/GetAllCategories', categoryApi.getAllCategories);

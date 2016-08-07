@@ -1,4 +1,4 @@
-<form ng-submit="onSave()">
+<form name="userForm" ng-submit="onSave(userForm)">
     <div ng-show="isShowMessage" class="alert alert-success" >
         {{saveMessage}}
     </div>
@@ -11,7 +11,8 @@
 
     <div class="form-group">
         <label>e-Mail</label>
-        <input type="email" ng-model="appUser.email" required="required" ng-disabled="!isNew">
+        <input type="email" ng-model="appUser.email" new-user-mail-validation required="required" ng-disabled="!isNew">
+        <div ng-if="userForm.$error.emailExists">username exists already</div>
     </div>
 
     <div class="form-group">

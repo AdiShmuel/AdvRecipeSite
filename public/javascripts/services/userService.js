@@ -18,10 +18,17 @@
         }
 
         this.getUser = function (userMail, userPassword) {
-            alert(userMail, userPassword);
             var user = {'email': userMail , 'password': userPassword};
-            return $http.get('/api/dataservice/GetAppUser/' + userMail + "/" + userPassword);// , {params: user,
-                // headers : {'Accept' : 'application/json'}});
+            return $http.get('/api/dataservice/GetAppUser/' + userMail + "/" + userPassword);
+        }
+
+        this.createUser = function (user) {
+            return $http.post('/api/dataservice/PostAppUser', user);
+        }
+
+
+        this.isUserExist = function (userMail) {
+            return $http.get('/api/dataservice/isUserExist/' + userMail);
         }
 
 
