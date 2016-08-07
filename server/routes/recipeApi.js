@@ -37,7 +37,7 @@ exports.getRecipesByAppUser = function (req, res) {
 
 exports.getRecipesByCategory = function (req, res) {
     console.log('*** GetRecipesByCategory API');
-    db.getRecipesByCategory(req.params.id, function(err, recipes) {
+    db.getRecipesByCategory(req.params.name, function(err, recipes) {
         if (err) {
             console.log('*** GetRecipesByCategory API Err');
             res.json({
@@ -91,6 +91,20 @@ exports.editRecipe = function (req, res) {
     });
 };
 
+
+exports.likeRecipe= function (req, res) {
+    console.log('*** LikeRecipe API');
+    db.likeRecipe(req.body, function(err) {
+        if (err) {
+            console.log('*** LikeRecipe API Err');
+            res.json({'status': false});
+        } else {
+            console.log('*** LikeRecipe API OK');
+
+            res.json({'status': true});
+        }
+    });
+};
 
 
 

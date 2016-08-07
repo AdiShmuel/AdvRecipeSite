@@ -44,7 +44,7 @@
 
 </head>
 
-<body ng-app="recipesApp" onload="init();" ng-controller="usersManagerGridCtrl">
+<body ng-app="recipesApp" ng-controller="usersManagerGridCtrl">
 <div id="fh5co-page">
 
 
@@ -175,6 +175,12 @@
 
     <script src="/javascripts/services/categoriesService.js"></script>
 
+    <script src="javascripts/services/recipeService.js"></script>
+
+    <script src="javascripts/controllers/categoryRecipesCtrl.js"></script>
+
+    <script src="/javascripts/controllers/categoryFormCtrl.js"></script>
+
     <script src="/javascripts/controllers/recipeDetailsCtrl.js"></script>
 
     <script src="/javascripts/services/recipeDetailsService.js"></script>
@@ -190,7 +196,6 @@
                 delay = 50;
 
         function init() {
-            console.log("in inut");
             can = document.getElementById("MyCanvas1");
             ctx = can.getContext("2d")  ;
             ctx.fillStyle = "black";

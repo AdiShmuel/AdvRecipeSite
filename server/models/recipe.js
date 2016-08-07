@@ -11,8 +11,8 @@ var RecipeSchema = new Schema({
         type : String, required: true, trim: true
     },
     image : {
-        //type : String, required: false, trim: true
-        data : Buffer, ContentType: String//, required: true
+        type : String, required: false, trim: true
+        // data : Buffer, ContentType: String//, required: true
     },
     likeAmount : {
         type : Number, required: true
@@ -21,7 +21,7 @@ var RecipeSchema = new Schema({
         type : Number, index: { unique: true }, required: true
     },
     categories: [
-        {type: Number , ref: 'Category'}
+        {type: String , ref: 'Category'}
     ],
     user:{type: String , ref: 'AppUser'}
 });
