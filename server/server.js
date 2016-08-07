@@ -73,7 +73,7 @@ app.get('/api/dataservice/GetAllRecipes', recipeApi.getAllRecipes);
 app.get('/api/dataservice/GetRecipeById/:id', recipeApi.getRecipeById);
 app.get('/api/dataservice/GetRecipeImageById/:id', recipeApi.getRecipeImageById);
 app.get('/api/dataservice/GetRecipesByAppUser/:email', recipeApi.getRecipesByAppUser);
-app.get('/api/dataservice/GetRecipesByCategory/:name', recipeApi.getRecipesByCategory);
+app.get('/api/dataservice/GetRecipesByCategory/:id', recipeApi.getRecipesByCategory);
 app.delete('/api/dataservice/DeleteRecipesByAppUser/:email', recipeApi.deleteRecipesByAppUser); //? get all the recipes number or the user
 app.delete('/api/dataservice/DeleteRecipeById/:id', recipeApi.deleteRecipeById);
 app.post('/api/dataservice/CreateRecipe', recipeApi.createRecipe);

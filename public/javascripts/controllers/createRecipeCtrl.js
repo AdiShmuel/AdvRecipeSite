@@ -3,8 +3,8 @@
     "use strict";
     function createRecipeCtrl($scope, $location, recipeDetailsService, categoriesService){
         categoriesService.getAll().then(function (data) {
-            if (!_.isEmpty(data) && !_.isEmpty(data.data)){
-                $scope.categories = data.data;
+            if (!_.isEmpty(data)) {
+                $scope.categories = data;
             }
         });
         
@@ -18,8 +18,8 @@
             
             var newRecipe = {
                 user: $scope.$parent.currentUser.email,
-                //image: $scope.image,
-                //imageType: $scope.imageType,
+                image: $scope.image,
+                imageType: $scope.imageType,
                 title: $scope.title,
                 content: $scope.content,
                 categories: categories,
@@ -27,7 +27,12 @@
             };
             
             recipeDetailsService.addRecipe(newRecipe).then(function (data) {
-               $location.path('/user/' + $scope.$parent.currentUser.email + '/recipes'); 
+                if (!_.isEmpty(data) && !_.isEmpty(data.data) && (data.data.id > 0)) {
+                    $location.path('/recipeDetails/' + data.data.id); 
+                }
+                else {
+                    alert('Error while adding recipe!');
+                }
             });
         }
     }

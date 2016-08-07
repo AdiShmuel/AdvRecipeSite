@@ -72,7 +72,7 @@ exports.getRecipesByAppUser = function (req, res) {
 
 exports.getRecipesByCategory = function (req, res) {
     console.log('*** GetRecipesByCategory API');
-    db.getRecipesByCategory(req.params.name, function(err, recipes) {
+    db.getRecipesByCategory(req.params.id, function(err, recipes) {
         if (err) {
             console.log('*** GetRecipesByCategory API Err');
             res.json({
@@ -113,12 +113,13 @@ exports.deleteRecipeById = function (req, res) {
 
 exports.createRecipe = function (req, res) {
     console.log('*** CreateRecipe API');
-    db.createRecipe(req.body, function(err){
+    db.createRecipe(req.body, function(err, id){
         if (err) {
             console.log('*** CreateRecipe API Err');
             res.json(false);
         } else {
             console.log('*** CreateRecipe API OK');
+            req.body.id = id;
             res.json(req.body);
         }
     });

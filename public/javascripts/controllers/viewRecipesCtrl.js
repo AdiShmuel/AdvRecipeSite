@@ -1,7 +1,7 @@
 
 (function(){
     "use strict";
-    function viewRecipesCtrl($scope, $routeParams, recipeDetailsService, categoriesService){
+    function viewRecipesCtrl($scope, $routeParams, recipeDetailsService, recipeService, categoriesService){
 
         if ($routeParams.email) {
             $scope.filter = $routeParams.email;
@@ -39,6 +39,17 @@
                 }
             });
         }
+        
+        $scope.like = function (data) {
+            recipeService.like(data).then(function (sucess) {
+                if (sucess) {
+                    data.likeAmount++;
+                }
+                else {
+                    alert("error in like");
+                }
+            });
+        }
     }
-    angular.module('recipesApp').controller('viewRecipesCtrl', ['$scope', '$routeParams', 'recipeDetailsService', 'categoriesService',  viewRecipesCtrl])
+    angular.module('recipesApp').controller('viewRecipesCtrl', ['$scope', '$routeParams', 'recipeDetailsService', 'recipeService', 'categoriesService',  viewRecipesCtrl])
 })();

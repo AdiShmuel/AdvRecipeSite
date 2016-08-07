@@ -29,7 +29,7 @@ var local = module.exports = {
     },
     getRecipesByCategory: function (id, callback) {
         console.log('*** GetRecipesByCategory AccessDB');
-        Recipe.find({'categories': {"$in": [id]}}, {}, function (err, recipes) { //find object that have in the categories array specific categopry
+        Recipe.find({ 'categories': { $in: [ id ] } }, {}, function (err, recipes) { //find object that have in the categories array specific categopry
             callback(null, recipes);
         });
     },
@@ -62,7 +62,7 @@ var local = module.exports = {
                     }
                     else {
                         RecipeModel.updateCounter();
-                        callback(null);
+                        callback(null, recipe.id);
                     }
                 });
             }
