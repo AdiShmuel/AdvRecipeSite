@@ -66,10 +66,6 @@
                 // controller: 'usersManagerGridCtrl',
                 templateUrl:'/views/contact.html'
             })
-            // .when('/recipeDetails/:id',{
-            //     // controller: 'recipeDetailsCtrl',
-            //     templateUrl:'/views/recipeDetails.html'
-            // })
             .when('/recipeDetails/:recipeId',{
                 controller: 'recipeDetailsCtrl',
                 templateUrl:'/views/recipeDetails.html'
@@ -78,6 +74,28 @@
                 controller: 'categoriesCtrl',
                 templateUrl:'/views/categories.html'
             })
+            .when('/createCategory',{
+                controller: 'categoryFormCtrl',
+                templateUrl:'/views/categories/categoryForm.html'
+            })
+            .when('/editCategory',{
+                controller: 'categoryFormCtrl',
+                templateUrl:'/views/categories/categoryForm.html'
+            })
+            .when('/editCategory/:name',{
+                controller: 'categoryFormCtrl',
+                templateUrl:'/views/categories/categoryForm.html'
+            })
+            .when('/removeCategory',{
+                controller: 'categoryFormCtrl',
+                templateUrl:'/views/categories.html'
+            })
+            .when('/categoryRecipes/:name',{
+                controller: 'categoryRecipesCtrl',
+                templateUrl:'/views/categoryRecipes.html'
+            })
+
+
 
 
 

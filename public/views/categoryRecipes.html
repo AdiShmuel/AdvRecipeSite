@@ -1,0 +1,26 @@
+<!--"usersManagerGridCtrl"-->
+<div class="fh5co-narrow-content" >
+
+    <a type="button" class="btn btn-success" href="/createRecipe">create</a>
+    <h2 class="fh5co-heading animated fadeInLeft">{{category}} recipes</span></h2>
+    <div class="row animated fadeInLeft">
+
+        <div ng-repeat="x in recipes" class="col-md-4 col-sm-6 col-xs-6 col-xsxs-12 work-item">
+            <!--TODO - add id-->
+            <a href="/recipeDetails/{{x.id}}">
+                <img src="{{x.image}}" class="img-responsive">
+                <h3 class="fh5co-work-title">{{x.title}}</h3>
+                <p>author name</p>
+            </a>
+            <a class="btn btn-primary-custom btn-sm"  href="/editRecipe/{{x.name}}">edit</a>
+            <a class="btn btn-primary-custom btn-outline btn-sm" href="/removeRecipe">remove</a>
+            <button class="btn btn-primary btn-xs" ng-click="like(x)">{{x.likeAmount}} Likes</button>
+            <!--<a><span class="glyphicon glyphicon-thumbs-up"></span></a>-->
+            <!--<a class="btn icon-btn btn-primary-blue" href="#">-->
+                <!--<span class="glyphicon btn-glyphicon glyphicon-thumbs-up img-circle text-primary"></span>-->
+                <!--Like-->
+            <!--</a>-->
+        </div>
+        <!--<div class="clearfix visible-md-block"></div>-->
+    </div>
+</div>

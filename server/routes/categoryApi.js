@@ -22,6 +22,21 @@ exports.getAllCategories = function (req, res) {
     });
 };
 
+exports.getCategory = function (req,res) {
+    console.log('*** GetCategory API');
+    categoryDb.getCategory(req.params.name, function(err, category) {
+        if (err) {
+            console.log('*** GetCategory API Err');
+            res.json({
+                category: category
+            });
+        } else {
+            console.log('*** GetCategory API Success');
+            res.json(category);
+        }
+    });
+}
+
 exports.getAllCategoriesRecipes = function (req, res) {
     console.log('*** GetAllCategoriesRecipes API');
     categoryDb.getAllCategoriesRecipes(function(err, categories) {
@@ -55,12 +70,12 @@ exports.createCategory = function (req, res) {
 
 exports.deleteCategory = function (req, res) {
     console.log('*** DeleteCategory API');
-    categoryDb.deleteCategory(req.params.id, function(err) {
+    categoryDb.deleteCategory(req.params.name, function(err) {
         if (err) {
             console.log('*** DeleteCategory API Err');
             res.json({'status': false});
         } else {
-            recipeDb.deleteRecipesCategory(req.params.id,function(){
+            recipeDb.deleteRecipesCategory(req.params.name,function(){
                 console.log('*** DeleteCategory API OK');
                 res.json({'status': true});
             })
