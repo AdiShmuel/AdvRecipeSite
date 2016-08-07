@@ -1,0 +1,15 @@
+<div class="fh5co-narrow-content">
+
+    <a class="btn btn-success" href="/createRecipe">create</a>
+    <h2 class="fh5co-heading animated fadeInLeft">{{ filter }} Recipes</span></h2>
+    <div class="row animated fadeInLeft">
+
+        <div ng-repeat="x in recipes" class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 work-item">
+            <a ng-href="/recipeDetails/{{ x.id }}">
+                <h3 class="fh5co-work-title">{{ x.title }}</h3>
+                <p>{{ x.user }} | {{ x.likeAmount || '0' }} likes</p>
+            </a>
+        </div>
+        <!--<div class="clearfix visible-md-block"></div>-->
+    </div>
+</div>

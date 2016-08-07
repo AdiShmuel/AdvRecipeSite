@@ -19,6 +19,41 @@ exports.getAllRecipes = function (req, res) {
     });
 };
 
+exports.getRecipeById = function (req, res) {
+    console.log('*** GetRecipeById API');
+
+    db.getRecipeById(req.params.id, function(err, recipe) {
+        if (err) {
+            console.log('*** GetRecipeById API Err');
+            res.json({
+                recipe: recipe
+            });
+        } else {
+            console.log('*** GetRecipeById API OK');
+
+            res.json(recipe);
+        }
+    });
+};
+
+exports.getRecipeImageById = function (req, res) {
+    console.log('*** GetRecipeImageById API');
+
+    db.getRecipeById(req.params.id, function(err, recipe) {
+        if (err) {
+            console.log('*** GetRecipeImageById API Err');
+            res.json({
+                recipe: recipe
+            });
+        } else {
+            console.log('*** GetRecipeImageById API OK');
+
+            res.set('Content-Type', recipe.imageType);
+            res.end(recipe.image, 'binary');
+        }
+    });
+};
+
 exports.getRecipesByAppUser = function (req, res) {
     console.log('*** GetRecipesByAppUser API');
     db.getRecipesByAppUser(req.params.email, function(err, recipes) {
@@ -58,6 +93,19 @@ exports.deleteRecipesByAppUser = function (req, res) {
             res.json({'status': false});
         } else {
             console.log('*** DeleteRecipesByAppUser API OK');
+            res.json({'status': true});
+        }
+    });
+};
+
+exports.deleteRecipeById = function (req, res) {
+    console.log('*** DeleteRecipeById API');
+    db.deleteRecipeById(req.params.id, function(err) {
+        if (err) {
+            console.log('*** DeleteRecipeById API Err');
+            res.json({'status': false});
+        } else {
+            console.log('*** DeleteRecipeById API OK');
             res.json({'status': true});
         }
     });

@@ -10,15 +10,15 @@
         $routeProvider
             .when('/',{
                 controller: 'usersManagerGridCtrl',
-                templateUrl:'views/home.html'
+                templateUrl:'/views/home.html'
             })
             .when('/login',{
              //   controller: 'usersManagerGridCtrl',
-                templateUrl:'views/login.html'
+                templateUrl:'/views/login.html'
             })
             .when('/register',{
                   controller: 'userManagerCtrl',
-                templateUrl:'views/userDetails.html',
+                templateUrl:'/views/userDetails.html',
                 resolve:{
                     isNew: function () {
                         return true;
@@ -27,40 +27,56 @@
             })
             .when('/usersManager',{
                 controller: 'usersGridCtrl',
-                templateUrl:'views/usersManager.html',
+                templateUrl:'/views/usersManager.html',
                 resolve:{
                     allUsers: function (userService) {
                         return userService.getAll();
                     }
                 }
             })
+            .when('/users/:email/recipes', {
+                controller: 'viewRecipesCtrl',
+                templateUrl: '/views/recipes.html'
+            })
+            .when('/categories/:categoryId/recipes', {
+                controller: 'viewRecipesCtrl',
+                templateUrl: '/views/recipes.html'
+            })
+            .when('/recipes', {
+                controller: 'viewRecipesCtrl',
+                templateUrl: '/views/recipes.html'
+            })
+            .when('/createRecipe', {
+                controller: 'createRecipeCtrl',
+                templateUrl: '/views/createRecipe.html'
+            })
             .when('/userRecipes',{
                 controller: 'userRecipesGraphCtrl',
-                templateUrl:'views/userRecipesGraph.html'
+                templateUrl:'/views/userRecipesGraph.html'
             })
             .when('/categoryRecipes',{
                 controller: 'categoryRecipesPieCtrl',
-                templateUrl:'views/categoryRecipesPie.html'
+                templateUrl:'/views/categoryRecipesPie.html'
             })
             .when('/about',{
                 // controller: 'usersManagerGridCtrl',
-                templateUrl:'views/about.html'
+                templateUrl:'/views/about.html'
             })
             .when('/contact',{
                 // controller: 'usersManagerGridCtrl',
-                templateUrl:'views/contact.html'
+                templateUrl:'/views/contact.html'
             })
             // .when('/recipeDetails/:id',{
             //     // controller: 'recipeDetailsCtrl',
-            //     templateUrl:'views/recipeDetails.html'
+            //     templateUrl:'/views/recipeDetails.html'
             // })
-            .when('/recipeDetails',{
+            .when('/recipeDetails/:recipeId',{
                 controller: 'recipeDetailsCtrl',
-                templateUrl:'views/recipeDetails.html'
+                templateUrl:'/views/recipeDetails.html'
             })
             .when('/categories',{
                 controller: 'categoriesCtrl',
-                templateUrl:'views/categories.html'
+                templateUrl:'/views/categories.html'
             })
 
 
@@ -68,7 +84,7 @@
 
 
             // .when('/messagesForDisplays', {
-            //     templateUrl: 'views/messagesForDisplaysGrid.html',
+            //     templateUrl: '/views/messagesForDisplaysGrid.html',
             //     controller: 'messagesForDisplaysGridCtrl',
             //     resolve:{
             //         messageDisplayRelations: function(messageService){
@@ -77,12 +93,12 @@
             //     }
             // })
             // .when('/message/:id',{
-            //     templateUrl: 'views/message.html',
+            //     templateUrl: '/views/message.html',
             //     controller: 'messageForEditCtrl',
             //     controllerAs:'messageEditor'
             // })
             // .when('/newMessageDisplayRelation',{
-            //     templateUrl: 'views/newMessageDisplayRelation.html',
+            //     templateUrl: '/views/newMessageDisplayRelation.html',
             //     controller: 'newMessageDisplayRelationCtrl',
             //     resolve:{
             //         messages: function(messageService){
@@ -94,12 +110,12 @@
             //     }
             // })
             // .when('/displayStations',{
-            //     templateUrl: 'views/displayStationsManagement.html',
+            //     templateUrl: '/views/displayStationsManagement.html',
             //     controller: 'displayStationsManagementCtrl'
             // })
             //
             .otherwise({
-                templateUrl:'views/home.html'
+                templateUrl:'/views/home.html'
             });
     })
     })();
