@@ -67,7 +67,7 @@
         var columnDef = [
             {name: 'userName', displayName: 'User Name', enableCellEdit: false},//, enableFiltering: true},
             {field: 'email', displayName: 'Email', enableCellEdit: false},//, enableFiltering: true},
-            {field: 'isAdmin', displayName: 'Is Admin', type: 'boolean', enableCellEdit: true},//, enableFiltering: false},
+            {field: 'isAdmin', displayName: 'Is Admin', type: 'boolean', enableCellEdit: true},//, cellTemplate: '<input type="checkbox" ng-model="row.entity.isAdmin">'},//, enableFiltering: false},
             {field: 'gender', displayName: 'Gender', enableCellEdit: false}];
         // enableFiltering: false}//,
         if (!_.isEmpty($scope.$parent.currentUser) && $scope.$parent.currentUser.isAdmin){
@@ -83,19 +83,28 @@
             columnDefs: columnDef
        };
 
-        // $scope.gridUserdOptions = {
-        //   //  enableFiltering: true,
-        //    // enableScrollbars: false,
-        //     data:'gridUsers',
-        //     columnDefs:[
-        //         {name: 'userName', displayName: 'User Name'},//, enableFiltering: true},
-        //         {field: 'email', displayName: 'Email'},//, enableFiltering: true},
-        //         {field: 'isAdmin', displayName: 'Is Admin'},//, enableFiltering: false},
-        //         {field: 'gender', displayName: 'Gender'},// enableFiltering: false}//,
-        //         // {name: 'options', displayName: 'Options',
-        //         //     cellTemplate: '<button id="deleteBtn" type="button" class="btn-small" ng-click="getExternalScopes().deleteRelation(row.entity)">Delete</button>', enableFiltering: false}
-        //     ]
-        // };
+
+        $scope.gridUsersOptions.onRegisterApi = function(gridApi) {
+            //set gridApi on scope
+            $scope.gridApi = gridApi;
+            gridApi.edit.on.afterCellEdit($scope, function(rowEntity, colDef, newValue, oldValue) {
+                if (newValue != oldValue){
+                    var user = {'userName': rowEntity.name,
+                                'password': rowEntity.password,
+                                'email': rowEntity.email,
+                                'isAdmin': rowEntity.isAdmin,
+                                'gender': rowEntity.gender};
+
+                    userService.updateUser(user).then(function () {
+                        $scope.$apply();
+                    })
+                }
+                //Alert to show what info about the edit is available
+               // alert('Column: ' + colDef.name + ' ID: ' + rowEntity.email + ' isAdmin: ' + rowEntity.isAdmin);
+            });
+        };
+
+
 
         // $scope.filter = function(){
         //     $scope.gridData = messageDisplayRelations.data;
