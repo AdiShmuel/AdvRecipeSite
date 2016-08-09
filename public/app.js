@@ -1,5 +1,5 @@
 (function(){
-    var recipesApp = angular.module('recipesApp',  ['ngRoute', 'ui.grid', 'ui.grid.edit', 'ui.grid.rowEdit', 'ngCookies']);
+    var recipesApp = angular.module('recipesApp',  ['ngRoute', 'ui.grid', 'ui.grid.edit', 'ui.grid.rowEdit', 'ngCookies', 'ngTouch', 'ui.grid.selection']);
     recipesApp.config(function($routeProvider,$locationProvider){
 
         $locationProvider.html5Mode({
@@ -10,7 +10,7 @@
         $routeProvider
             .when('/',{
                 controller: 'usersManagerGridCtrl',
-                templateUrl:'/views/home.html'
+                templateUrl:'views/home.html'
             })
             .when('/login',{
              //   controller: 'usersManagerGridCtrl',
@@ -36,12 +36,28 @@
             })
             .when('/usersManager',{
                 controller: 'usersGridCtrl',
-                templateUrl:'/views/usersManager.html',
+                templateUrl:'views/usersManager.html',
                 resolve:{
                     allUsers: function (userService) {
                         return userService.getAll();
                     }
                 }
+            })
+            .when('/users/:email/recipes', {
+                controller: 'viewRecipesCtrl',
+                templateUrl: '/views/recipes.html'
+            })
+            .when('/categories/:categoryId/recipes', {
+                controller: 'viewRecipesCtrl',
+                templateUrl: '/views/recipes.html'
+            })
+            .when('/recipes', {
+                controller: 'viewRecipesCtrl',
+                templateUrl: '/views/recipes.html'
+            })
+            .when('/createRecipe', {
+                controller: 'createRecipeCtrl',
+                templateUrl: '/views/createRecipe.html'
             })
             .when('/userRecipes',{
                 controller: 'userRecipesGraphCtrl',
@@ -59,7 +75,7 @@
                 // controller: 'usersManagerGridCtrl',
                 templateUrl:'/views/contact.html'
             })
-            .when('/recipeDetails',{
+            .when('/recipeDetails/:recipeId',{
                 controller: 'recipeDetailsCtrl',
                 templateUrl:'/views/recipeDetails.html'
             })
@@ -87,8 +103,14 @@
                 controller: 'categoryRecipesCtrl',
                 templateUrl:'/views/categoryRecipes.html'
             })
-
-
+            .when('/addIngredients',{
+                controller: 'addIngredientsCtrl',
+                templateUrl:'views/addIngredients.html'
+            })
+            .when('/myIngredients',{
+                controller: 'myIngredientsCtrl',
+                templateUrl:'views/myIngredients.html'
+            })       
 
 
 

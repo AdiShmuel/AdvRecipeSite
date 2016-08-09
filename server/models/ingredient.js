@@ -23,19 +23,16 @@ var IngredientSchema = new Schema({
 var count;
 
 exports.updateCounter = function () {
-    ObjectCounter.findOneAndUpdate( {collectionName: "ingredients"}, { $inc: { nextSeqNumber: 1 } }, function (err, retCount) {count = retCount.nextSeqNumber})
+    //ObjectCounter.findOneAndUpdate({collectionName: "ingredients"}, { $inc: { nextSeqNumber: 1 } }, function (err, retCount) {count = retCount.nextSeqNumber})
+    ObjectCounter.findOneAndUpdate({collectionName: "ingredients"}, { $inc: { nextSeqNumber: 1 } }, function (err, retCount) {})
+    
 };
 
 exports.counter = function (callback) {
-    if(count == undefined) {
         ObjectCounter.find({"collectionName": "ingredients"}, {}, function(err, settings) {
             count = settings[0].nextSeqNumber;
             callback(err, count);
         });
-    }
-    else {
-        callback(null, count);
-    }
 };
 
 //exports.IngredientSchema = IngredientSchema;

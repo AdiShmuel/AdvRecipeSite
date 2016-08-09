@@ -11,8 +11,10 @@ var RecipeSchema = new Schema({
         type : String, required: true, trim: true
     },
     image : {
-        type : String, required: false, trim: true
-        // data : Buffer, ContentType: String//, required: true
+        type : Buffer, ContentType: String//, required: true
+    },
+    imageType : {
+        type : String, trim: true//, required: true
     },
     likeAmount : {
         type : Number, required: true
@@ -21,7 +23,7 @@ var RecipeSchema = new Schema({
         type : Number, index: { unique: true }, required: true
     },
     categories: [
-        {type: String , ref: 'Category'}
+        {type: Number , ref: 'Category'}
     ],
     user:{type: String , ref: 'AppUser'}
 });
@@ -29,19 +31,14 @@ var RecipeSchema = new Schema({
 var count;
 
 exports.updateCounter = function () {
-    ObjectCounter.findOneAndUpdate( {collectionName: "recipes"}, { $inc: { nextSeqNumber: 1 } }, function (err, retCount) {count = retCount.nextSeqNumber + 1})
+    ObjectCounter.findOneAndUpdate( {collectionName: "recipes"}, { $inc: { nextSeqNumber: 1 } }, function (err, retCount) {})
 };
 
 exports.counter = function (callback) {
-    if(count == undefined) {
         ObjectCounter.find({"collectionName": "recipes"}, {}, function (err, settings) {
             count = settings[0].nextSeqNumber;
             callback(err, count);
         });
-    }
-    else {
-        callback(null, count); //becuase getting always the last count before increase by 1
-    }
 };
 
 
