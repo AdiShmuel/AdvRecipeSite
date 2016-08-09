@@ -31,19 +31,14 @@ var RecipeSchema = new Schema({
 var count;
 
 exports.updateCounter = function () {
-    ObjectCounter.findOneAndUpdate( {collectionName: "recipes"}, { $inc: { nextSeqNumber: 1 } }, function (err, retCount) {count = retCount.nextSeqNumber + 1})
+    ObjectCounter.findOneAndUpdate( {collectionName: "recipes"}, { $inc: { nextSeqNumber: 1 } }, function (err, retCount) {})
 };
 
 exports.counter = function (callback) {
-    if(count == undefined) {
         ObjectCounter.find({"collectionName": "recipes"}, {}, function (err, settings) {
             count = settings[0].nextSeqNumber;
             callback(err, count);
         });
-    }
-    else {
-        callback(null, count); //becuase getting always the last count before increase by 1
-    }
 };
 
 

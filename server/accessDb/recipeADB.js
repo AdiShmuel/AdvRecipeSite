@@ -52,6 +52,7 @@ var local = module.exports = {
         counter(function (err, count) {
             if (err) {
                 console.log('*** CreateRecipe AccessDB Err on Incrasing Index: ' + err);
+                RecipeModel.updateCounter(); //for problem that id not move
             }
             else {
                 recipe.id = count;
