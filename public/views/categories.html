@@ -1,19 +1,31 @@
-<!--"usersManagerGridCtrl"-->
+<div id="searchSection" class="animated fadeInLeft" >
+    <form ng-submit="search()">
+        <div >
+             Title <input type="text"  ng-model="searchData.title">
+             Author <input type="text"  ng-model="searchData.author">
+             Category
+            <select ng-model="searchData.category">
+                <option ng-repeat="x in categories" value="{{x.name}}">{{x.name}}</option>
+            </select>
+        <input type="submit" class="btn btn-primary-custom btn-md" value="search">
+        </div>
+    </form>
+</div>
+
+
 <div class="fh5co-narrow-content" >
 
-    <a type="button" class="btn btn-success" href="/createCategory">create</a>
+    <a type="button" class="btn btn-success animated fadeInLeft" href="/createCategory">create</a>
     <h2 class="fh5co-heading animated fadeInLeft" >Categories</span></h2>
     <div class="row animated fadeInLeft">
 
         <div ng-repeat="x in categories" class="col-md-4 col-sm-6 col-xs-6 col-xsxs-12 work-item">
-            <!--TODO - add id-->
             <a href="/categoryRecipes/{{x.name}}">
-                <img src="{{x.image}}" class="img-responsive">
+                <img src="{{uploadsUrl}}{{x.image}}" class="img-responsive">
                 <h3 class="fh5co-work-title">{{x.name}}</h3>
-                <!--<p>Illustration, Branding</p>-->
             </a>
-            <a class="btn btn-primary-custom btn-sm"  href="/editCategory/{{x.name}}">edit</a>
-            <a class="btn btn-primary-custom btn-outline btn-sm" href="/categories">remove</a>
+            <a class="btn btn-primary-custom btn-sm" ng-if="connected&&currentUser.isAdmin" href="/editCategory/{{x.name}}">edit</a>
+            <a class="btn btn-primary-custom btn-outline btn-sm" ng-if="connected&&currentUser.isAdmin" href="/categories">remove</a>
         </div>
         <!--<div class="clearfix visible-md-block"></div>-->
     </div>

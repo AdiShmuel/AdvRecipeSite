@@ -12,8 +12,8 @@
                 <h3 class="fh5co-work-title">{{x.title}}</h3>
                 <p>author name</p>
             </a>
-            <a class="btn btn-primary-custom btn-sm"  href="/editRecipe/{{x.name}}">edit</a>
-            <a class="btn btn-primary-custom btn-outline btn-sm" href="/removeRecipe">remove</a>
+            <a class="btn btn-primary-custom btn-sm" ng-if="connected&&(currentUser.isAdmin || x.user == currentUser.email)" href="/editRecipe/{{x.name}}">edit</a>
+            <a class="btn btn-primary-custom btn-outline btn-sm" ng-if="connected&&(currentUser.isAdmin || x.user == currentUser.email)"  href="/removeRecipe">remove</a>
             <button class="btn btn-primary btn-xs" ng-click="like(x)">{{x.likeAmount}} Likes</button>
             <!--<a><span class="glyphicon glyphicon-thumbs-up"></span></a>-->
             <!--<a class="btn icon-btn btn-primary-blue" href="#">-->

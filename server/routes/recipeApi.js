@@ -50,6 +50,21 @@ exports.getRecipesByCategory = function (req, res) {
     });
 };
 
+exports.searchRecipes = function (req, res) {
+    console.log('*** SearchRecipes API');
+    db.searchRecipes(req.body, function(err, recipes) {
+        if (err) {
+            console.log('*** SearchRecipes API Err');
+            res.json({
+                recipes: recipes
+            });
+        } else {
+            console.log('*** SearchRecipes API OK');
+            res.json(recipes);
+        }
+    });
+};
+
 exports.deleteRecipesByAppUser = function (req, res) {
     console.log('*** DeleteRecipesByAppUser API');
     db.deleteRecipesByAppUser(req.params.email, function(err) {
