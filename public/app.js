@@ -1,5 +1,5 @@
 (function(){
-    var recipesApp = angular.module('recipesApp',  ['ngRoute', 'ui.grid']);
+    var recipesApp = angular.module('recipesApp',  ['ngRoute','ngTouch', 'ui.grid', 'ui.grid.selection']);
     recipesApp.config(function($routeProvider,$locationProvider){
 
         $locationProvider.html5Mode({
@@ -62,7 +62,14 @@
                 controller: 'categoriesCtrl',
                 templateUrl:'views/categories.html'
             })
-
+            .when('/addIngredients',{
+                controller: 'addIngredientsCtrl',
+                templateUrl:'views/addIngredients.html'
+            })
+            .when('/myIngredients',{
+                controller: 'myIngredientsCtrl',
+                templateUrl:'views/myIngredients.html'
+            })
 
 
 
