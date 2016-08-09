@@ -15,15 +15,21 @@ var local = module.exports = {
             callback(null, recipes);
         });
     },
+    getRecipeById: function (id, callback) {
+        console.log('*** GetRecipeById AccessDB');
+        Recipe.findOne({'id': id}, {}, function (err, recipe) {
+            callback(null, recipe);
+        });
+    },
     getRecipesByAppUser: function (email, callback) {
         console.log('*** GetRecipesByAppUser AccessDB');
-        Recipe.findOne({'user': email}, {}, function (err, recipe) {
-            callback(null, recipe);
+        Recipe.find({'user': email}, {}, function (err, recipes) {
+            callback(null, recipes);
         });
     },
     getRecipesByCategory: function (id, callback) {
         console.log('*** GetRecipesByCategory AccessDB');
-        Recipe.find({'categories': {"$in": [id]}}, {}, function (err, recipes) { //find object that have in the categories array specific categopry
+        Recipe.find({ 'categories': { $in: [ id ] } }, {}, function (err, recipes) { //find object that have in the categories array specific categopry
             callback(null, recipes);
         });
     },
@@ -32,7 +38,12 @@ var local = module.exports = {
         var recipe = new Recipe();
         recipe.title = req_body.title;
         recipe.content = req_body.content;
-        recipe.image = req_body.image;
+        if (req_body.image) {
+            var b64 = req_body.image.replace(/^data:image\/.+;base64,/, "");
+            var binaryData  =   new Buffer(b64, 'base64');
+            recipe.image = binaryData;
+            recipe.imageType = req_body.imageType;
+        }
         recipe.likeAmount = req_body.likeAmount;
         recipe.categories = req_body.categories;
         recipe.user = req_body.user;
@@ -51,7 +62,7 @@ var local = module.exports = {
                     }
                     else {
                         RecipeModel.updateCounter();
-                        callback(null);
+                        callback(null, recipe.id);
                     }
                 });
             }
@@ -80,9 +91,51 @@ var local = module.exports = {
             });
         })
     },
+    likeRecipe: function (req_body, callback) {
+        console.log('*** LikeRecipe AccessDB');
+
+        Recipe.findOne({'id': req_body.id}, {}, function (err, recipe) {
+            if (err) {
+                return callback(err);
+            }
+
+            recipe.likeAmount++;
+            recipe.save(function (err) {
+                if (err) {
+                    console.log('*** accessDB.likeRecipe err: ' + err);
+                    return callback(err);
+                }
+                callback(null);
+            });
+        })
+    },
+    unlikeRecipe: function (req_body, callback) {
+        console.log('*** UnlikeRecipe AccessDB');
+
+        Recipe.findOne({'id': req_body.id}, {}, function (err, recipe) {
+            if (err) {
+                return callback(err);
+            }
+
+            recipe.likeAmount--;
+            recipe.save(function (err) {
+                if (err) {
+                    console.log('*** accessDB.unlikeRecipe err: ' + err);
+                    return callback(err);
+                }
+                callback(null);
+            });
+        })
+    },
     deleteRecipesByAppUser: function (email, callback) {
         console.log('*** DeleteRecipesByAppUser AccessDB');
         Recipe.remove({'user': email}, function (err) {
+            callback(err);
+        });
+    },
+    deleteRecipeById: function (id, callback) {
+        console.log('*** DeleteRecipeById AccessDB');
+        Recipe.remove({'id': id}, function (err) {
             callback(err);
         });
     },

@@ -42,7 +42,7 @@
 
 </head>
 
-<body ng-app="recipesApp" onload="init();" ng-controller="usersManagerGridCtrl">
+<body ng-app="recipesApp" ng-controller="usersManagerGridCtrl">
 <div id="fh5co-page">
 
 
@@ -57,7 +57,7 @@
                             <!--<img src="img_fjords.jpg" alt="Trolltunga Norway" width="300" height="200">-->
                             <a href="#">Manage Cateories</a>
                             <a href="#">Manage Users</a>
-                            <a href="#">Manage Recipes</a>
+                            <a href="/recipes">Manage Recipes</a>
                         </div>
                     </div>
                 </li>
@@ -69,7 +69,7 @@
                         <div class="dropdown-content">
                             <!--<img src="img_fjords.jpg" alt="Trolltunga Norway" width="300" height="200">-->
                             <a href="#">my profile</a>
-                            <a href="#">my recipes</a>
+                            <a ng-if="currentUser" ng-href="/users/{{ currentUser.email }}/recipes">my recipes</a>
                             <a href="#">my ingredients</a>
                             <a href="/userRecipes">user graph</a>
                             <a href="/categoryRecipes">category graph</a>
@@ -159,6 +159,8 @@
     <script src="javascripts/controllers/userManagerCtrl.js"></script>
     <script src="javascripts/controllers/usersManagerGridCtrl.js"></script>
     <script src="javascripts/controllers/usersGridCtrl.js"></script>
+    <script src="javascripts/controllers/createRecipeCtrl.js"></script>
+    <script src="javascripts/controllers/viewRecipesCtrl.js"></script>
     <!--&lt;!&ndash;Services&ndash;&gt;-->
     <script src="javascripts/controllers/userRecipesGraphCtrl.js"></script>
     <script src="javascripts/controllers/categoryRecipesPieCtrl.js"></script>
@@ -169,6 +171,10 @@
     <script src="/javascripts/controllers/categoriesCtrl.js"></script>
 
     <script src="/javascripts/services/categoriesService.js"></script>
+
+    <script src="javascripts/services/recipeService.js"></script>
+
+    <script src="/javascripts/controllers/categoryFormCtrl.js"></script>
 
     <script src="/javascripts/controllers/recipeDetailsCtrl.js"></script>
 
@@ -185,7 +191,6 @@
                 delay = 50;
 
         function init() {
-            console.log("in inut");
             can = document.getElementById("MyCanvas1");
             ctx = can.getContext("2d")  ;
             ctx.fillStyle = "black";

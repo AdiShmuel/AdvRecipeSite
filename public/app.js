@@ -1,5 +1,5 @@
 (function(){
-    var recipesApp = angular.module('recipesApp',  ['ngRoute','ngTouch', 'ui.grid', 'ui.grid.selection']);
+    var recipesApp = angular.module('recipesApp',  ['ngRoute', 'ui.grid']);
     recipesApp.config(function($routeProvider,$locationProvider){
 
         $locationProvider.html5Mode({
@@ -34,33 +34,65 @@
                     }
                 }
             })
+            .when('/users/:email/recipes', {
+                controller: 'viewRecipesCtrl',
+                templateUrl: '/views/recipes.html'
+            })
+            .when('/categories/:categoryId/recipes', {
+                controller: 'viewRecipesCtrl',
+                templateUrl: '/views/recipes.html'
+            })
+            .when('/recipes', {
+                controller: 'viewRecipesCtrl',
+                templateUrl: '/views/recipes.html'
+            })
+            .when('/createRecipe', {
+                controller: 'createRecipeCtrl',
+                templateUrl: '/views/createRecipe.html'
+            })
             .when('/userRecipes',{
                 controller: 'userRecipesGraphCtrl',
-                templateUrl:'views/userRecipesGraph.html'
+                templateUrl:'/views/userRecipesGraph.html'
             })
             .when('/categoryRecipes',{
                 controller: 'categoryRecipesPieCtrl',
-                templateUrl:'views/categoryRecipesPie.html'
+                templateUrl:'/views/categoryRecipesPie.html'
             })
             .when('/about',{
                 // controller: 'usersManagerGridCtrl',
-                templateUrl:'views/about.html'
+                templateUrl:'/views/about.html'
             })
             .when('/contact',{
                 // controller: 'usersManagerGridCtrl',
-                templateUrl:'views/contact.html'
+                templateUrl:'/views/contact.html'
             })
-            // .when('/recipeDetails/:id',{
-            //     // controller: 'recipeDetailsCtrl',
-            //     templateUrl:'views/recipeDetails.html'
-            // })
-            .when('/recipeDetails',{
+            .when('/recipeDetails/:recipeId',{
                 controller: 'recipeDetailsCtrl',
-                templateUrl:'views/recipeDetails.html'
+                templateUrl:'/views/recipeDetails.html'
             })
             .when('/categories',{
                 controller: 'categoriesCtrl',
-                templateUrl:'views/categories.html'
+                templateUrl:'/views/categories.html'
+            })
+            .when('/createCategory',{
+                controller: 'categoryFormCtrl',
+                templateUrl:'/views/categories/categoryForm.html'
+            })
+            .when('/editCategory',{
+                controller: 'categoryFormCtrl',
+                templateUrl:'/views/categories/categoryForm.html'
+            })
+            .when('/editCategory/:name',{
+                controller: 'categoryFormCtrl',
+                templateUrl:'/views/categories/categoryForm.html'
+            })
+            .when('/removeCategory',{
+                controller: 'categoryFormCtrl',
+                templateUrl:'/views/categories.html'
+            })
+            .when('/categoryRecipes/:name',{
+                controller: 'categoryRecipesCtrl',
+                templateUrl:'/views/categoryRecipes.html'
             })
             .when('/addIngredients',{
                 controller: 'addIngredientsCtrl',
@@ -69,7 +101,8 @@
             .when('/myIngredients',{
                 controller: 'myIngredientsCtrl',
                 templateUrl:'views/myIngredients.html'
-            })
+            })       
+
 
 
 

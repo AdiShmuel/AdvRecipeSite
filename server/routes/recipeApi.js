@@ -19,6 +19,41 @@ exports.getAllRecipes = function (req, res) {
     });
 };
 
+exports.getRecipeById = function (req, res) {
+    console.log('*** GetRecipeById API');
+
+    db.getRecipeById(req.params.id, function(err, recipe) {
+        if (err) {
+            console.log('*** GetRecipeById API Err');
+            res.json({
+                recipe: recipe
+            });
+        } else {
+            console.log('*** GetRecipeById API OK');
+
+            res.json(recipe);
+        }
+    });
+};
+
+exports.getRecipeImageById = function (req, res) {
+    console.log('*** GetRecipeImageById API');
+
+    db.getRecipeById(req.params.id, function(err, recipe) {
+        if (err) {
+            console.log('*** GetRecipeImageById API Err');
+            res.json({
+                recipe: recipe
+            });
+        } else {
+            console.log('*** GetRecipeImageById API OK');
+
+            res.set('Content-Type', recipe.imageType);
+            res.end(recipe.image, 'binary');
+        }
+    });
+};
+
 exports.getRecipesByAppUser = function (req, res) {
     console.log('*** GetRecipesByAppUser API');
     db.getRecipesByAppUser(req.params.email, function(err, recipes) {
@@ -63,14 +98,28 @@ exports.deleteRecipesByAppUser = function (req, res) {
     });
 };
 
+exports.deleteRecipeById = function (req, res) {
+    console.log('*** DeleteRecipeById API');
+    db.deleteRecipeById(req.params.id, function(err) {
+        if (err) {
+            console.log('*** DeleteRecipeById API Err');
+            res.json({'status': false});
+        } else {
+            console.log('*** DeleteRecipeById API OK');
+            res.json({'status': true});
+        }
+    });
+};
+
 exports.createRecipe = function (req, res) {
     console.log('*** CreateRecipe API');
-    db.createRecipe(req.body, function(err){
+    db.createRecipe(req.body, function(err, id){
         if (err) {
             console.log('*** CreateRecipe API Err');
             res.json(false);
         } else {
             console.log('*** CreateRecipe API OK');
+            req.body.id = id;
             res.json(req.body);
         }
     });
@@ -91,6 +140,20 @@ exports.editRecipe = function (req, res) {
     });
 };
 
+
+exports.likeRecipe= function (req, res) {
+    console.log('*** LikeRecipe API');
+    db.likeRecipe(req.body, function(err) {
+        if (err) {
+            console.log('*** LikeRecipe API Err');
+            res.json({'status': false});
+        } else {
+            console.log('*** LikeRecipe API OK');
+
+            res.json({'status': true});
+        }
+    });
+};
 
 
 

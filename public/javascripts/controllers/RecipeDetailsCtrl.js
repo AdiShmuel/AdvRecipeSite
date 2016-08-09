@@ -1,17 +1,39 @@
 
 (function(){
     "use strict";
-    function recipeDetailsCtrl($scope, recipeDetailsService){
+    function recipeDetailsCtrl($scope, $location, $routeParams, recipeDetailsService){
 
-        // var recipeId = $routeParams.id;
+        var recipeId = $routeParams.recipeId;
 
-        // $scope.recipeDetails = recipeDetailsService.getRecipe(recipeId);
-        $scope.recipeDetails = {
-            userName: 'yardenD', title: "Sloppy Joe",
-            content: 'In a medium skillet over medium heat, brown the ground beef, onion, and green pepper; drain off liquids. Stir in the garlic powder, mustard, ketchup, and brown sugar; mix thoroughly. Reduce heat, and simmer for 30 minutes. Season with salt and pepper.',
-            image: '../images/recipes/sloppy_joe.jpg', likes: 14
-        };
+        recipeDetailsService.getRecipeById(recipeId).then(function (data) {
+            if (!_.isEmpty(data) && !_.isEmpty(data.data)){
+                $scope.recipeDetails = data.data;
+                
+                $scope.canEdit = $scope.$parent && $scope.$parent.currentUser && ($scope.$parent.currentUser.isAdmin || ($scope.$parent.currentUser.email == data.data.user));
+            }
+        });
+        
+        $scope.edit = function () {
+            $scope.original = angular.copy($scope.recipeDetails);
+            $scope.editMode = true;
+        }
+        
+        $scope.save = function () {
+            recipeDetailsService.saveRecipe($scope.recipeDetails).then(function () { $scope.editMode = false; });
+        }
 
+        $scope.cancel = function () {
+            $scope.recipeDetails = $scope.original;
+            $scope.editMode = false;
+        }
+        
+        $scope.delete = function () {
+            if (confirm('Are you sure you want delete?')) {
+                recipeDetailsService.deleteRecipe($scope.recipeDetails.id).then(function () {
+                    $location.path('/home');
+                });
+            }
+        }
     }
-    angular.module('recipesApp').controller('recipeDetailsCtrl', ['$scope', 'recipeDetailsService',  recipeDetailsCtrl])
+    angular.module('recipesApp').controller('recipeDetailsCtrl', ['$scope', '$location', '$routeParams', 'recipeDetailsService',  recipeDetailsCtrl])
 })();
