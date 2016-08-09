@@ -1,5 +1,5 @@
-<img src="../images/hero.jpg" onload="init();">
-<section id="canvasSection" >
+<!--<img src="../images/hero.jpg" onload="init();">-->
+<section id="canvasSection" ng-controller="canvasCtrl" >
 
     <div>
         <label>What's new?</label>
@@ -27,47 +27,3 @@
 
 </section>
 <div ng-repeat="x in popuarUsers"></div>
-
-<!--&lt;!&ndash;canvas script&ndash;&gt;-->
-<script type="text/javascript">
-
-    console.log("sss");
-    var can, ctx, step, steps = 0,
-            delay = 50;
-
-    function init() {
-        console.log("in inut");
-        can = document.getElementById("MyCanvas1");
-        ctx = can.getContext("2d")  ;
-        ctx.fillStyle = "black";
-        ctx.font = "10pt Verdana";
-
-        ctx.textBaseline = "middle";
-
-        step = 0;
-        steps = can.height + 10;
-        RunTextUpToDown();
-    }
-
-    function RunTextUpToDown() {
-        step++;
-        ctx.clearRect(0, 0, can.width, can.height);
-        ctx.save();
-        ctx.translate(can.width, step);
-        ctx.textAlign = "left";
-        ctx.fillText("NEW!!!",-can.width, 0);
-//
-//            users.foreach(function(entry){
-//                ctx.fillText(entry.userName, -can.width, 15);
-//            });
-
-        ctx.fillText("Hot Chocolate Cake Recipe", -can.width, 15);
-        ctx.fillText("The Best in Town !!!", -can.width, 30);
-
-        ctx.restore();
-        if (step == steps)
-            step = 0;
-        if (step < steps)
-            var t = setTimeout('RunTextUpToDown()', delay); //delay = 50
-    }
-</script>

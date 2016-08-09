@@ -18,6 +18,20 @@ angular.module('recipesApp').factory('categoriesService', function ($http) {
         remove: function(key) { // remove by id
             $http.delete('/api/dataservice/DeleteCategory/' + key);
         },
+        saveData: function (fileData, formData) {
+
+            $http.post('/api/dataservice/UploadCategoryImage', fileData, {
+                    transformRequest: angular.identity,
+                    headers: {'Content-Type': undefined}
+                })
+                .success(function(){
+                    console.log("upload sucess")
+                    $http.post('/api/dataservice/CreateCategory', formData).success(function () {
+                        {alert("category created successfully")};
+                    });
+                }); 
+
+        },
         getAll: function () {
             return $http.get('/api/dataservice/GetAllCategories').then(function (response) {
                 return response.data;
