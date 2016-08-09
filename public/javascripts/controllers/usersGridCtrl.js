@@ -1,73 +1,36 @@
 (function(){
     "use strict";
-    function usersGridCtrl($scope, allUsers, userService){//}, uiGridConstants, $filter){
-
-        // Insert users
-    //     var path = "/api/dataservice/PostAppUser";
-    // var c = {'userName': "Yarden Davidof"
-    //           , 'password': "1234"// nameGenderHost[1]
-    //         , 'email': "yardo.david@gmail.com"//nameGenderHost[0] + '.' + nameGenderHost[1] + '@' + nameGenderHost[3]
-    //         , 'isAdmin': true// addresses[i]
-    //         , 'gender': "F"};
-    //
-    // $.ajax({
-    //     type: "POST",
-    //     url: path,
-    //     data: c,
-    //     success: function () {
-    //         alert("success");
-    //     },
-    //     fail: function () {
-    //         alert("fail");
-    //     },
-    //     dataType: "json"
-    // });
-
-        
-        
-
+    function usersGridCtrl($scope, allUsers, userService,$cookieStore){//}, uiGridConstants, $filter){
         var self = this;
         $scope.gridUsers = allUsers.data;
-        // $scope.gridUsers = [{'userName': "Yarden Davidof"
-        //       , 'password': "1234"// nameGenderHost[1]
-        //     , 'email': "yardo.david@gmail.com"//nameGenderHost[0] + '.' + nameGenderHost[1] + '@' + nameGenderHost[3]
-        //     , 'isAdmin': true// addresses[i]
-        //     , 'gender': "F"},
-        //     {'userName': "Gal Cohen"
-        //         //  , 'password': "1234"// nameGenderHost[1]
-        //         , 'email': "galcohen92@gmail.com"//nameGenderHost[0] + '.' + nameGenderHost[1] + '@' + nameGenderHost[3]
-        //         , 'isAdmin': true// addresses[i]
-        //         , 'gender': "M"}];
-
-        //  $scope.searchedDisplayStation = "";
-        //   $scope.searchedMessage = "";
-        //   $scope.gridUsers = [];
-        // userService.getAll().then(function (data) {
-        //     $scope.gridUsers = data.data;
-        // })
-
-        //   $scope.gridData = messageDisplayRelations.data;
-          $scope.gridScope = {
+        $scope.gridScope = {
             deleteRelation: function(userToRemove){
 
                 userService.removeUser(userToRemove.email)
                     .success(function () {
                         allUsers.data = _.reject(allUsers.data, function (relation) {
-                                return relation.email === userToRemove.email;
-                            });
+                        return relation.email === userToRemove.email;
+                        });
 
-                            $scope.gridUsers = allUsers.data;
-                        })
+                        $scope.gridUsers = allUsers.data;
+                    })
                     .fail(function () {
                         console.log("error");
                     });
             }
         };
 
+    //    var checkBoxCell = '<input type="checkbox" ng-model="row.entity.isAdmin" disabled>';
+        var cellEditable = false;
+        if (!_.isEmpty($scope.$parent.currentUser) &&  $scope.$parent.currentUser.isAdmin){
+            cellEditable = true;
+        //    checkBoxCell = '<input type="checkbox" ng-model="row.entity.isAdmin" >';
+        }
+
         var columnDef = [
-            {name: 'userName', displayName: 'User Name', enableCellEdit: false},//, enableFiltering: true},
-            {field: 'email', displayName: 'Email', enableCellEdit: false},//, enableFiltering: true},
-            {field: 'isAdmin', displayName: 'Is Admin', type: 'boolean', enableCellEdit: true},//, cellTemplate: '<input type="checkbox" ng-model="row.entity.isAdmin">'},//, enableFiltering: false},
+            {name: 'userName', displayName: 'User Name', enableCellEdit: false},
+            {field: 'email', displayName: 'Email', enableCellEdit: false},
+            {field: 'isAdmin', displayName: 'Is Admin', type: 'boolean', enableCellEdit: cellEditable, enableCellEditOnFocus: true},//, cellTemplate: checkBoxCell },
             {field: 'gender', displayName: 'Gender', enableCellEdit: false}];
         // enableFiltering: false}//,
         if (!_.isEmpty($scope.$parent.currentUser) && $scope.$parent.currentUser.isAdmin){
@@ -78,31 +41,40 @@
 
 
         $scope.gridUsersOptions =  {
-           data: "gridUsers",
+            data: "gridUsers",
             enableSorting: true,
+            enableFiltering: true,
             columnDefs: columnDef
        };
 
 
-        $scope.gridUsersOptions.onRegisterApi = function(gridApi) {
-            //set gridApi on scope
-            $scope.gridApi = gridApi;
-            gridApi.edit.on.afterCellEdit($scope, function(rowEntity, colDef, newValue, oldValue) {
-                if (newValue != oldValue){
-                    var user = {'userName': rowEntity.name,
-                                'password': rowEntity.password,
-                                'email': rowEntity.email,
-                                'isAdmin': rowEntity.isAdmin,
-                                'gender': rowEntity.gender};
+    $scope.gridUsersOptions.onRegisterApi = function(gridApi) {
+        //set gridApi on scope
+        $scope.gridApi = gridApi;
+        gridApi.rowEdit.on.saveRow($scope, $scope.saveRow);
+            // gridApi.edit.on.afterCellEdit($scope, function(rowEntity, colDef, newValue, oldValue) {
+            //     if (newValue != oldValue){
+            //         var user = {'userName': rowEntity.name,
+            //                     'password': rowEntity.password,
+            //                     'email': rowEntity.email,
+            //                     'isAdmin': rowEntity.isAdmin,
+            //                     'gender': rowEntity.gender};
+            //
+            //         userService.updateUser(user).then(function () {
+            //             $scope.$apply();
+            //         })
+            //     }
+            //     //Alert to show what info about the edit is available
+            //    // alert('Column: ' + colDef.name + ' ID: ' + rowEntity.email + ' isAdmin: ' + rowEntity.isAdmin);
+            // });
+    };
 
-                    userService.updateUser(user).then(function () {
-                        $scope.$apply();
-                    })
-                }
-                //Alert to show what info about the edit is available
-               // alert('Column: ' + colDef.name + ' ID: ' + rowEntity.email + ' isAdmin: ' + rowEntity.isAdmin);
-            });
+        $scope.saveRow = function( rowEntity ) {
+            var promise = userService.updateUser(rowEntity);
+            $scope.gridApi.rowEdit.setSavePromise( rowEntity, promise.promise );
+            promise.resolve();
         };
+
 
 
 
@@ -120,5 +92,5 @@
         //     $scope.gridData = $filter('filter')($scope.gridData, {'messageId': $scope.searchedMessage}, undefined);
         // };
     }
-    angular.module('recipesApp').controller('usersGridCtrl', ['$scope', 'allUsers', 'userService',  usersGridCtrl])
+    angular.module('recipesApp').controller('usersGridCtrl', ['$scope', 'allUsers', 'userService', '$cookieStore',  usersGridCtrl])
 })();

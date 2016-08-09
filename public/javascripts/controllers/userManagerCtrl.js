@@ -1,6 +1,6 @@
 (function(){
     "use strict";
-    function userManagerCtrl($scope, userService, isNew){
+    function userManagerCtrl($scope, userService, isNew,$window,$location,$cookieStore ){
         var self = this;
         $scope.isNew = isNew;
         $scope.isShowMessage = false;
@@ -27,6 +27,17 @@
                         $scope.$parent.currentUser = $scope.appUser;
                         $scope.saveMessage = "Create user successfully!";
                         $scope.isShowMessage = true;
+
+                        $scope.$parent.connected = true;
+                        var now = new $window.Date(),
+                        // this will set the expiration to 1 day
+                            exp = new $window.Date(now.getFullYear(), now.getMonth(), now.getDate()+1);
+
+                        $cookieStore.put('currentUser',$scope.appUser,{
+                            expires: exp
+                        });
+
+                        $location.path('/home');
                     }, function () {
                         $scope.saveMessage = "Create user fail";
                         $scope.isShowMessage = true;
@@ -45,5 +56,5 @@
         }
 
     }
-    angular.module('recipesApp').controller('userManagerCtrl', ['$scope', 'userService', 'isNew', userManagerCtrl])
+    angular.module('recipesApp').controller('userManagerCtrl', ['$scope', 'userService', 'isNew', '$window', '$location', '$cookieStore', userManagerCtrl])
 })();

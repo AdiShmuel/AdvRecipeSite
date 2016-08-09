@@ -1,5 +1,5 @@
 (function(){
-    var recipesApp = angular.module('recipesApp',  ['ngRoute', 'ui.grid', 'ui.grid.edit']);
+    var recipesApp = angular.module('recipesApp',  ['ngRoute', 'ui.grid', 'ui.grid.edit', 'ui.grid.rowEdit', 'ngCookies']);
     recipesApp.config(function($routeProvider,$locationProvider){
 
         $locationProvider.html5Mode({
