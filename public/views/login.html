@@ -1,9 +1,21 @@
-<form name="loginForm" id="loginForm" ng-submit="login()">
-    user mail:
-    <input type="email" name="userMail" required>
-    password:
-    <input type="password" name="userPassword" required>
+<form name="loginForm" id="loginForm" ng-submit="login()" class="col-lg-offset-3 ">
+    <div class="col-lg-6">
+        <div class="form-group">
+            <label>user mail:</label>
+            <input type="email" name="userMail" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label>password:</label>
+            <input type="password" name="userPassword" class="form-control" required>
+        </div>
 
-    <button >Login</button>
+        <button class="btn btn-success">Login</button>
+    </div>
+
+
+
+
+
+
 {{currentUser}}
 </form>

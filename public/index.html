@@ -26,6 +26,7 @@
     <!-- Theme style  -->
     <link rel="stylesheet" href="css/style.css">
 
+    <link rel="stylesheet" href="css/recipeStyle.css">
 
     <!-- Modernizr JS -->
     <!--<script src="js/modernizr-2.6.2.min.js"></script>-->
@@ -38,6 +39,7 @@
     <script src="libs/angular-route.js"></script>
     <script src="libs/angular-animate.js"></script>
     <script src="libs/angular-touch.js"></script>
+    <script src="libs/angular-cookies.js"></script>
     <script src="libs/underscore.js"></script>
     <script src="libs/ui-grid.js"></script>
     <script src="js/main.js"></script>
@@ -70,11 +72,13 @@
                              alt="Private Zone">
                         <div class="dropdown-content">
                             <!--<img src="img_fjords.jpg" alt="Trolltunga Norway" width="300" height="200">-->
-                            <a href="#">my profile</a>
+                            <a href="/myProfile">my profile</a>
                             <a href="#">my recipes</a>
-                            <a href="#">my ingredients</a>
                             <a href="/userRecipes">user graph</a>
                             <a href="/categoryRecipes">category graph</a>
+                            <a href="/userRecipes">user graph</a>
+                            <a href="/addIngredients">add ingredients</a>
+                            <a href="/myIngredients">my ingredients</a>
                         </div>
                     </div>
                 </li>
@@ -141,8 +145,6 @@
         js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6&appId=818834374895942";
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));</script>
-
-
     <!-- jQuery -->
     <script src="js/jquery.min.js"></script>
     <!-- jQuery Easing -->
@@ -166,12 +168,25 @@
     <script src="javascripts/controllers/googleMapsCtrl.js"></script>
     <script src="javascripts/controllers/usersManagerGridCtrl.js"></script>
     <script src="javascripts/controllers/usersGridCtrl.js"></script>
+    <script src="javascripts/controllers/createRecipeCtrl.js"></script>
+    <script src="javascripts/controllers/viewRecipesCtrl.js"></script>
     <!--&lt;!&ndash;Services&ndash;&gt;-->
     <script src="javascripts/controllers/userRecipesGraphCtrl.js"></script>
     <script src="javascripts/controllers/categoryRecipesPieCtrl.js"></script>
+    <script src="/javascripts/controllers/myIngredientsCtrl.js"></script>
+    <script src="/javascripts/controllers/addIngredientsCtrl.js"></script>
+
+    <script src="/javascripts/controllers/categoriesCtrl.js"></script>
+
+    <script src="/javascripts/controllers/recipeDetailsCtrl.js"></script>
+
     <!--Services-->
     <script src="javascripts/services/userService.js"></script>
     <script src="/javascripts/controllers/canvasCtrl.js"></script>
+
+    <!--Directives-->
+    <script src="javascripts/directives/newUserMailValidation.js"></script>
+
 
     <script src="/javascripts/controllers/categoriesCtrl.js"></script>
 
@@ -187,6 +202,8 @@
 
     <script src="/javascripts/services/recipeDetailsService.js"></script>
 
+    <!-- MAIN JS -->
+    <script src="js/main.js"></script>
 
 </div>
 </body>

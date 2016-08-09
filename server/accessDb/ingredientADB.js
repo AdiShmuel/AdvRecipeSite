@@ -35,6 +35,7 @@ module.exports = {
                 ingredient.save(function (err) {
                     if (err) {
                         console.log('*** CreateIngredient AccessDB Err On saving: ' + err);
+                        IngredientModel.updateCounter(); //for problem that id not move
                         callback(err);
                     }
                     else {

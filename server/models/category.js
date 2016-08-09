@@ -35,20 +35,21 @@ var CategorySchema = new Schema({
 var count;
 
 exports.updateCounter = function () {
-    ObjectCounter.findOneAndUpdate( {collectionName: "categories"}, { $inc: { nextSeqNumber: 1 } }, function (err, retCount) {count = retCount.nextSeqNumber})
+    //ObjectCounter.findOneAndUpdate( {collectionName: "categories"}, { $inc: { nextSeqNumber: 1 } }, function (err, retCount) {count = retCount.nextSeqNumber})
+    ObjectCounter.findOneAndUpdate( {collectionName: "categories"}, { $inc: { nextSeqNumber: 1 } }, function (err, retCount) {})
 };
 
 exports.counter = function (callback) {
-    if(count == undefined) {
+    //if(count == undefined) {
         ObjectCounter.find({"collectionName": "categories"}, {}, function(err, settings) {
             count = settings[0].nextSeqNumber;
             callback(err, count);
         });
-    }
-    else
-    {
-        callback(null, count);
-    }
+    // }
+    // else
+    // {
+    //     callback(null, count);
+    // }
 };
 
 

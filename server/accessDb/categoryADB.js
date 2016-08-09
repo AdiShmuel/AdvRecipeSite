@@ -49,6 +49,7 @@ module.exports = {
                 category.save(function (err) {
                     if (err) {
                         console.log('*** CreateCategory AccessDB Err On saving: ' + err);
+                        CategoryModel.updateCounter(); //for problem that id not move
                         callback(err);
                     }
                     else {

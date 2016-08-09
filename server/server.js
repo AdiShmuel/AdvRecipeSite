@@ -55,9 +55,11 @@ db = new DB.startup(conn);
 app.get('/api/dataservice/GetAppUsers', appUserApi.getAllAppUsers);
 app.get('/api/dataservice/GetAppUser/:email/:password', appUserApi.getAppUser);
 app.get('/api/dataservice/GetAppUsersRecipes', appUserApi.getAllAppUsersRecipes);
-app.get('/api/dataservice/GetAppUser/:email', appUserApi.getAppUser);
+// app.get('/api/dataservice/GetAppUser/:email', appUserApi.getAppUser);
+app.post('/api/dataservice/PostAppUser', appUserApi.createAppUser);
 app.put('/api/dataservice/EditAppUser', appUserApi.editAppUser);
 app.delete('/api/dataservice/DeleteAppUser/:email', appUserApi.deleteAppUser);
+app.get('/api/dataservice/isUserExist/:email', appUserApi.isUserExist);
 
 //Category
 app.get('/api/dataservice/GetAllCategories', categoryApi.getAllCategories);
@@ -68,12 +70,14 @@ app.post('/api/dataservice/UploadCategoryImage', categoryApi.uploadFile);
 app.delete('/api/dataservice/DeleteCategory/:name', categoryApi.deleteCategory);
 app.put('/api/dataservice/EditCategory', categoryApi.editCategory);
 
-
 //Recipe
 app.get('/api/dataservice/GetAllRecipes', recipeApi.getAllRecipes);
+app.get('/api/dataservice/GetRecipeById/:id', recipeApi.getRecipeById);
+app.get('/api/dataservice/GetRecipeImageById/:id', recipeApi.getRecipeImageById);
 app.get('/api/dataservice/GetRecipesByAppUser/:email', recipeApi.getRecipesByAppUser);
-app.get('/api/dataservice/GetRecipesByCategory/:name', recipeApi.getRecipesByCategory);
+app.get('/api/dataservice/GetRecipesByCategory/:id', recipeApi.getRecipesByCategory);
 app.delete('/api/dataservice/DeleteRecipesByAppUser/:email', recipeApi.deleteRecipesByAppUser); //? get all the recipes number or the user
+app.delete('/api/dataservice/DeleteRecipeById/:id', recipeApi.deleteRecipeById);
 app.post('/api/dataservice/CreateRecipe', recipeApi.createRecipe);
 app.post('/api/dataservice/SearchRecipes', recipeApi.searchRecipes);
 app.put('/api/dataservice/EditRecipe', recipeApi.editRecipe);

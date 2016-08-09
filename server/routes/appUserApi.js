@@ -103,3 +103,28 @@ exports.deleteAppUser = function (req, res) {
     }
   });
 };
+
+
+/**
+ * Check if user (email) is already exist. If it does return true, otherwise- return false
+ * @param req
+ * @param res
+ */
+exports.isUserExist = function (req, res) {
+  console.log('*** isUserExist API');
+  appUserDB.isUserExist(req.params.email, function(err, appUser) {
+    if (err) {
+      console.log('*** isUserExist API Err');
+      res.json();
+    } else {
+      console.log('*** isUserExist API Success');
+
+      if (appUser == undefined){
+        res.json(false);
+      } else{
+        res.json(true);
+
+      }
+    }
+  });
+};

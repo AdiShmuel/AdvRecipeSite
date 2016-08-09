@@ -67,7 +67,11 @@ module.exports = {
       
       appUser.userName = req_body.userName || appUser.userName;
       appUser.password = req_body.password;
-      appUser.isAdmin = req_body.isAdmin || appUser.isAdmin;
+
+      if (req_body.isAdmin != null && req_body.isAdmin != undefined){
+        appUser.isAdmin = req_body.isAdmin;
+      }
+      // appUser.isAdmin =  req_body.isAdmin || appUser.isAdmin;
       appUser.gender = req_body.gender || appUser.gender;
       // appUser.recipes = req_body.recipes ;
       // appUser.ingredients = req_body.ingredients || appUser.ingredients;
@@ -86,6 +90,13 @@ module.exports = {
     AppUser.remove({'email': email}, function(err) {
       if (err) { callback(err); }
       else{callback(null)}
+    });
+  },
+
+  isUserExist: function(email, callback) {
+    console.log('*** isUserExist AccessDB');
+    AppUser.find({'email': email}, {}, function(err, user) {
+      callback(null, user[0]);
     });
   }
 
