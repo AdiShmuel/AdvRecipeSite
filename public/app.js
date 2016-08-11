@@ -1,5 +1,5 @@
 (function(){
-    var recipesApp = angular.module('recipesApp', ['ngRoute','ngTouch', 'ui.grid', 'ui.grid.selection']);
+    var recipesApp = angular.module('recipesApp',  ['ngRoute', 'ui.grid', 'ui.grid.edit', 'ui.grid.rowEdit', 'ngCookies', 'ngTouch', 'ui.grid.selection']);
     recipesApp.config(function($routeProvider,$locationProvider){
 
         $locationProvider.html5Mode({
@@ -22,6 +22,15 @@
                 resolve:{
                     isNew: function () {
                         return true;
+                    }
+                }
+            })
+            .when('/myProfile',{
+                controller: 'userManagerCtrl',
+                templateUrl:'views/userDetails.html',
+                resolve:{
+                    isNew: function () {
+                        return false;
                     }
                 }
             })

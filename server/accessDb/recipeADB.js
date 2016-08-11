@@ -33,6 +33,42 @@ var local = module.exports = {
             callback(null, recipes);
         });
     },
+    searchRecipes: function (req_body, callback) {
+        console.log('*** searchRecipes AccessDB');
+
+        var query = [];
+
+        for (var fieldName in req_body)
+        {
+            if(req_body.hasOwnProperty(fieldName))  //no inherited properties
+            {
+                if(req_body[fieldName])  //get rid of empty fields
+                {
+                    query[fieldName] = req_body[fieldName];
+                    // query.where(fieldName).equals(req_body[fieldName]);
+                }
+            }
+        }
+
+        Recipe.find({$and: [query]}, function (err, recipes) {
+            console.log(Console);
+        });
+
+        //
+        // query.exec(function(err,recipes)
+        // {
+        //     callback(null, recipes);
+        // });
+
+        //
+        // Recipe.find(
+        //     {'categories': {"$in": [req_body.category]},
+        //         'title' : {$regex : ".*" + req_body.title + ".*"},
+        //             'user' : {$regex : ".*" + req_body.author + ".*"}}, {},
+        //     function (err, recipes) {
+        //     callback(null, recipes);
+        // });
+    },
     createRecipe: function (req_body, callback) {
         console.log('*** CreateRecipe AccessDB');
         var recipe = new Recipe();

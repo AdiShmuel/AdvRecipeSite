@@ -26,8 +26,10 @@
     <!-- Theme style  -->
     <link rel="stylesheet" href="css/style.css">
 
+    <link rel="stylesheet" href="css/recipeStyle.css">
+
     <!-- Modernizr JS -->
-    <script src="js/modernizr-2.6.2.min.js"></script>
+    <!--<script src="js/modernizr-2.6.2.min.js"></script>-->
 
     <!--Libs-->
     <script src="http://d3js.org/d3.v3.min.js"></script>
@@ -37,17 +39,19 @@
     <script src="libs/angular-route.js"></script>
     <script src="libs/angular-animate.js"></script>
     <script src="libs/angular-touch.js"></script>
+    <script src="libs/angular-cookies.js"></script>
     <script src="libs/underscore.js"></script>
     <script src="libs/ui-grid.js"></script>
-
+    <script src="js/main.js"></script>
+    <script src="http://maps.googleapis.com/maps/api/js"></script>
 </head>
 
-<body ng-app="recipesApp" onload="init();" ng-controller="usersManagerGridCtrl">
+<body ng-app="recipesApp" ng-controller="usersManagerGridCtrl" >
 <div id="fh5co-page">
 
 
     <header>
-        <section class="login-section" id="fh5co-main-menu">
+        <section class="login-section" >
             <ul>
                 <li ng-if="connected&&currentUser.isAdmin">
                     <div class="dropdown">
@@ -57,7 +61,7 @@
                             <!--<img src="img_fjords.jpg" alt="Trolltunga Norway" width="300" height="200">-->
                             <a href="#">Manage Cateories</a>
                             <a href="#">Manage Users</a>
-                            <a href="#">Manage Recipes</a>
+                            <a href="/recipes">Manage Recipes</a>
                         </div>
                     </div>
                 </li>
@@ -68,8 +72,8 @@
                              alt="Private Zone">
                         <div class="dropdown-content">
                             <!--<img src="img_fjords.jpg" alt="Trolltunga Norway" width="300" height="200">-->
-                            <a href="#">my profile</a>
-                            <a href="#">my recipes</a>
+                            <a href="/myProfile">my profile</a>
+                            <a ng-href="/users/{{currentUser.email}}/recipes">my recipes</a>
                             <a href="/userRecipes">user graph</a>
                             <a href="/categoryRecipes">category graph</a>
                             <a href="/userRecipes">user graph</a>
@@ -128,8 +132,9 @@
 
     </aside>
 
-    <div style="margin-top: 100px" id="fh5co-main" data-ng-view=""></div>
+    <div id="fh5co-main" data-ng-view=""></div>
 
+    <!--TODO - maybe script in ctrl-->
     <div id="fb-root"></div>
     <script>(function (d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];
@@ -145,19 +150,21 @@
     <script src="js/jquery.easing.1.3.js"></script>
     <!-- Bootstrap -->
     <script src="js/bootstrap.min.js"></script>
-    <!-- Carousel -->
-    <script src="js/owl.carousel.min.js"></script>
-    <!-- Stellar -->
-    <script src="js/jquery.stellar.min.js"></script>
-    <!-- Waypoints -->
-    <script src="js/jquery.waypoints.min.js"></script>
-    <!-- Counters -->
-    <script src="js/jquery.countTo.js"></script>
+    <!-- Carousel - for slider of pic in the beginning of site-->
+    <!--<script src="js/owl.carousel.min.js"></script>-->
+    <!-- Stellar - for backround hich changes  -->
+    <!--<script src="js/jquery.stellar.min.js"></script>-->
+    <!-- Waypoints - for animation in some waypoint when we are scrolling  -->
+    <!--<script src="js/jquery.waypoints.min.js"></script>-->
+    <!-- Counters - dynamic counter in some speed very nice -->
+    <!--<script src="js/jquery.countTo.js"></script>-->
 
 
+    <!--<script src="js/google_map.js"></script>-->
     <script src="app.js"></script>
     <!--&lt;!&ndash;Controllers&ndash;&gt;-->
     <script src="javascripts/controllers/userManagerCtrl.js"></script>
+    <script src="javascripts/controllers/googleMapsCtrl.js"></script>
     <script src="javascripts/controllers/usersManagerGridCtrl.js"></script>
     <script src="javascripts/controllers/usersGridCtrl.js"></script>
     <script src="javascripts/controllers/createRecipeCtrl.js"></script>
@@ -174,6 +181,10 @@
 
     <!--Services-->
     <script src="javascripts/services/userService.js"></script>
+    <script src="/javascripts/controllers/canvasCtrl.js"></script>
+
+    <!--Directives-->
+    <script src="javascripts/directives/newUserMailValidation.js"></script>
 
 
     <script src="/javascripts/controllers/categoriesCtrl.js"></script>
@@ -181,6 +192,8 @@
     <script src="/javascripts/services/categoriesService.js"></script>
 
     <script src="javascripts/services/recipeService.js"></script>
+
+    <script src="javascripts/controllers/categoryRecipesCtrl.js"></script>
 
     <script src="/javascripts/controllers/categoryFormCtrl.js"></script>
 
@@ -191,48 +204,6 @@
     <!-- MAIN JS -->
     <script src="js/main.js"></script>
 
-    <!--&lt;!&ndash;canvas script&ndash;&gt;-->
-    <script type="text/javascript">
-        console.log("sss");
-        var can, ctx, step, steps = 0,
-                delay = 50;
-
-        function init() {
-            console.log("in inut");
-            can = document.getElementById("MyCanvas1");
-            ctx = can.getContext("2d")  ;
-            ctx.fillStyle = "black";
-            ctx.font = "10pt Verdana";
-
-            ctx.textBaseline = "middle";
-
-            step = 0;
-            steps = can.height + 10;
-            RunTextUpToDown();
-        }
-
-        function RunTextUpToDown() {
-            step++;
-            ctx.clearRect(0, 0, can.width, can.height);
-            ctx.save();
-            ctx.translate(can.width, step);
-            ctx.textAlign = "left";
-            ctx.fillText("NEW!!!",-can.width, 0);
-//
-//            users.foreach(function(entry){
-//                ctx.fillText(entry.userName, -can.width, 15);
-//            });
-
-            ctx.fillText("Hot Chocolate Cake Recipe", -can.width, 15);
-            ctx.fillText("The Best in Town !!!", -can.width, 30);
-
-            ctx.restore();
-            if (step == steps)
-                step = 0;
-            if (step < steps)
-                var t = setTimeout('RunTextUpToDown()', delay); //delay = 50
-        }
-    </script>
-
+</div>
 </body>
 </html>

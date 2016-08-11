@@ -41,7 +41,7 @@
         d3.json("/api/dataservice/GetAppUsersRecipes", function(error, data) {
             if (!_.isEmpty(data)){
                 data.sort(function(a, b){ return b.recipes-a.recipes; });
-                data.slice(0,5);
+                data = data.slice(0,5);
 
                 x.domain(data.map(function(d) { return d.email; }));
                 y.domain([0, d3.max(data, function(d) { return d.recipes; })]);

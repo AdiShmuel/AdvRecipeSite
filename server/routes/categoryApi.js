@@ -3,7 +3,12 @@
  */
 var categoryDb = require('../accessDb/categoryADB')
     , recipeDb = require('../accessDb/recipeADB')
-    , util = require('util');
+    , util = require('util')
+    , multer = require('multer')
+    , storage = multer.diskStorage({destination: '../public/uploads/categories',
+                                    filename: function (req, file, cb) {cb(null, file.originalname )}
+                                    })
+    , upload = multer({ storage: storage });
 
 
 exports.getAllCategories = function (req, res) {
@@ -53,8 +58,24 @@ exports.getAllCategoriesRecipes = function (req, res) {
     });
 };
 
+exports.uploadFile = function(req, res){
+    console.log('*** UploadFile API');
+    var uploadedFile = upload.single('file');
+
+    uploadedFile(req, res, function (err) {
+        if (err) {
+            console.log('Error in file upload');
+            return res.json(false);
+        }
+        console.log('file Uploaded');
+        return res.json(req.body);
+    });
+
+};
+
 exports.createCategory = function (req, res) {
     console.log('*** CreateCategory API');
+    
     categoryDb.createCategory(req.body, function(err){
         if (err) {
             console.log('*** CreateCategory API Err');

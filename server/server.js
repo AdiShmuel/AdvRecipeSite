@@ -55,16 +55,18 @@ db = new DB.startup(conn);
 app.get('/api/dataservice/GetAppUsers', appUserApi.getAllAppUsers);
 app.get('/api/dataservice/GetAppUser/:email/:password', appUserApi.getAppUser);
 app.get('/api/dataservice/GetAppUsersRecipes', appUserApi.getAllAppUsersRecipes);
-app.get('/api/dataservice/GetAppUser/:email', appUserApi.getAppUser);
+// app.get('/api/dataservice/GetAppUser/:email', appUserApi.getAppUser);
 app.post('/api/dataservice/PostAppUser', appUserApi.createAppUser);
 app.put('/api/dataservice/EditAppUser', appUserApi.editAppUser);
 app.delete('/api/dataservice/DeleteAppUser/:email', appUserApi.deleteAppUser);
+app.get('/api/dataservice/isUserExist/:email', appUserApi.isUserExist);
 
 //Category
 app.get('/api/dataservice/GetAllCategories', categoryApi.getAllCategories);
 app.get('/api/dataservice/GetCategory/:name', categoryApi.getCategory);
 app.get('/api/dataservice/GetAllCategoriesRecipes', categoryApi.getAllCategoriesRecipes);
 app.post('/api/dataservice/CreateCategory', categoryApi.createCategory);
+app.post('/api/dataservice/UploadCategoryImage', categoryApi.uploadFile);
 app.delete('/api/dataservice/DeleteCategory/:name', categoryApi.deleteCategory);
 app.put('/api/dataservice/EditCategory', categoryApi.editCategory);
 
@@ -77,10 +79,10 @@ app.get('/api/dataservice/GetRecipesByCategory/:id', recipeApi.getRecipesByCateg
 app.delete('/api/dataservice/DeleteRecipesByAppUser/:email', recipeApi.deleteRecipesByAppUser); //? get all the recipes number or the user
 app.delete('/api/dataservice/DeleteRecipeById/:id', recipeApi.deleteRecipeById);
 app.post('/api/dataservice/CreateRecipe', recipeApi.createRecipe);
+app.post('/api/dataservice/SearchRecipes', recipeApi.searchRecipes);
 app.put('/api/dataservice/EditRecipe', recipeApi.editRecipe);
 app.put('/api/dataservice/LikeRecipe', recipeApi.likeRecipe)
-// TODO - add 
-// app.put('/api/dataservice/GetRecipe/:id', recipeApi.getRecipe);
+
 
 //Ingredient
 app.get('/api/dataservice/GetIngredientsByAppUser/:email', ingredientApi.getIngredientsByAppUser);
