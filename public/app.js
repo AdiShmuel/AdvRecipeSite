@@ -6,18 +6,18 @@
             enabled: true,
             requireBase: false
         });
-      // $locationProvider.html5Mode(true).hashPrefix('!');
+        // $locationProvider.html5Mode(true).hashPrefix('!');
         $routeProvider
             .when('/',{
                 controller: 'usersManagerGridCtrl',
                 templateUrl:'views/home.html'
             })
             .when('/login',{
-             //   controller: 'usersManagerGridCtrl',
+                //   controller: 'usersManagerGridCtrl',
                 templateUrl:'views/login.html'
             })
             .when('/register',{
-                  controller: 'userManagerCtrl',
+                controller: 'userManagerCtrl',
                 templateUrl:'views/userDetails.html',
                 resolve:{
                     isNew: function () {
@@ -101,7 +101,7 @@
             .when('/myIngredients',{
                 controller: 'myIngredientsCtrl',
                 templateUrl:'views/myIngredients.html'
-            })       
+            })
 
 
 
@@ -142,7 +142,7 @@
                 templateUrl:'views/home.html'
             });
     })
-    })();
+})();
 
 
 

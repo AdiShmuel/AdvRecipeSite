@@ -16,7 +16,7 @@ angular.module('recipesApp').controller('myIngredientsCtrl',   function($scope, 
             { field: 'calories' }
         ]
     };
-    
+
     $scope.gridOptions.minRowsToShow = 15;
 
     $http.get('/api/dataservice/GetIngredientsByAppUser/' + $scope.currentUser.email).success(function(data) {
