@@ -1,7 +1,9 @@
 
 (function(){
     "use strict";
-    function viewRecipesCtrl($scope, $routeParams, recipeDetailsService, recipeService, categoriesService){
+    function viewRecipesCtrl($scope, $routeParams, recipeDetailsService, recipeService, categoriesService) {
+
+        recipeService.onLike(onlike);
 
         if ($routeParams.email) {
             $scope.filter = $routeParams.email;
@@ -42,13 +44,21 @@
         
         $scope.like = function (data) {
             recipeService.like(data).then(function (sucess) {
-                if (sucess) {
-                    data.likeAmount++;
-                }
-                else {
+                if (!sucess) {
                     alert("error in like");
                 }
             });
+        }
+
+        function onlike(data) {
+            if ($scope && $scope.recipes && $scope.recipes.length) {
+                for (var r = 0; r < $scope.recipes.length; r++) {
+                    if ($scope.recipes[r].id == data.id) {
+                        $scope.recipes[r].likeAmount = data.likes;
+                        break;
+                    }
+                }
+            }
         }
     }
     angular.module('recipesApp').controller('viewRecipesCtrl', ['$scope', '$routeParams', 'recipeDetailsService', 'recipeService', 'categoriesService',  viewRecipesCtrl])

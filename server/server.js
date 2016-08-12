@@ -9,10 +9,25 @@ var express = require('express')
    , ingredientApi = require('./routes/ingredientApi')
    , DB = require('./accessDb/mainADB')
    , bodyParser = require('body-parser')
-   , path = require('path');
+   , path = require('path')
+   , http = require('http')
+   , iolistener = require('socket.io');
  // , protectJSON = require('./lib/protectJSON');
 
 var app = module.exports = express();
+var server = http.Server(app);
+var io = iolistener(server);
+
+var iosockets = [];
+
+io.on('connection', function(socket){
+  console.log('a user connected');
+  iosockets.push(socket);
+  socket.on('disconnect', function() {
+    console.log('user disconnected');
+    iosockets.splice(iosockets.indexOf(socket), 1);
+  });
+});
 
 // Configuration
 
@@ -81,7 +96,7 @@ app.delete('/api/dataservice/DeleteRecipeById/:id', recipeApi.deleteRecipeById);
 app.post('/api/dataservice/CreateRecipe', recipeApi.createRecipe);
 app.post('/api/dataservice/SearchRecipes', recipeApi.searchRecipes);
 app.put('/api/dataservice/EditRecipe', recipeApi.editRecipe);
-app.put('/api/dataservice/LikeRecipe', recipeApi.likeRecipe)
+app.put('/api/dataservice/LikeRecipe', function (req, res) { recipeApi.likeRecipe(req, res, iosockets); });
 
 
 //Ingredient
@@ -96,11 +111,9 @@ app.delete('/api/dataservice/DeleteIngredient/:id', ingredientApi.deleteIngredie
 
 // Start server
 
-app.listen(8080, function(){
+server.listen(8080, function(){
   console.log("CustMgr Express server listening on port %d in %s mode");//, this.address().port, app.settings.env);
 });
-
-
 
 // app.get('/', function(request, response){
 //   response.sendFile('../index.html');
