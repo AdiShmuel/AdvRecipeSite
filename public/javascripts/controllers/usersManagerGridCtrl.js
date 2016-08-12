@@ -53,8 +53,8 @@
                     }
                 },
                  function () {
-                alert("fail");
-            });
+                     console.log("error when try to get user");
+                });
         }
 
         $scope.logout = function () {
