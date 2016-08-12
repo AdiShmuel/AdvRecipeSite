@@ -27,7 +27,7 @@ angular.module('recipesApp').factory('categoriesService', function ($http) {
                 .success(function(){
                     console.log("upload sucess")
                     $http.post('/api/dataservice/CreateCategory', formData).success(function () {
-                        {alert("category created successfully")};
+                       // {alert("category created successfully")};
                     });
                 }); 
 

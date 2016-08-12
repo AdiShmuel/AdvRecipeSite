@@ -45,7 +45,7 @@
         $scope.like = function (data) {
             recipeService.like(data).then(function (sucess) {
                 if (!sucess) {
-                    alert("error in like");
+                    console.log("error in like");
                 }
             });
         }

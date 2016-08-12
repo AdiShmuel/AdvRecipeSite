@@ -31,7 +31,7 @@
                     $location.path('/recipeDetails/' + data.data.id); 
                 }
                 else {
-                    alert('Error while adding recipe!');
+                    console.log('Error while adding recipe!');
                 }
             });
         }

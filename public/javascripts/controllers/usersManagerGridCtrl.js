@@ -49,12 +49,12 @@
 
                        $location.path('/home');
                     }else{
-                        alert("invalid");
+                        $scope.isShowError = true;
                     }
                 },
                  function () {
-                alert("fail");
-            });
+                     console.log("error when try to get user");
+                });
         }
 
         $scope.logout = function () {

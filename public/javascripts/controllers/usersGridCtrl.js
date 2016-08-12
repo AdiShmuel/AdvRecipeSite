@@ -1,6 +1,6 @@
 (function(){
     "use strict";
-    function usersGridCtrl($scope, allUsers, userService,$cookieStore){//}, uiGridConstants, $filter){
+    function usersGridCtrl($scope, allUsers, userService,$cookieStore){
         var self = this;
         $scope.gridUsers = allUsers.data;
         $scope.gridScope = {
@@ -74,23 +74,6 @@
             $scope.gridApi.rowEdit.setSavePromise( rowEntity, promise.promise );
             promise.resolve();
         };
-
-
-
-
-        // $scope.filter = function(){
-        //     $scope.gridData = messageDisplayRelations.data;
-        //     self.filterByDisplayStation();
-        //     self.filterByMessage();
-        // };
-        //
-        // self.filterByDisplayStation = function() {
-        //     $scope.gridData = $filter('filter')($scope.gridData, {'displayStationId': $scope.searchedDisplayStation}, undefined);
-        // };
-        //
-        // self.filterByMessage = function() {
-        //     $scope.gridData = $filter('filter')($scope.gridData, {'messageId': $scope.searchedMessage}, undefined);
-        // };
     }
     angular.module('recipesApp').controller('usersGridCtrl', ['$scope', 'allUsers', 'userService', '$cookieStore',  usersGridCtrl])
 })();
