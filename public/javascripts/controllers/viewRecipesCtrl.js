@@ -16,10 +16,10 @@
             $scope.categoryId = $routeParams.categoryId;
             
             categoriesService.getAll().then(function (data) {
-                if (!_.isEmpty(data) && !_.isEmpty(data.data)){
-                    for (var i = 0; i < data.data.length; i++) {
-                        if (data.data[i].id == $scope.categoryId) {
-                            $scope.filter = data.data[i].name;
+                if (!_.isEmpty(data)){
+                    for (var i = 0; i < data.length; i++) {
+                        if (data[i].id == $scope.categoryId) {
+                            $scope.filter = data[i].name;
                             break;
                         }
                     }

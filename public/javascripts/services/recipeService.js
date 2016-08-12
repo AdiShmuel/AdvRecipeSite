@@ -18,6 +18,11 @@ angular.module('recipesApp').factory('recipeService', function ($http) {
             return $http.put('/api/dataservice/LikeRecipe', data).then(function (response) {
                 return response.data.status;
             });
+        },
+        search:function (searchData) {
+            return $http.post('/api/dataservice/SearchRecipes', searchData).then(function (response) {
+                return response.data;
+            })
         }
     };
 });

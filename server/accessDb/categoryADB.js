@@ -37,7 +37,7 @@ module.exports = {
         category.name = req_body.name;
         category.image = req_body.image;
 
-        //  appUser.id = 1; // The id is calculated by the Mongoose pre 'save'.
+        //  appUser.id = message = "req_body is not defined"1; // The id is calculated by the Mongoose pre 'save'.
         var counter =  CategoryModel.counter;
         counter(function(err,count) {
             if (err) {
