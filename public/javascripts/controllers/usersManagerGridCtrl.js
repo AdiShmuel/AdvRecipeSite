@@ -49,7 +49,7 @@
 
                        $location.path('/home');
                     }else{
-                        alert("invalid");
+                        $scope.isShowError = true;
                     }
                 },
                  function () {
