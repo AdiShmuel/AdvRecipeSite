@@ -12,7 +12,7 @@
         };
         this.getRecipesByCategory = function(id){
             return $http.get('/api/dataservice/GetRecipesByCategory/' + id);
-        };
+        };  
         this.addRecipe = function(recipe){
             return $http.post('/api/dataservice/CreateRecipe/', recipe);
         };

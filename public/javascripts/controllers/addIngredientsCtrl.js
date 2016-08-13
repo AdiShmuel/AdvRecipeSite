@@ -15,7 +15,7 @@
 //             $interval( function() {$scope.gridApi.selection.selectRow($scope.gridOptions.data[0]);}, 0, 1);
 //         });
 
-angular.module('recipesApp').controller('addIngredientsCtrl', function ($scope, $http, $log, $timeout,  $location) {
+angular.module('recipesApp').controller('addIngredientsCtrl', function ($scope, $http, ingredientService , $location) {
     $scope.gridOptions = {
         enableRowSelection: true,
         enableRowHeaderSelection: false
@@ -119,22 +119,16 @@ angular.module('recipesApp').controller('addIngredientsCtrl', function ($scope, 
         this.setSelectionRange(0, this.value.length);
     }
 
-    $scope.addIngredient = function(index){
-        var path = "/api/dataservice/createIngredient";
 
-        $.ajax({
-            type: "POST",
-            url: path,
-            data: $scope.c,
-            success: function () {
-//alert("success");
-                window.location.href= "/myIngredients"
-//$location.path('/myIngredients');
-            },
-            fail: function () {
-                alert("fail");
-            },
-            dataType: "json"
-        });
+    $scope.addIngredient = function(){
+        ingredientService.createIngredient($scope.c).then(function (response) {
+            if (response.data.status) {
+              $location.path('/myIngredients');
+            }
+            else 
+            {
+                console.log("error - add ingredient");
+            }
+       });
     }
 });
