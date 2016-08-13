@@ -46,6 +46,15 @@
             } else{
                 userService.updateUser($scope.appUser).then(function () {
                     $scope.$parent.currentUser = $scope.appUser;
+                    var now = new $window.Date(),
+                    // this will set the expiration to 1 day
+                        exp = new $window.Date(now.getFullYear(), now.getMonth(), now.getDate()+1);
+
+                    $cookieStore.put('currentUser',$scope.appUser,{
+                        expires: exp
+                    });
+
+
                     $scope.saveMessage = "Update user successfully!";
                     $scope.isShowMessage = true;
                 }, function () {

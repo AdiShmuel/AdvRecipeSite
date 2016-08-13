@@ -23,7 +23,7 @@
                         }
                     }
                 }
-                alert("error in like");
+                console.log("error in like");
             });
         }
     }

@@ -128,7 +128,7 @@ var local = module.exports = {
             });
         })
     },
-    likeRecipe: function (req_body, callback) {
+    likeRecipe: function (req_body, iosockets, callback) {
         console.log('*** LikeRecipe AccessDB');
 
         Recipe.findOne({'id': req_body.id}, {}, function (err, recipe) {
@@ -142,6 +142,15 @@ var local = module.exports = {
                     console.log('*** accessDB.likeRecipe err: ' + err);
                     return callback(err);
                 }
+
+                if (iosockets && iosockets.length) {
+                    console.log('*** accessDB.likeRecipe calling ' + iosockets.length + ' iosockets');
+
+                    for (var s = 0; s < iosockets.length; s++) {
+                        iosockets[s].emit('like', { id: req_body.id, likes: recipe.likeAmount });
+                    }
+                }
+
                 callback(null);
             });
         })
