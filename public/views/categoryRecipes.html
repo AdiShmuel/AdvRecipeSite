@@ -10,11 +10,11 @@
             <a href="/recipeDetails/{{x.id}}">
                 <img src="{{x.image}}" class="img-responsive">
                 <h3 class="fh5co-work-title">{{x.title}}</h3>
-                <p>author name</p>
+                <!--<p>author name</p>-->
             </a>
             <a class="btn btn-primary-custom btn-sm" ng-if="connected&&(currentUser.isAdmin || x.user == currentUser.email)" href="/editRecipe/{{x.name}}">edit</a>
             <a class="btn btn-primary-custom btn-outline btn-sm" ng-if="connected&&(currentUser.isAdmin || x.user == currentUser.email)"  href="/removeRecipe">remove</a>
-            <button class="btn btn-primary btn-xs" ng-click="like(x)">{{x.likeAmount}} Likes</button>
+            <button class="btn btn-primary btn-xs btn-like" ng-click="like(x)">{{x.likeAmount}} Likes</button>
             <!--<a><span class="glyphicon glyphicon-thumbs-up"></span></a>-->
             <!--<a class="btn icon-btn btn-primary-blue" href="#">-->
                 <!--<span class="glyphicon btn-glyphicon glyphicon-thumbs-up img-circle text-primary"></span>-->
