@@ -44,6 +44,7 @@
     <script src="libs/ui-grid.js"></script>
     <script src="js/main.js"></script>
     <script src="http://maps.googleapis.com/maps/api/js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
 </head>
 
 <body ng-app="recipesApp" ng-controller="usersManagerGridCtrl" >
@@ -61,7 +62,7 @@
                             <!--<img src="img_fjords.jpg" alt="Trolltunga Norway" width="300" height="200">-->
                             <a href="#">Manage Cateories</a>
                             <a href="#">Manage Users</a>
-                            <a href="#">Manage Recipes</a>
+                            <a href="/recipes">Manage Recipes</a>
                         </div>
                     </div>
                 </li>
@@ -73,7 +74,7 @@
                         <div class="dropdown-content">
                             <!--<img src="img_fjords.jpg" alt="Trolltunga Norway" width="300" height="200">-->
                             <a href="/myProfile">my profile</a>
-                            <a href="#">my recipes</a>
+                            <a ng-href="/users/{{currentUser.email}}/recipes">my recipes</a>
                             <a href="/userRecipes">user graph</a>
                             <a href="/categoryRecipes">category graph</a>
                             <a href="/userRecipes">user graph</a>

@@ -20,7 +20,7 @@
     <div class="row animated fadeInLeft">
 
         <div ng-repeat="x in categories" class="col-md-4 col-sm-6 col-xs-6 col-xsxs-12 work-item">
-            <a href="/categoryRecipes/{{x.name}}">
+            <a ng-href="/categories/{{x.id}}/recipes">
                 <img src="{{uploadsUrl}}{{x.image}}" class="img-responsive">
                 <h3 class="fh5co-work-title">{{x.name}}</h3>
             </a>

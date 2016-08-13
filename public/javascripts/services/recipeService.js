@@ -5,6 +5,15 @@
 
 angular.module('recipesApp').factory('recipeService', function ($http) {
 
+    var client = io();
+    var likeCallback = null;
+
+    client.on('like', function (data) {
+        if (likeCallback) {
+            likeCallback(data);
+        }
+    });
+
     return {
         getAllByCategory: function(key) { // get by id
             return $http.get('/api/dataservice/GetRecipesByCategory/'+ key).then(function (response) {
@@ -18,6 +27,9 @@ angular.module('recipesApp').factory('recipeService', function ($http) {
             return $http.put('/api/dataservice/LikeRecipe', data).then(function (response) {
                 return response.data.status;
             });
+        },
+        onLike: function (callback) {
+            likeCallback = callback;
         },
         search:function (searchData) {
             return $http.post('/api/dataservice/SearchRecipes', searchData).then(function (response) {

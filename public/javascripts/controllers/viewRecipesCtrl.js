@@ -1,7 +1,9 @@
 
 (function(){
     "use strict";
-    function viewRecipesCtrl($scope, $routeParams, recipeDetailsService, recipeService, categoriesService){
+    function viewRecipesCtrl($scope, $routeParams, recipeDetailsService, recipeService, categoriesService) {
+
+        recipeService.onLike(onlike);
 
         if ($routeParams.email) {
             $scope.filter = $routeParams.email;
@@ -16,10 +18,10 @@
             $scope.categoryId = $routeParams.categoryId;
             
             categoriesService.getAll().then(function (data) {
-                if (!_.isEmpty(data) && !_.isEmpty(data.data)){
-                    for (var i = 0; i < data.data.length; i++) {
-                        if (data.data[i].id == $scope.categoryId) {
-                            $scope.filter = data.data[i].name;
+                if (!_.isEmpty(data)){
+                    for (var i = 0; i < data.length; i++) {
+                        if (data[i].id == $scope.categoryId) {
+                            $scope.filter = data[i].name;
                             break;
                         }
                     }
@@ -42,13 +44,21 @@
         
         $scope.like = function (data) {
             recipeService.like(data).then(function (sucess) {
-                if (sucess) {
-                    data.likeAmount++;
-                }
-                else {
-                    alert("error in like");
+                if (!sucess) {
+                    console.log("error in like");
                 }
             });
+        }
+
+        function onlike(data) {
+            if ($scope && $scope.recipes && $scope.recipes.length) {
+                for (var r = 0; r < $scope.recipes.length; r++) {
+                    if ($scope.recipes[r].id == data.id) {
+                        $scope.recipes[r].likeAmount = data.likes;
+                        break;
+                    }
+                }
+            }
         }
     }
     angular.module('recipesApp').controller('viewRecipesCtrl', ['$scope', '$routeParams', 'recipeDetailsService', 'recipeService', 'categoriesService',  viewRecipesCtrl])

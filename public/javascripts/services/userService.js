@@ -9,7 +9,6 @@
         };
 
         this.removeUser = function (userMail) {
-            alert(userMail);
             return $http.delete('/api/dataservice/DeleteAppUser/' + userMail);
         }
 

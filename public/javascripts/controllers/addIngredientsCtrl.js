@@ -16,10 +16,12 @@
 //         });
 
 angular.module('recipesApp').controller('addIngredientsCtrl', function ($scope, $http, $log, $timeout) {
+    $scope.isShowMessage = false;
     $scope.gridOptions = {
         enableRowSelection: true,
         enableRowHeaderSelection: false
     };
+
 
     $scope.gridOptions.columnDefs =  [
             //{ field: '_score' }
@@ -127,10 +129,13 @@ angular.module('recipesApp').controller('addIngredientsCtrl', function ($scope, 
             url: path,
             data: $scope.c,
             success: function () {
-                alert("success");
+                $scope.ingredientMessage ="Ingredient was added successfully";
+                $scope.isShowMessage = true;
+
             },
             fail: function () {
-                alert("fail");
+                $scope.ingredientMessage ="There was a problem adding ingredient";
+                $scope.isShowMessage = true;
             },
             dataType: "json"
         });
