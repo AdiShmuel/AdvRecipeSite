@@ -15,17 +15,18 @@
 //             $interval( function() {$scope.gridApi.selection.selectRow($scope.gridOptions.data[0]);}, 0, 1);
 //         });
 
-angular.module('recipesApp').controller('addIngredientsCtrl', function ($scope, $http, ingredientService , $location) {
+angular.module('recipesApp').controller('addIngredientsCtrl', function ($scope, $http, $log, $timeout, ingredientService, $location) {
+    $scope.isShowMessage = false;
     $scope.gridOptions = {
         enableRowSelection: true,
         enableRowHeaderSelection: false
     };
 
     $scope.gridOptions.columnDefs =  [
-//{ field: '_score' }
-        { field: 'fields.item_name' , name:'id' },
-        { field: 'fields.nf_total_fat' , name:'fat'},
-        { field: 'fields.nf_calories', name:'calories' }
+            //{ field: '_score' }
+             { field: 'fields.item_name' , name:'id' },
+             { field: 'fields.nf_total_fat' , name:'fat'},
+             { field: 'fields.nf_calories', name:'calories' }
     ];
 
     $scope.gridOptions.multiSelect = false;
@@ -41,49 +42,49 @@ angular.module('recipesApp').controller('addIngredientsCtrl', function ($scope, 
         });
     };
 
-// $scope.toggleRowSelection = function() {
-//     $scope.gridApi.selection.clearSelectedRows();
-//     $scope.gridOptions.enableRowSelection = !$scope.gridOptions.enableRowSelection;
-//     $scope.gridApi.core.notifyDataChange( uiGridConstants.dataChange.OPTIONS);
-// };
-// $scope.gridOptions.multiSelect = true;
-//
-// $scope.getSelectedRows = function() {
-//     $scope.mySelectedRows = $scope.gridApi.selection.getSelectedRows();
-// };
+    // $scope.toggleRowSelection = function() {
+    //     $scope.gridApi.selection.clearSelectedRows();
+    //     $scope.gridOptions.enableRowSelection = !$scope.gridOptions.enableRowSelection;
+    //     $scope.gridApi.core.notifyDataChange( uiGridConstants.dataChange.OPTIONS);
+    // };
+    // $scope.gridOptions.multiSelect = true;
+    //
+    // $scope.getSelectedRows = function() {
+    //     $scope.mySelectedRows = $scope.gridApi.selection.getSelectedRows();
+    // };
 
-// $http.get('https://cdn.rawgit.com/angular-ui/ui-grid.info/gh-pages/data/500_complex.json')
-//     .success(function(data) {
-//         $scope.gridOptions.data = data;
-//         $scope.mySelectedRows = $scope.gridApi.selection.getSelectedRows();
-//         // $timeout(function() {
-//         //     if($scope.gridApi.selection.selectRow){
-//         //         $scope.gridApi.selection.selectRow($scope.gridOptions.data[0]);
-//         //     }
-//         // });
-//     });
+    // $http.get('https://cdn.rawgit.com/angular-ui/ui-grid.info/gh-pages/data/500_complex.json')
+    //     .success(function(data) {
+    //         $scope.gridOptions.data = data;
+    //         $scope.mySelectedRows = $scope.gridApi.selection.getSelectedRows();
+    //         // $timeout(function() {
+    //         //     if($scope.gridApi.selection.selectRow){
+    //         //         $scope.gridApi.selection.selectRow($scope.gridOptions.data[0]);
+    //         //     }
+    //         // });
+    //     });
 
-// $scope.info = {};
-//
-// $scope.toggleMultiSelect = function() {
-//     $scope.gridApi.selection.setMultiSelect(!$scope.gridApi.grid.options.multiSelect);
-// };
-//
-// $scope.toggleRow1 = function() {
-//     $scope.gridApi.selection.toggleRowSelection($scope.gridOptions.data[0]);
-// };
+    // $scope.info = {};
+    //
+    // $scope.toggleMultiSelect = function() {
+    //     $scope.gridApi.selection.setMultiSelect(!$scope.gridApi.grid.options.multiSelect);
+    // };
+    //
+    // $scope.toggleRow1 = function() {
+    //     $scope.gridApi.selection.toggleRowSelection($scope.gridOptions.data[0]);
+    // };
 
-// $scope.gridOptions.onRegisterApi = function(gridApi){
-//     //set gridApi on scope
-//     $scope.gridApi = gridApi;
-//     gridApi.selection.on.rowSelectionChangedBatch($scope,function(rows){
-//         var msg = 'rows changed ' + rows.length;
-//         $log.log(msg);
-//     });
-//
-// };
+    // $scope.gridOptions.onRegisterApi = function(gridApi){
+    //     //set gridApi on scope
+    //     $scope.gridApi = gridApi;
+    //     gridApi.selection.on.rowSelectionChangedBatch($scope,function(rows){
+    //         var msg = 'rows changed ' + rows.length;
+    //         $log.log(msg);
+    //     });
+    //
+    // };
 
-// $scope.dataLoaded = false;
+    // $scope.dataLoaded = false;
 
     $scope.$watch('search', function() {
         $scope.c = undefined;
@@ -95,23 +96,23 @@ angular.module('recipesApp').controller('addIngredientsCtrl', function ($scope, 
         if($scope.search != undefined) {
             var appId = "03542556";
             var appKey = "1c15d9345355328f56cda78506e9ebd1";
-
+        
 
             $http.get("https://api.nutritionix.com/v1_1/search/" + $scope.search + "?fields="
                     + "item_name%2Cnf_calories%2Cnf_total_fat&appId=" + appId + "&appKey=" + appKey)
                 .then(function (response) {
-                    if( response.data.hits.length > 0) {
-                        $scope.gridOptions.data = response.data.hits;
-                        $scope.dataLoaded = true;
-                    }
+                  if( response.data.hits.length > 0) {
+                      $scope.gridOptions.data = response.data.hits;
+                      $scope.dataLoaded = true;
+                  }
                     else
-                    {
-                        $scope.dataLoaded = false;
-                    }
+                  {
+                      $scope.dataLoaded = false;
+                  }
                 });
         }
     }
-
+    
     $scope.gridOptions.minRowsToShow = 15;
 
 
@@ -119,16 +120,15 @@ angular.module('recipesApp').controller('addIngredientsCtrl', function ($scope, 
         this.setSelectionRange(0, this.value.length);
     }
 
-
     $scope.addIngredient = function(){
         ingredientService.createIngredient($scope.c).then(function (response) {
             if (response.data.status) {
-              $location.path('/myIngredients');
+                $location.path('/myIngredients');
             }
-            else 
+            else
             {
                 console.log("error - add ingredient");
             }
-       });
+        });
     }
 });
