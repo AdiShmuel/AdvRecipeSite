@@ -51,6 +51,10 @@
                 controller: 'viewRecipesCtrl',
                 templateUrl: '/views/recipes.html'
             })
+            .when('/recipesSearch', {
+                controller: 'recipesSearchCtrl',
+                templateUrl: '/views/recipesSearch.html'
+            })
             .when('/recipes', {
                 controller: 'viewRecipesCtrl',
                 templateUrl: '/views/recipes.html'
