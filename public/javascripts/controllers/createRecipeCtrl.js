@@ -3,8 +3,8 @@
     "use strict";
     function createRecipeCtrl($scope, $location, recipeDetailsService, categoriesService){
         categoriesService.getAll().then(function (data) {
-            if (!_.isEmpty(data)) {
-                $scope.categories = data;
+            if (!_.isEmpty(data.data)) {
+                $scope.categories = data.data;
             }
         });
         
