@@ -5,5 +5,4 @@
 exports.index = function(req, res){
   console.log("casfasf");
   res.sendFile('../index.html');
- // res.render('index');
 };

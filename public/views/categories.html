@@ -1,18 +1,3 @@
-<div id="searchSection" class="animated fadeInLeft" >
-    <form ng-submit="search()">
-        <div >
-             Title <input type="text"  ng-model="searchData.title">
-             Author <input type="text"  ng-model="searchData.author">
-             Category
-            <select ng-model="searchData.category">
-                <option ng-repeat="x in categories" value="{{x.name}}">{{x.name}}</option>
-            </select>
-        <input type="submit" class="btn btn-primary-custom btn-md" value="search">
-        </div>
-    </form>
-</div>
-
-
 <div class="fh5co-narrow-content" >
 
     <a type="button" class="btn btn-success animated fadeInLeft" href="/createCategory">create</a>
@@ -24,9 +9,8 @@
                 <img src="{{uploadsUrl}}{{x.image}}" class="img-responsive">
                 <h3 class="fh5co-work-title">{{x.name}}</h3>
             </a>
-            <a class="btn btn-primary-custom btn-sm" ng-if="connected&&currentUser.isAdmin" href="/editCategory/{{x.name}}">edit</a>
+            <a class="btn btn-primary-custom btn-sm" ng-if="connected&&currentUser.isAdmin" href="/editCategory/{{x.id}}">edit</a>
             <a class="btn btn-primary-custom btn-outline btn-sm" ng-if="connected&&currentUser.isAdmin" href="/categories">remove</a>
         </div>
-        <!--<div class="clearfix visible-md-block"></div>-->
     </div>
 </div>

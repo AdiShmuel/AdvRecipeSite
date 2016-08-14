@@ -6,18 +6,18 @@
             enabled: true,
             requireBase: false
         });
-      // $locationProvider.html5Mode(true).hashPrefix('!');
+        // $locationProvider.html5Mode(true).hashPrefix('!');
         $routeProvider
             .when('/',{
                 controller: 'usersManagerGridCtrl',
                 templateUrl:'views/home.html'
             })
             .when('/login',{
-             //   controller: 'usersManagerGridCtrl',
+                //   controller: 'usersManagerGridCtrl',
                 templateUrl:'views/login.html'
             })
             .when('/register',{
-                  controller: 'userManagerCtrl',
+                controller: 'userManagerCtrl',
                 templateUrl:'views/userDetails.html',
                 resolve:{
                     isNew: function () {
@@ -50,6 +50,10 @@
             .when('/categories/:categoryId/recipes', {
                 controller: 'viewRecipesCtrl',
                 templateUrl: '/views/recipes.html'
+            })
+            .when('/recipesSearch', {
+                controller: 'recipesSearchCtrl',
+                templateUrl: '/views/recipesSearch.html'
             })
             .when('/recipes', {
                 controller: 'viewRecipesCtrl',
@@ -91,7 +95,7 @@
                 controller: 'categoryFormCtrl',
                 templateUrl:'/views/categories/categoryForm.html'
             })
-            .when('/editCategory/:name',{
+            .when('/editCategory/:id',{
                 controller: 'categoryFormCtrl',
                 templateUrl:'/views/categories/categoryForm.html'
             })
@@ -110,48 +114,12 @@
             .when('/myIngredients',{
                 controller: 'myIngredientsCtrl',
                 templateUrl:'views/myIngredients.html'
-            })       
-
-
-
-
-
-            // .when('/messagesForDisplays', {
-            //     templateUrl: 'views/messagesForDisplaysGrid.html',
-            //     controller: 'messagesForDisplaysGridCtrl',
-            //     resolve:{
-            //         messageDisplayRelations: function(messageService){
-            //             return messageService.getAllMessageDisplayRelations();
-            //         }
-            //     }
-            // })
-            // .when('/message/:id',{
-            //     templateUrl: 'views/message.html',
-            //     controller: 'messageForEditCtrl',
-            //     controllerAs:'messageEditor'
-            // })
-            // .when('/newMessageDisplayRelation',{
-            //     templateUrl: 'views/newMessageDisplayRelation.html',
-            //     controller: 'newMessageDisplayRelationCtrl',
-            //     resolve:{
-            //         messages: function(messageService){
-            //             return messageService.getAll();
-            //         },
-            //         stations: function(stationService){
-            //             return stationService.getAll();
-            //         }
-            //     }
-            // })
-            // .when('/displayStations',{
-            //     templateUrl: 'views/displayStationsManagement.html',
-            //     controller: 'displayStationsManagementCtrl'
-            // })
-            //
+            })
             .otherwise({
                 templateUrl:'views/home.html'
             });
     })
-    })();
+})();
 
 
 

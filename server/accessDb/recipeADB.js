@@ -36,38 +36,17 @@ var local = module.exports = {
     searchRecipes: function (req_body, callback) {
         console.log('*** searchRecipes AccessDB');
 
-        var query = [];
+        var title =  (req_body.title)? ".*" + req_body.title + ".*" :".*.*";
+        var likeAmount = (req_body.likeAmount)? req_body.likeAmount : 0;
+        var user = (req_body.author)? ".*" + req_body.author + ".*":".*.*";
 
-        for (var fieldName in req_body)
-        {
-            if(req_body.hasOwnProperty(fieldName))  //no inherited properties
-            {
-                if(req_body[fieldName])  //get rid of empty fields
-                {
-                    query[fieldName] = req_body[fieldName];
-                    // query.where(fieldName).equals(req_body[fieldName]);
-                }
+        Recipe.find({$and: [{"title": {$regex : title} , "user": {$regex :user},  "likeAmount": {$gte :likeAmount}}]}, function (err, recipes) {
+            if (err) {
+                console.log('*** search Recipes err: ' + err);
+                return callback(err,  recipes);
             }
-        }
-
-        Recipe.find({$and: [query]}, function (err, recipes) {
-            console.log(Console);
+            callback(null, recipes);
         });
-
-        //
-        // query.exec(function(err,recipes)
-        // {
-        //     callback(null, recipes);
-        // });
-
-        //
-        // Recipe.find(
-        //     {'categories': {"$in": [req_body.category]},
-        //         'title' : {$regex : ".*" + req_body.title + ".*"},
-        //             'user' : {$regex : ".*" + req_body.author + ".*"}}, {},
-        //     function (err, recipes) {
-        //     callback(null, recipes);
-        // });
     },
     createRecipe: function (req_body, callback) {
         console.log('*** CreateRecipe AccessDB');
@@ -128,7 +107,7 @@ var local = module.exports = {
             });
         })
     },
-    likeRecipe: function (req_body, callback) {
+    likeRecipe: function (req_body, iosockets, callback) {
         console.log('*** LikeRecipe AccessDB');
 
         Recipe.findOne({'id': req_body.id}, {}, function (err, recipe) {
@@ -142,6 +121,15 @@ var local = module.exports = {
                     console.log('*** accessDB.likeRecipe err: ' + err);
                     return callback(err);
                 }
+
+                if (iosockets && iosockets.length) {
+                    console.log('*** accessDB.likeRecipe calling ' + iosockets.length + ' iosockets');
+
+                    for (var s = 0; s < iosockets.length; s++) {
+                        iosockets[s].emit('like', { id: req_body.id, likes: recipe.likeAmount });
+                    }
+                }
+
                 callback(null);
             });
         })

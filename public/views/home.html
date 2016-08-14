@@ -1,10 +1,9 @@
-<!--<img src="../images/hero.jpg" onload="init();">-->
-<section id="canvasSection" ng-controller="canvasCtrl" >
+<div style="margin: 30px">
+<section style="margin-right: 30px" id="canvasDiv" ng-controller="canvasCtrl" >
 
     <div>
-        <label>What's new?</label>
+        <h2 class="textShadow">What's new?</h2>
     </div>
-
     <!--canva-->
     <canvas id="MyCanvas1" >
         This browser or document mode doesn't support canvas object
@@ -12,18 +11,11 @@
 
 </section>
 
+<h1 class="textShadow">Welcome to Recipe Site !</h1>
 
-
-<video width="500" height="500" style="height:50%;width:50%" controls>
+<video width="500" height="500" style="margin-top:50px;height:50%;width:50%" controls>
     <source src="../videos/karinGoren.mp4" type="video/mp4">
     Your browser does not support the video tag.
 </video>
 
-<section class="popularUsers">
-    <h1>Popular Users:</h1>
-    <ul>
-        <li ng-repeat="x in popularUsers"> {{x.userName}} </li>
-    </ul>
-
-</section>
-<div ng-repeat="x in popuarUsers"></div>
+</div>

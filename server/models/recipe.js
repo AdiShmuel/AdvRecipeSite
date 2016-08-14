@@ -42,5 +42,4 @@ exports.counter = function (callback) {
 };
 
 
-//exports.RecipeSchema = RecipeSchema;
 exports.scehma = mongoose.model('Recipe', RecipeSchema);

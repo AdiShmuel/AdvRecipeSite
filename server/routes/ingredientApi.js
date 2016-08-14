@@ -1,7 +1,6 @@
 var db = require('../accessDb/ingredientADB')
     , util = require('util');
 
-///////////////// appUser
 exports.getIngredientsByAppUser = function (req, res) {
     console.log('*** GetIngredientsByAppUser API');
     db.getIngredientsByAppUser(req.params.email, function(err, ingredients) {
@@ -35,10 +34,10 @@ exports.createIngredient = function (req, res) {
     db.createIngredient(req.body, function(err){
         if (err) {
             console.log('*** CreateIngredient API Err');
-            res.json(false);
+            res.json({'status': false});
         } else {
             console.log('*** CreateIngredient API OK');
-            res.json(req.body);
+            res.json({'status': true});
         }
     });
 };

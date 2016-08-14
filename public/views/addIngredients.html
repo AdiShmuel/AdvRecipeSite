@@ -1,42 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Add ingredients</title>
-
-</head>
-<body>
-    <!--<div class="container-fluid outerdiv" ng-app="myApp" ng-controller="MovieController">-->
-    <div ng-show="isShowMessage" class="alert alert-success" style="text-align: center;">
+<div ng-show="isShowMessage" class="alert alert-success" style="text-align: center;">
         {{ingredientMessage}}
     </div>
             <div style="margin:100px" class="animated zoomInRight">
                 <input type="text" ng-model="search" ng-model-options="{ debounce: 800 }" onclick="select()" class="form-control" placeholder="Enter Ingredient to search" autofocus />
-                <!--<span class="input-group-addon bar-style"><i class="glyphicon glyphicon-search"></i></span>-->
-
-                <!--<div ng-if="!ingredients">-->
-                    <!--Loading results...-->
-                <!--</div>-->
-
-                <!--&lt;!&ndash;&lt;!&ndash;<div ng-if="ingredients.Response==='True'">&ndash;&gt;&ndash;&gt;-->
-                <!--<div ng-if="ingredients">-->
                 <div style="margin-top: 50px" ng-show="dataLoaded" id="grid1" ui-grid="gridOptions" ui-grid-selection class="grid"></div>
 
-
-                    <!--<div ng-hide="dataLoaded">Loading...</div>-->
-                    <!--Name : {{ingredients[0].fields.item_name}} <br>-->
-                    <!--Calories : {{ingredients[0].fields.nf_calories || '0'}}<br>-->
-                    <!--Fat : {{ingredients[0].fields.nf_total_fat || '0'}}-->
-                <!--</div>-->
                 <div>
                     <button style="margin-top: 10px" type="button" ng-show="c" ng-click="addIngredient(0)" class="btn btn-primary">Add</button>
                 </div>
 
-                <!--<div ng-if="ingredients.Response==='False'">-->
-                    <!--No results found.-->
-                <!--</div>-->
 
-        </div>
-    <!--</div>-->
-</body>
-</html>
+</div>

@@ -1,7 +1,5 @@
 var db = require('../accessDb/recipeADB')
 
-
-////////// Recipe
 exports.getAllRecipes = function (req, res) {
     console.log('*** GetAllRecipes API');
 
@@ -156,9 +154,9 @@ exports.editRecipe = function (req, res) {
 };
 
 
-exports.likeRecipe= function (req, res) {
+exports.likeRecipe = function (req, res, iosockets) {
     console.log('*** LikeRecipe API');
-    db.likeRecipe(req.body, function(err) {
+    db.likeRecipe(req.body, iosockets, function(err) {
         if (err) {
             console.log('*** LikeRecipe API Err');
             res.json({'status': false});
