@@ -6,15 +6,14 @@
         $scope.gridScope = {
             deleteRelation: function(userToRemove){
 
-                userService.removeUser(userToRemove.email)
-                    .success(function () {
+                userService.removeUser(userToRemove.email).then(function () {
                         allUsers.data = _.reject(allUsers.data, function (relation) {
                         return relation.email === userToRemove.email;
                         });
 
                         $scope.gridUsers = allUsers.data;
-                    })
-                    .fail(function () {
+                    },
+                    function () {
                         console.log("error");
                     });
             }
