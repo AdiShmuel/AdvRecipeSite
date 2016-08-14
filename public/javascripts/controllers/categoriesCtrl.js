@@ -5,8 +5,8 @@
 
         $scope.uploadsUrl = '../uploads/categories/'
 
-        categoriesService.getAll().then(function (data) {
-            $scope.categories = data;
+        categoriesService.getAll().then(function (response) {
+            $scope.categories = response.data;
         });
         
     }

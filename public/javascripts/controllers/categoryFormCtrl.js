@@ -3,10 +3,10 @@
     "use strict";
     function categoryFormCtrl($scope, categoriesService, $location, $routeParams){//}, uiGridConstants, $filter){
         $scope.uploadInProgress = false;
-        if ($routeParams.name == undefined)
+        if ($routeParams.id == undefined)
             $scope.formData = {};
         else
-            categoriesService.get($routeParams.name).then(function (data) {
+            categoriesService.get($routeParams.id).then(function (data) {
                 $scope.formData = data;
             });
 
@@ -24,11 +24,37 @@
             reader.readAsDataURL(element.files[0]);
         }
 
-        $scope.submit = function() {
+        $scope.fullSubmit = function() {
             var fileData = new FormData();
             fileData.append('file', $scope.currentFile );
-            categoriesService.saveData(fileData,$scope.formData);
-            $location.path('/categories');
+            if(fileData)
+            {
+                categoriesService.uploadImage(fileData).then(function(response)
+                {
+                    if(response.data) {
+                        if($routeParams.id) //update category
+                        {
+                            $scope.formData.id = $routeParams.id;
+                            categoriesService.set($scope.formData).then(function (status) {
+                                $location.path('/categories');
+                            });
+                        }
+                        else { //new category
+                            categoriesService.saveData($scope.formData).then(function (status) {
+                                $location.path('/categories');
+                            });
+                        }
+                    }
+                    else
+                    {
+                        $scope.error = "Error uploading image"
+                    }
+                });
+            }
+            else
+            {
+                $scope.error = "Please upload image"
+            }
         };
     }
     angular.module('recipesApp').controller('categoryFormCtrl', ['$scope', 'categoriesService','$location', '$routeParams',  categoryFormCtrl])

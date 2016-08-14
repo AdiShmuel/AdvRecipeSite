@@ -22,9 +22,9 @@ module.exports = {
             callback(null, categories);
         });
     },
-    getCategory: function(name, callback) {
+    getCategory: function(id, callback) {
         console.log('*** GetCategory AccessDB');
-        Category.find({'name': name}, function(err, category) {
+        Category.find({'id': id}, function(err, category) {
             callback(null, category);
         });
     },
@@ -61,17 +61,21 @@ module.exports = {
     editCategory: function(req_body, callback) {
         console.log('*** EditCategory AccessDB');
 
-        Category.findOne({'id': req_body.id}, {}, function(err, category) {
-            if (err) { return callback(err); }
-
-            category.image = req_body.image;
-            category.name = req_body.name || category.name;
-            category.save(function(err) {
+        Category.update(
+            { id: req_body.id },
+            {
+                name: req_body.name,
+                image: req_body.image,
+            },
+            function(err, category){
                 if (err) {
                     console.log('*** EditCategory AccessDB Err: ' + err); return callback(err); }
-            });
-
-        });
+                else
+                {
+                    return callback(null);
+                }
+            }
+        )
     },
     deleteCategory: function(id, callback) {
         console.log('*** DeleteCategory AccessDB');

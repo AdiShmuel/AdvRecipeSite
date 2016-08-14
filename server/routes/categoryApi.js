@@ -29,7 +29,7 @@ exports.getAllCategories = function (req, res) {
 
 exports.getCategory = function (req,res) {
     console.log('*** GetCategory API');
-    categoryDb.getCategory(req.params.name, function(err, category) {
+    categoryDb.getCategory(req.params.id, function(err, category) {
         if (err) {
             console.log('*** GetCategory API Err');
             res.json({

@@ -58,7 +58,7 @@ app.get('/api/dataservice/isUserExist/:email', appUserApi.isUserExist);
 
 //Category
 app.get('/api/dataservice/GetAllCategories', categoryApi.getAllCategories);
-app.get('/api/dataservice/GetCategory/:name', categoryApi.getCategory);
+app.get('/api/dataservice/GetCategory/:id', categoryApi.getCategory);
 app.get('/api/dataservice/GetAllCategoriesRecipes', categoryApi.getAllCategoriesRecipes);
 app.post('/api/dataservice/CreateCategory', categoryApi.createCategory);
 app.post('/api/dataservice/UploadCategoryImage', categoryApi.uploadFile);

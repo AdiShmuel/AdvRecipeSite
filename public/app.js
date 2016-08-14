@@ -95,7 +95,7 @@
                 controller: 'categoryFormCtrl',
                 templateUrl:'/views/categories/categoryForm.html'
             })
-            .when('/editCategory/:name',{
+            .when('/editCategory/:id',{
                 controller: 'categoryFormCtrl',
                 templateUrl:'/views/categories/categoryForm.html'
             })
