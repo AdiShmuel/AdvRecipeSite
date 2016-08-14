@@ -10,7 +10,7 @@
             if(google == undefined) {
                 var script = document.createElement('script');
                 script.type = 'text/javascript';
-                script.src = 'https://maps.google.com/maps/api/js?key=AIzaSyDofDkrQWdkI_KKrRNAZPW1UMcKGNf1dec&sensor=false&callback=init';
+                script.src = 'https://maps.google.com/maps/api/js?key=AIzaSyD0T8JZfHykfYrGDv8SNSl7X0X30ErsQ-U&sensor=false&callback=init';
                 document.body.appendChild(script);
                 setTimeout(function () {
                     $scope.init();

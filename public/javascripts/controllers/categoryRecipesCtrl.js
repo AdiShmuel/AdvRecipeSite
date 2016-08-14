@@ -12,12 +12,13 @@
            $scope.recipes = data;
         });
 
-        $scope.like = function (data) {
-            recipeService.like(data).then(function (sucess) {
+        $scope.like = function (id) {
+            console.log(id); 
+            recipeService.like(id).then(function (sucess) {
                 if(sucess)
                 {
                     for (var x in $scope.recipes) {
-                        if ($scope.recipes[x].id == data.id) {
+                        if ($scope.recipes[x].id == id) {
                             $scope.recipes[x].likeAmount++;
                             return;
                         }
