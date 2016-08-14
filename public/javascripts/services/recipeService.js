@@ -24,7 +24,7 @@ angular.module('recipesApp').factory('recipeService', function ($http) {
             $http.post('/api/dataservice/CreateRecipe',value); 
         },
         like: function (data) {
-            return $http.put('/api/dataservice/LikeRecipe', data).then(function (response) {
+            return $http.put('/api/dataservice/LikeRecipe/' + data.id).then(function (response) {
                 return response.data.status;
             });
         },

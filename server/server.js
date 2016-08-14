@@ -76,7 +76,7 @@ app.delete('/api/dataservice/DeleteRecipeById/:id', recipeApi.deleteRecipeById);
 app.post('/api/dataservice/CreateRecipe', recipeApi.createRecipe);
 app.post('/api/dataservice/SearchRecipes', recipeApi.searchRecipes);
 app.put('/api/dataservice/EditRecipe', recipeApi.editRecipe);
-app.put('/api/dataservice/LikeRecipe', function (req, res) { recipeApi.likeRecipe(req, res, iosockets); });
+app.put('/api/dataservice/LikeRecipe/:id', function (req, res) { recipeApi.likeRecipe(req, res, iosockets); });
 
 
 //Ingredient

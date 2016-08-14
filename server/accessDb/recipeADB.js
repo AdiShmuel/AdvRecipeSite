@@ -107,10 +107,10 @@ var local = module.exports = {
             });
         })
     },
-    likeRecipe: function (req_body, iosockets, callback) {
+    likeRecipe: function (id, iosockets, callback) {
         console.log('*** LikeRecipe AccessDB');
 
-        Recipe.findOne({'id': req_body.id}, {}, function (err, recipe) {
+        Recipe.findOne({'id': id}, {}, function (err, recipe) {
             if (err) {
                 return callback(err);
             }
@@ -126,7 +126,7 @@ var local = module.exports = {
                     console.log('*** accessDB.likeRecipe calling ' + iosockets.length + ' iosockets');
 
                     for (var s = 0; s < iosockets.length; s++) {
-                        iosockets[s].emit('like', { id: req_body.id, likes: recipe.likeAmount });
+                        iosockets[s].emit('like', { id: recipe.id, likes: recipe.likeAmount });
                     }
                 }
 
