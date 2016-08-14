@@ -12,7 +12,6 @@ var express = require('express')
    , path = require('path')
    , http = require('http')
    , iolistener = require('socket.io');
- // , protectJSON = require('./lib/protectJSON');
 
 var app = module.exports = express();
 var server = http.Server(app);
@@ -40,29 +39,10 @@ app.use(bodyParser.json())
 //let the server permission to use this files
 app.use(express.static(path.join(__dirname , '../public')));
 
-// app.use(express.methodOverride());
-//app.use(app.router);
-
 var conn = 'mongodb://localhost:27017/recipeSite';
 var db;
 db = new DB.startup(conn);
-//
-// app.configure('development', function(){
-//   app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
-// });
-//
-// app.configure('production', function(){
-//   app.use(express.errorHandler());
-// });
-//
-// function csrf(req, res, next) {
-//   res.locals.token = req.session._csrf;
-//   next();
-// }
-//
-// Routes
 
-// app.get('/', routes.index);
 
 // JSON API
 
@@ -91,7 +71,7 @@ app.get('/api/dataservice/GetRecipeById/:id', recipeApi.getRecipeById);
 app.get('/api/dataservice/GetRecipeImageById/:id', recipeApi.getRecipeImageById);
 app.get('/api/dataservice/GetRecipesByAppUser/:email', recipeApi.getRecipesByAppUser);
 app.get('/api/dataservice/GetRecipesByCategory/:id', recipeApi.getRecipesByCategory);
-app.delete('/api/dataservice/DeleteRecipesByAppUser/:email', recipeApi.deleteRecipesByAppUser); //? get all the recipes number or the user
+app.delete('/api/dataservice/DeleteRecipesByAppUser/:email', recipeApi.deleteRecipesByAppUser); 
 app.delete('/api/dataservice/DeleteRecipeById/:id', recipeApi.deleteRecipeById);
 app.post('/api/dataservice/CreateRecipe', recipeApi.createRecipe);
 app.post('/api/dataservice/SearchRecipes', recipeApi.searchRecipes);
@@ -103,24 +83,16 @@ app.put('/api/dataservice/LikeRecipe', function (req, res) { recipeApi.likeRecip
 app.get('/api/dataservice/GetIngredientsByAppUser/:email', ingredientApi.getIngredientsByAppUser);
 app.post('/api/dataservice/CreateIngredient', ingredientApi.createIngredient);
 app.put('/api/dataservice/EditIngredient', ingredientApi.editIngredient);
-app.delete('/api/dataservice/DeleteIngredientsByAppUser/:email', ingredientApi.deleteIngredientsByAppUser); //? get all the recipes number or the user
+app.delete('/api/dataservice/DeleteIngredientsByAppUser/:email', ingredientApi.deleteIngredientsByAppUser);
 app.delete('/api/dataservice/DeleteIngredient/:id', ingredientApi.deleteIngredient);
-
-// redirect all others to the index (HTML5 history)
-// app.get('*', routes.index);
 
 // Start server
 
 server.listen(8080, function(){
-  console.log("CustMgr Express server listening on port %d in %s mode");//, this.address().port, app.settings.env);
+  console.log("CustMgr Express server listening on port %d in %s mode");
 });
 
-// app.get('/', function(request, response){
-//   response.sendFile('../index.html');
-//
-// });
 app.all('/*', function(request, response){
- console.log("serverrr    ");// + __dirname + '/../public/index.html');
-  //response.sendFile(path.resolve('../public/index.html'));
+ console.log("serverrr    ");
     response.sendFile(path.join(__dirname , '../public/index.html'));
 });

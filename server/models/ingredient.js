@@ -23,7 +23,6 @@ var IngredientSchema = new Schema({
 var count;
 
 exports.updateCounter = function () {
-    //ObjectCounter.findOneAndUpdate({collectionName: "ingredients"}, { $inc: { nextSeqNumber: 1 } }, function (err, retCount) {count = retCount.nextSeqNumber})
     ObjectCounter.findOneAndUpdate({collectionName: "ingredients"}, { $inc: { nextSeqNumber: 1 } }, function (err, retCount) {})
     
 };
@@ -35,5 +34,4 @@ exports.counter = function (callback) {
         });
 };
 
-//exports.IngredientSchema = IngredientSchema;
 exports.schema = mongoose.model('Ingredient', IngredientSchema);

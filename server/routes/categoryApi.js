@@ -110,7 +110,6 @@ exports.editCategory = function (req, res) {
     console.log('*** EditCategory API');
     categoryDb.editCategory(req.body, function(err) {
         if (err) {
-            // console.log('*** editAppUser err' + util.inspect(err));
             console.log('*** EditCategory API Err');
             res.json({'status': false});
         } else {

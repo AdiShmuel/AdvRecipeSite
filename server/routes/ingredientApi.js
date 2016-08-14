@@ -1,7 +1,6 @@
 var db = require('../accessDb/ingredientADB')
     , util = require('util');
 
-///////////////// appUser
 exports.getIngredientsByAppUser = function (req, res) {
     console.log('*** GetIngredientsByAppUser API');
     db.getIngredientsByAppUser(req.params.email, function(err, ingredients) {

@@ -47,51 +47,6 @@ var local = module.exports = {
             }
             callback(null, recipes);
         });
-
-        // var query;
-        //
-        // for (var fieldName in req_body)
-        // {
-        //     //if(req_body.hasOwnProperty(fieldName))  //no inherited properties
-        //     // {
-        //     if(req_body[fieldName])  //get rid of empty fields
-        //     {
-        //         //query += fieldName: req_body[fieldName];
-        //         query.where(fieldName).equals(req_body[fieldName]);
-        //     }
-        //     // }
-        // }
-        // query.exec(function(err,recipes)
-        // {
-        //     callback(null, recipes);
-        // });
-
-
-
-        // for (var fieldName in req_body)
-        // {
-        //     //if(req_body.hasOwnProperty(fieldName))  //no inherited properties
-        //     // {
-        //     if(req_body[fieldName])  //get rid of empty fields
-        //     {
-        //         query[fieldName] = req_body[fieldName];
-        //         // query.where(fieldName).equals(req_body[fieldName]);
-        //     }
-        //     // }
-        // }
-        //
-        // var query1 = "{$and: [" + JSON.stringify(query) + "]}";
-        //
-
-
-        //
-        // Recipe.find(
-        //     {'categories': {"$in": [req_body.category]},
-        //         'title' : {$regex : ".*" + req_body.title + ".*"},
-        //             'user' : {$regex : ".*" + req_body.author + ".*"}}, {},
-        //     function (err, recipes) {
-        //     callback(null, recipes);
-        // });
     },
     createRecipe: function (req_body, callback) {
         console.log('*** CreateRecipe AccessDB');

@@ -115,42 +115,6 @@
                 controller: 'myIngredientsCtrl',
                 templateUrl:'views/myIngredients.html'
             })
-
-
-
-
-
-            // .when('/messagesForDisplays', {
-            //     templateUrl: 'views/messagesForDisplaysGrid.html',
-            //     controller: 'messagesForDisplaysGridCtrl',
-            //     resolve:{
-            //         messageDisplayRelations: function(messageService){
-            //             return messageService.getAllMessageDisplayRelations();
-            //         }
-            //     }
-            // })
-            // .when('/message/:id',{
-            //     templateUrl: 'views/message.html',
-            //     controller: 'messageForEditCtrl',
-            //     controllerAs:'messageEditor'
-            // })
-            // .when('/newMessageDisplayRelation',{
-            //     templateUrl: 'views/newMessageDisplayRelation.html',
-            //     controller: 'newMessageDisplayRelationCtrl',
-            //     resolve:{
-            //         messages: function(messageService){
-            //             return messageService.getAll();
-            //         },
-            //         stations: function(stationService){
-            //             return stationService.getAll();
-            //         }
-            //     }
-            // })
-            // .when('/displayStations',{
-            //     templateUrl: 'views/displayStationsManagement.html',
-            //     controller: 'displayStationsManagementCtrl'
-            // })
-            //
             .otherwise({
                 templateUrl:'views/home.html'
             });
