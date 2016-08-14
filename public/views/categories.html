@@ -3,10 +3,11 @@
         <div >
              Title <input type="text"  ng-model="searchData.title">
              Author <input type="text"  ng-model="searchData.author">
-             Category
-            <select ng-model="searchData.category">
-                <option ng-repeat="x in categories" value="{{x.name}}">{{x.name}}</option>
-            </select>
+             <!--Category-->
+            <!--<select ng-model="searchData.category">-->
+                <!--<option ng-repeat="x in categories" value="{{x.name}}">{{x.name}}</option>-->
+            <!--</select>-->
+            Minimum Likes <input type="text"  ng-model="searchData.likeAmount">
         <input type="submit" class="btn btn-primary-custom btn-md" value="search">
         </div>
     </form>
