@@ -31,7 +31,6 @@
             {field: 'email', displayName: 'Email', enableCellEdit: false},
             {field: 'isAdmin', displayName: 'Is Admin', type: 'boolean', enableCellEdit: cellEditable, enableCellEditOnFocus: true},//, cellTemplate: checkBoxCell },
             {field: 'gender', displayName: 'Gender', enableCellEdit: false}];
-        // enableFiltering: false}//,
         if (!_.isEmpty($scope.$parent.currentUser) && $scope.$parent.currentUser.isAdmin){
             columnDef[columnDef.length] = {name: 'actions', displayName: 'Actions',
                 cellTemplate: '<button id="deleteBtn" type="button" class="btn-small btn-danger" ng-click="getExternalScopes().deleteRelation(row.entity)"><i class="fa fa-trash" aria-hidden="true"></i> </button>', enableFiltering: false};
