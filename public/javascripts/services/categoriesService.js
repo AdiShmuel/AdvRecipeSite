@@ -7,35 +7,26 @@ angular.module('recipesApp').factory('categoriesService', function ($http) {
                return response.data[0]; // TODO - why et array ... name is uniqe
             });
         },
-        set: function(key, value) { // set by id
-            if (key == undefined)
-                $http.post('/api/dataservice/CreateCategory',value);
-            else
-                $http.post('/api/dataservice/CreateCategory',value);
+        set: function(value) { // set by id
+            return $http.put('/api/dataservice/EditCategory',value);
 
             // sessionStorage.setItem(key, JSON.stringify(value));
         },
         remove: function(key) { // remove by id
-            $http.delete('/api/dataservice/DeleteCategory/' + key);
+            return $http.delete('/api/dataservice/DeleteCategory/' + key);
         },
-        saveData: function (fileData, formData) {
-
-            $http.post('/api/dataservice/UploadCategoryImage', fileData, {
-                    transformRequest: angular.identity,
-                    headers: {'Content-Type': undefined}
-                })
-                .success(function(){
+        uploadImage:function(fileData){
+            return   $http.post('/api/dataservice/UploadCategoryImage', fileData, {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined}
+            });
+        },
+        saveData: function (formData) {
                     console.log("upload sucess")
-                    $http.post('/api/dataservice/CreateCategory', formData).success(function () {
-                       // {alert("category created successfully")};
-                    });
-                }); 
-
+                    return $http.post('/api/dataservice/CreateCategory', formData);
         },
         getAll: function () {
-            return $http.get('/api/dataservice/GetAllCategories').then(function (response) {
-                return response.data;
-            });
+            return $http.get('/api/dataservice/GetAllCategories');
         }
     };
 });

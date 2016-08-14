@@ -1,6 +1,4 @@
-/**
- * Created by galco on 7/4/2016.
- */
+
 var mongoose = require('mongoose')
     , Schema = mongoose.Schema;
 

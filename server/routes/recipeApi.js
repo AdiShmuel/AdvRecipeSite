@@ -1,7 +1,5 @@
 var db = require('../accessDb/recipeADB')
 
-
-////////// Recipe
 exports.getAllRecipes = function (req, res) {
     console.log('*** GetAllRecipes API');
 

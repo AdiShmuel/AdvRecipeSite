@@ -16,14 +16,12 @@ module.exports = {
         console.log('*** CreateIngredient AccessDB');
 
         var ingredient = new Ingredient();
-        //  var s = {'id': state[0].id, 'abbreviation': state[0].abbreviation, 'name': state[0].name}
 
         ingredient.name = req_body.name;
         ingredient.calories = req_body.calories;
         ingredient.fat = req_body.fat;
         ingredient.user = req_body.user;
 
-        //  appUser.id = 1; // The id is calculated by the Mongoose pre 'save'.
         var counter =  IngredientModel.counter;
         counter(function(err,count) {
             if (err) {

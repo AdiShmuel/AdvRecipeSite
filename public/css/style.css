@@ -6,6 +6,32 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "SensationLight";
+  src: url("../fonts/SansationLight.woff");
+}
+
+
+#canvasDiv {
+    position: fixed;
+    right: 0;
+    border-radius: 25px;
+  border: 2px solid #da1212;
+  padding: 20px;
+  width: 300px;
+  height: 280px;
+}
+
+.btn-like {
+  border-radius:2em;
+
+}
+
+.textShadow {
+  font-family: "SensationLight";
+  text-shadow: 2px 2px rgba(0, 0, 0, .2)
+}
+
 .btn-glyphicon {
   padding:8px;
   background:#ffffff;

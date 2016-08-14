@@ -1,20 +1,18 @@
 
 (function(){
-    
-    
     "use strict";
     function categoriesCtrl($scope, categoriesService, recipeService, $location){//}, uiGridConstants, $filter){
 
         $scope.uploadsUrl = '../uploads/categories/'
 
-        categoriesService.getAll().then(function (data) {
-            $scope.categories = data;
+        categoriesService.getAll().then(function (response) {
+            $scope.categories = response.data;
         });
-
-        $scope.search = function () {
-            recipeService.search($scope.searchData).then(function (data) {
-                $location
-            }); 
+        
+        $scope.removeCategory = function (categoryId) {
+            categoriesService.remove(categoryId).then(function (response) {
+                
+            });
         }
     }
     angular.module('recipesApp').controller('categoriesCtrl', ['$scope', 'categoriesService', 'recipeService', '$location',  categoriesCtrl])
