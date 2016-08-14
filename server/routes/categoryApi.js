@@ -91,12 +91,12 @@ exports.createCategory = function (req, res) {
 
 exports.deleteCategory = function (req, res) {
     console.log('*** DeleteCategory API');
-    categoryDb.deleteCategory(req.params.name, function(err) {
+    categoryDb.deleteCategory(req.params.id, function(err) {
         if (err) {
             console.log('*** DeleteCategory API Err');
             res.json({'status': false});
         } else {
-            recipeDb.deleteRecipesCategory(req.params.name,function(){
+            recipeDb.deleteRecipesCategory(req.params.id,function(){
                 console.log('*** DeleteCategory API OK');
                 res.json({'status': true});
             })

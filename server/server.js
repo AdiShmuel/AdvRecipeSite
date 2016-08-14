@@ -62,7 +62,7 @@ app.get('/api/dataservice/GetCategory/:id', categoryApi.getCategory);
 app.get('/api/dataservice/GetAllCategoriesRecipes', categoryApi.getAllCategoriesRecipes);
 app.post('/api/dataservice/CreateCategory', categoryApi.createCategory);
 app.post('/api/dataservice/UploadCategoryImage', categoryApi.uploadFile);
-app.delete('/api/dataservice/DeleteCategory/:name', categoryApi.deleteCategory);
+app.delete('/api/dataservice/DeleteCategory/:id', categoryApi.deleteCategory);
 app.put('/api/dataservice/EditCategory', categoryApi.editCategory);
 
 //Recipe

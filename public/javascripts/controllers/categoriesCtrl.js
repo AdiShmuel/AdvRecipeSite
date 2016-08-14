@@ -9,6 +9,11 @@
             $scope.categories = response.data;
         });
         
+        $scope.removeCategory = function (categoryId) {
+            categoriesService.remove(categoryId).then(function (response) {
+                
+            });
+        }
     }
     angular.module('recipesApp').controller('categoriesCtrl', ['$scope', 'categoriesService', 'recipeService', '$location',  categoriesCtrl])
 })();
